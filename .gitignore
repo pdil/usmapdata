@@ -1,1 +1,7 @@
+.DS_Store
+.Rhistory
+.Rdata
 .Rproj.user
+inst/doc
+doc
+Meta

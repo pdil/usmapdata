@@ -16,5 +16,7 @@ URL: https://usmap.dev
 BugReports: https://github.com/pdil/usmapdata/issues
 Imports:
     utils
+Suggests: 
+    testthat
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.1.1
