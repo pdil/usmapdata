@@ -1,5 +1,7 @@
 # 🗺 usmapdata
 
+[![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fpdil%2Fusmapdata%2Fbadge%3Fref%3Dmaster&style=popout&label=build)](https://actions-badge.atrox.dev/pdil/usmapdata/goto?ref=master) [![codecov](https://codecov.io/gh/pdil/usmapdata/branch/master/graph/badge.svg)](https://codecov.io/gh/pdil/usmapdata)
+
 [under construction]
 
 You might be looking for the `usmap` package:
