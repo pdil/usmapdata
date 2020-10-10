@@ -34,7 +34,7 @@ us_map <- function(regions = c("states", "state", "counties", "county"),
   if (regions_ == "state") regions_ <- "states"
   else if (regions_ == "county") regions_ <- "counties"
 
-  df <- utils::read.csv(system.file("extdata", paste0("us_", regions_, ".csv"), package = "usmap"),
+  df <- utils::read.csv(system.file("extdata", paste0("us_", regions_, ".csv"), package = "usmapdata"),
                         colClasses = col_classes(regions_),
                         stringsAsFactors = FALSE)
 
