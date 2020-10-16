@@ -4,10 +4,7 @@
 
 [under construction]
 
-You might be looking for the `usmap` package:
-* [Github](https://github.com/pdil/usmap)
-* [Website](https://usmap.dev)
-
+You might be looking for the `usmap` package: [CRAN](https://cran.r-project.org/package=usmap) | [Github](https://github.com/pdil/usmap) | [Website](https://usmap.dev)
 
 ## Purpose
 
