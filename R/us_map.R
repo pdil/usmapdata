@@ -23,7 +23,7 @@
 #' df <- us_map(regions = "counties")
 #' west_coast <- us_map(include = c("CA", "OR", "WA"))
 #'
-#' south_atl_excl_FL <- us_map(include = .south_atlantic, exclude = "FL")
+#' excl_west_coast <- us_map(exclude = c("CA", "OR", "WA"))
 #' @export
 us_map <- function(regions = c("states", "state", "counties", "county"),
                    include = c(),

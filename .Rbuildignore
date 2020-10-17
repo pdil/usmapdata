@@ -1,3 +1,5 @@
-^usmapdata\.Rproj$
-^\.Rproj\.user$
+^\.github$
+^codecov\.yml$
 ^data-raw$
+^\.Rproj\.user$
+^usmapdata\.Rproj$
