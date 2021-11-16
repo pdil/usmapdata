@@ -34,8 +34,9 @@ us_map <- function(regions = c("states", "state", "counties", "county"),
   if (regions_ == "state") regions_ <- "states"
   else if (regions_ == "county") regions_ <- "counties"
 
-  df <- utils::read.csv(system.file("extdata", paste0("us_", regions_, ".csv"), package = "usmapdata"),
-                        colClasses = col_classes(regions_),
+  df <- utils::read.csv(system.file("extdata", paste0("us_", regions_, ".csv"),
+                                    package = "usmapdata"),
+                        colClasses = col_classes_map(regions_),
                         stringsAsFactors = FALSE)
 
   if (length(include) > 0) {
@@ -58,12 +59,36 @@ us_map <- function(regions = c("states", "state", "counties", "county"),
 #' Map data column classes
 #'
 #' @keywords internal
-col_classes <- function(regions) {
-  result <- c("numeric", "numeric", "integer", "logical", "integer", rep("character", 4))
+col_classes_map <- function(regions) {
+  classes <- c("numeric", "numeric", "integer", "logical", "integer", rep("character", 4))
 
   if (regions %in% c("county", "counties")) {
-    result <- c(result, "character")    # add extra column for county name
+    classes <- c(classes, "character")    # add extra column for county name
   }
 
-  result
+  classes
+}
+
+#' Centroid label column classes
+#'
+#' @keywords internal
+col_classes_centroids <- function(regions) {
+  classes <- c("numeric", "numeric", "character", "character", "character")
+
+  if (regions == "county" | regions == "counties") {
+    # add extra column for the county name
+    classes <- c(classes, "character")
+  }
+
+  classes
+}
+
+#' centroid labels
+#'
+#' @export
+centroid_labels <- function(regions) {
+  utils::read.csv(system.file("extdata", paste0("us_", regions, "_centroids.csv"),
+                              package = "usmapdata"),
+                  colClasses = col_classes_centroids(regions),
+                  stringsAsFactors = FALSE)
 }
