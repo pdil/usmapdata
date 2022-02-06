@@ -18,23 +18,32 @@ The shape files that we use to plot the maps in R are located in the `data-raw` 
 ### Updating Shape Files
 The [Cartographic Boundary Files](https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.html) are used for mapping in `usmap`, specifically the 1:20m scale files. This low resolution allows for small file sizes while still allowing enough detail for simple choropleths. The file description can be read [here](https://www.census.gov/programs-surveys/geography/technical-documentation/naming-convention/cartographic-boundary-file.html).
 
-Follow these steps to update the files used within the project:
-1. Go to https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.html and select the most recent year available.
-2. In the `Cartographic Boundary Files by Geography` section, download the following files to the `data-raw` folder:
-* Counties 1 : 20,000,000 (national) shapefile
-* States 1 : 20,000,000 (national) shapefile
-3. Refer to the [county changes documentation](https://www.census.gov/programs-surveys/geography/technical-documentation/county-changes.2020.html) and make any relevant updates to `county-fips.csv`
-4. Delete the folders from older years (e.g. `cb_2017_us_county_20m`)
-5. Run `create-map-df.R`
-6. Run `format-map-df.R`
-7. Copy the following files to `inst/extdata`:
-* `us_counties_centroids.csv`
-* `us_counties.csv`
-* `us_states_centroids.csv`
-* `us_states.csv`
-* `county_fips.csv` (if changed)
-
-After applying these changes, [open a pull request](https://github.com/pdil/usmapdata/compare) and await review. 
+<details>
+    <summary>Follow these steps to update the files used within the project (click to expand)</summary>
+    <br>
+    <ol>
+        <li>Go to https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.html and select the most recent year available.</li>
+        <li>In the <strong>Cartographic Boundary Files by Geography</strong> section, download the following files to the <code>data-raw</code> folder:</li>
+        <ul>
+            <li>Counties 1 : 20,000,000 (national) shapefile</li>
+            <li>States 1 : 20,000,000 (national) shapefile</li>
+        </ul>
+        <li>Refer to the <a href="https://www.census.gov/programs-surveys/geography/technical-documentation/county-changes.2020.html">county changes documentation</a> and make any relevant updates to <code>county-fips.csv</code></li>
+        <li>Delete the folders from older years (e.g. <code>cb_2017_us_county_20m</code>)</li>
+        <li>Run <code>create-map-df.R</code></li>
+        <li>Run <code>format-map-df.R</code></li>
+        <li>Copy the following files to <code>inst/extdata</code>:</li>
+        <ul>
+            <li><code>us_counties_centroids.csv</code></li>
+            <li><code>us_counties.csv</code></li>
+            <li><code>us_states_centroids.csv</code></li>
+            <li><code>us_states.csv</code></li>
+            <li><code>county_fips.csv</code> (if changed)</li>
+        </ul>
+    </ol>
+    </code>
+    After applying these changes, <a href=https://github.com/pdil/usmapdata/compare>open a pull request</a> and await review.
+</details>
 
 ## Installation
 This package should only be installed if you intend to manipulate the US mapping data frame, which contains coordinates to draw the US state and county boundaries. If you're interested in plotting data on a US map, use the [`usmap`](https://github.com/pdil/usmap) package.
