@@ -23,14 +23,16 @@ Follow these steps to update the files used within the project:
 2. In the `Cartographic Boundary Files by Geography` section, download the following files to the `data-raw` folder:
 * Counties 1 : 20,000,000 (national) shapefile
 * States 1 : 20,000,000 (national) shapefile
-3. Delete the folders from older years (e.g. `cb_2017_us_county_20m`)
-4. Run `create-map-df.R`
-5. Run `format-map-df.R`
-6. Copy the following files to `inst/extdata`:
+3. Refer to the [county changes documentation](https://www.census.gov/programs-surveys/geography/technical-documentation/county-changes.2020.html) and make any relevant updates to `county-fips.csv`
+4. Delete the folders from older years (e.g. `cb_2017_us_county_20m`)
+5. Run `create-map-df.R`
+6. Run `format-map-df.R`
+7. Copy the following files to `inst/extdata`:
 * `us_counties_centroids.csv`
 * `us_counties.csv`
 * `us_states_centroids.csv`
 * `us_states.csv`
+* `county_fips.csv` (if changed)
 
 After applying these changes, [open a pull request](https://github.com/pdil/usmapdata/compare) and await review. 
 

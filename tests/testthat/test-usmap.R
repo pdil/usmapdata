@@ -41,7 +41,7 @@ test_that("correct states are excluded", {
 
 
 test_that("structure of counties df is correct", {
-  expect_equal(length(unique(counties_map$fips)), 3142)
+  expect_equal(length(unique(counties_map$fips)), 3143)
 })
 
 test_that("correct counties are included", {

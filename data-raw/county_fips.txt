@@ -70,6 +70,8 @@ AK,02,016,Aleutians West Census Area,H5
 AK,02,020,Anchorage Municipality,H6
 AK,02,050,Bethel Census Area,H5
 AK,02,060,Bristol Bay Borough,H1
+AK,02,063,Chugach Census Area,Z5
+AK,02,066,Copper River Census Area,Z5
 AK,02,068,Denali Borough,H1
 AK,02,070,Dillingham Census Area,H5
 AK,02,090,Fairbanks North Star Borough,H1
@@ -90,7 +92,6 @@ AK,02,198,Prince of Wales-Hyder Census Area,H5
 AK,02,220,Sitka City and Borough,H6
 AK,02,230,Skagway Municipality,H1
 AK,02,240,Southeast Fairbanks Census Area,H5
-AK,02,261,Valdez-Cordova Census Area,H5
 AK,02,275,Wrangell City and Borough,H1
 AK,02,282,Yakutat City and Borough,H1
 AK,02,290,Yukon-Koyukuk Census Area,H5
