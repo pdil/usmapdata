@@ -2,10 +2,19 @@
 % Please edit documentation in R/us_map.R
 \name{centroid_labels}
 \alias{centroid_labels}
-\title{centroid labels}
+\title{Retrieve centroid labels}
 \usage{
-centroid_labels(regions)
+centroid_labels(regions = c("states", "counties"))
+}
+\arguments{
+\item{regions}{The region breakdown for the map, can be one of
+(\code{"states"}, \code{"counties"}, as specified by the internal file names.
+The default is \code{"states"}.}
+}
+\value{
+A data frame of state or county centroid labels and positions
+relative to the coordinates returned by the \code{us_map} function.
 }
 \description{
-centroid labels
+Retrieve centroid labels
 }

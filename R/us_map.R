@@ -56,6 +56,23 @@ us_map <- function(regions = c("states", "state", "counties", "county"),
   df
 }
 
+#' Retrieve centroid labels
+#'
+#' @param regions The region breakdown for the map, can be one of
+#'   (\code{"states"}, \code{"counties"}, as specified by the internal file names.
+#'   The default is \code{"states"}.
+#'
+#' @return A data frame of state or county centroid labels and positions
+#'   relative to the coordinates returned by the \code{us_map} function.
+#'
+#' @export
+centroid_labels <- function(regions = c("states", "counties")) {
+  utils::read.csv(system.file("extdata", paste0("us_", regions, "_centroids.csv"),
+                              package = "usmapdata"),
+                  colClasses = col_classes_centroids(regions),
+                  stringsAsFactors = FALSE)
+}
+
 #' Map data column classes
 #'
 #' @keywords internal
@@ -81,14 +98,4 @@ col_classes_centroids <- function(regions) {
   }
 
   classes
-}
-
-#' centroid labels
-#'
-#' @export
-centroid_labels <- function(regions) {
-  utils::read.csv(system.file("extdata", paste0("us_", regions, "_centroids.csv"),
-                              package = "usmapdata"),
-                  colClasses = col_classes_centroids(regions),
-                  stringsAsFactors = FALSE)
 }
