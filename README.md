@@ -13,7 +13,26 @@ You might be looking for the `usmap` package: [CRAN](https://cran.r-project.org/
 This package and repository will only contain functions and data relevant to the actual map data frame used to draw the map in the `usmap` package. All other functions, including FIPS and mapping convenience functions, will be contained in the `usmap` [repository](https://github.com/pdil/usmap).
 
 ## Shape Files
-The shape files that we use to plot the maps in R are located in the `data-raw` folder. For more information refer to the [US Census Bureau](https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html). Maps at both the state and county levels are included for convenience (zip code maps may be included in the future).
+The shape files that we use to plot the maps in R are located in the `data-raw` folder. For more information refer to the [US Census Bureau](https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.html). Maps at both the state and county levels are included for convenience (zip code maps may be included in the future).
+
+### Updating Shape Files
+The [Cartographic Boundary Files](https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.html) are used for mapping in `usmap`, specifically the 1:20m scale files. This low resolution allows for small file sizes while still allowing enough detail for simple choropleths. The file description can be read [here](https://www.census.gov/programs-surveys/geography/technical-documentation/naming-convention/cartographic-boundary-file.html).
+
+Follow these steps to update the files used within the project:
+1. Go to https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.html and select the most recent year available.
+2. In the `Cartographic Boundary Files by Geography` section, download the following files to the `data-raw` folder:
+* Counties 1 : 20,000,000 (national) shapefile
+* States 1 : 20,000,000 (national) shapefile
+3. Delete the folders from older years (e.g. `cb_2017_us_county_20m`)
+4. Run `create-map-df.R`
+5. Run `format-map-df.R`
+6. Copy the following files to `inst/extdata`:
+* `us_counties_centroids.csv`
+* `us_counties.csv`
+* `us_states_centroids.csv`
+* `us_states.csv`
+
+After applying these changes, [open a pull request](https://github.com/pdil/usmapdata/compare) and await review. 
 
 ## Installation
 This package should only be installed if you intend to manipulate the US mapping data frame, which contains coordinates to draw the US state and county boundaries. If you're interested in plotting data on a US map, use the [`usmap`](https://github.com/pdil/usmap) package.

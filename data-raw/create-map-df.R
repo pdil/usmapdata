@@ -5,6 +5,10 @@
 #
 # Based off code found here:
 #   http://www.r-bloggers.com/moving-the-earth-well-alaska-hawaii-with-r/
+#
+# Shapefiles obtained from:
+#   https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.html
+#   use 20,000,000 resolution
 # ==============================================================================
 
 library(maptools)
@@ -16,7 +20,7 @@ library(dplyr)
 setwd("data-raw/")
 source("compute-centroids.R")
 
-prefix = "cb_2017_us_"
+prefix = "cb_2020_us_"
 region_types <- c("county", "state")
 suffix <- "20m"
 
