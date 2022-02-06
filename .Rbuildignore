@@ -3,3 +3,5 @@
 ^data-raw$
 ^\.Rproj\.user$
 ^usmapdata\.Rproj$
+^cran-comments\.md$
+

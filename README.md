@@ -2,8 +2,6 @@
 
 [![Build Status](https://img.shields.io/endpoint.svg?url=https%3A%2F%2Factions-badge.atrox.dev%2Fpdil%2Fusmapdata%2Fbadge%3Fref%3Dmaster&style=popout&label=build)](https://actions-badge.atrox.dev/pdil/usmapdata/goto?ref=master) [![codecov](https://codecov.io/gh/pdil/usmapdata/branch/master/graph/badge.svg)](https://codecov.io/gh/pdil/usmapdata)
 
-[under construction]
-
 You might be looking for the `usmap` package: [CRAN](https://cran.r-project.org/package=usmap) | [Github](https://github.com/pdil/usmap) | [Website](https://usmap.dev)
 
 ## Purpose
@@ -48,7 +46,7 @@ The [Cartographic Boundary Files](https://www.census.gov/geographies/mapping-fil
 ## Installation
 This package should only be installed if you intend to manipulate the US mapping data frame, which contains coordinates to draw the US state and county boundaries. If you're interested in plotting data on a US map, use the [`usmap`](https://github.com/pdil/usmap) package.
 
-To install from CRAN _(coming soon)_, run the following code in an R console:
+To install from CRAN _(recommended)_, run the following code in an R console:
 ```r
 install.packages("usmapdata")
 ```
@@ -69,19 +67,63 @@ library(usmapdata)
 ## Additional Information
 
 ### Projection
-`usmap` and `usmapdata` use an [Albers equal-area conic projection](https://en.wikipedia.org/wiki/Albers_projection), with arguments as follows:
-```r
-usmap::usmap_crs()
-#> CRS arguments:
-#>     +proj=laea +lat_0=45 +lon_0=-100 +x_0=0
-#>     +y_0=0 +a=6370997 +b=6370997 +units=m
-#>     +no_defs 
-```
+`usmap` uses an [Albers equal-area conic projection](https://en.wikipedia.org/wiki/Albers_projection), with arguments as follows:
 
-To obtain the projection used by `usmap` and `usmapdata`, use `usmap_crs()`.
+<details>
+    <summary><code>usmap::usmap_crs()</code></summary>
+
+    ```
+    #> Coordinate Reference System:
+    #> Deprecated Proj.4 representation:
+    #>  +proj=laea +lat_0=45 +lon_0=-100 +x_0=0 +y_0=0 +ellps=sphere
+    #> +units=m +no_defs 
+    #> WKT2 2019 representation:
+    #> PROJCRS["unknown",
+    #>     BASEGEOGCRS["unknown",
+    #>         DATUM["unknown",
+    #>             ELLIPSOID["Normal Sphere (r=6370997)",6370997,0,
+    #>                 LENGTHUNIT["metre",1,
+    #>                     ID["EPSG",9001]]]],
+    #>         PRIMEM["Greenwich",0,
+    #>             ANGLEUNIT["degree",0.0174532925199433],
+    #>             ID["EPSG",8901]]],
+    #>     CONVERSION["unknown",
+    #>         METHOD["Lambert Azimuthal Equal Area (Spherical)",
+    #>             ID["EPSG",1027]],
+    #>         PARAMETER["Latitude of natural origin",45,
+    #>             ANGLEUNIT["degree",0.0174532925199433],
+    #>             ID["EPSG",8801]],
+    #>         PARAMETER["Longitude of natural origin",-100,
+    #>             ANGLEUNIT["degree",0.0174532925199433],
+    #>             ID["EPSG",8802]],
+    #>         PARAMETER["False easting",0,
+    #>             LENGTHUNIT["metre",1],
+    #>             ID["EPSG",8806]],
+    #>         PARAMETER["False northing",0,
+    #>             LENGTHUNIT["metre",1],
+    #>             ID["EPSG",8807]]],
+    #>     CS[Cartesian,2],
+    #>         AXIS["(E)",east,
+    #>             ORDER[1],
+    #>             LENGTHUNIT["metre",1,
+    #>                 ID["EPSG",9001]]],
+    #>         AXIS["(N)",north,
+    #>             ORDER[2],
+    #>             LENGTHUNIT["metre",1,
+    #>                 ID["EPSG",9001]]]] 
+    ```
+</details>
+
+This is the same projection used by the [US National Atlas](https://epsg.io/2163).
+
+To obtain the projection used by `usmap`, use `usmap_crs()`.
 
 Alternatively, the CRS ([coordinate reference system](https://www.nceas.ucsb.edu/sites/default/files/2020-04/OverviewCoordinateReferenceSystems.pdf)) can be created manually with the following command:
 ```r
-sp::CRS("+proj=laea +lat_0=45 +lon_0=-100 +x_0=0 +y_0=0
-         +a=6370997 +b=6370997 +units=m +no_defs")
+sp::CRS(paste("+proj=laea +lat_0=45 +lon_0=-100 +x_0=0 +y_0=0",
+              "+a=6370997 +b=6370997 +units=m +no_defs"))
 ```
+
+## Acknowledgments
+The code used to generate the map files was based on this blog post by [Bob Rudis](https://github.com/hrbrmstr):    
+[Moving The Earth (well, Alaska & Hawaii) With R](https://rud.is/b/2014/11/16/moving-the-earth-well-alaska-hawaii-with-r/)
