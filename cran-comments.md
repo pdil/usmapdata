@@ -1,6 +1,8 @@
 
+This is a resubmission for 0.1.0.
+
 ## Test environments
-* local macOS install, R 4.0.3
+* local macOS install, R 4.1.2
 
 #### On Github Actions
 * macOS-latest (release), R 4.1.2
