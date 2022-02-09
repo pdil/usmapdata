@@ -1,6 +1,9 @@
+# usmapdata 0.1.0.9999
+
 # usmapdata 0.1.0
 
 * First release
+Released Wednesday, February 2, 2022.
 
 ### Main features
 
