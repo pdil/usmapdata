@@ -70,3 +70,8 @@ test_that("singular regions value returns same data frames as plural", {
 test_that("error occurs for invalid region", {
   expect_error(us_map(regions = "cities"))
 })
+
+test_that("centroid labels are loaded", {
+  expect_equal(length(centroid_labels("states")[, 1]), 51)
+  expect_equal(length(centroid_labels("counties")[, 1]), 3143)
+})
