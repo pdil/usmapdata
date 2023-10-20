@@ -1,4 +1,4 @@
-# usmapdata 0.1.0.9999
+# usmapdata 0.1.1
 
 * Update package author email and website.
 

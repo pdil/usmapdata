@@ -21,7 +21,7 @@
 #' @author Paolo Di Lorenzo \cr
 #' \itemize{
 #'   \item Email: \email{dilorenzo@@hey.com}
-#'   \item Github: \url{https://github.com/pdil/}
+#'   \item GitHub: \url{https://github.com/pdil/}
 #' }
 #'
 #' @seealso
