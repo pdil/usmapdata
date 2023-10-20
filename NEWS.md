@@ -1,5 +1,6 @@
 # usmapdata 0.1.0.9999
 
+* Update package author email and website.
 
 # usmapdata 0.1.0
 Released Wednesday, February 2, 2022.

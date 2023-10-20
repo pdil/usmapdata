@@ -38,8 +38,7 @@ Helpful links:
 \author{
 Paolo Di Lorenzo \cr
 \itemize{
-\item Email: \email{paolo@dilorenzo.pl}
-\item Website: \url{https://dilorenzo.pl}
+\item Email: \email{dilorenzo@hey.com}
 \item Github: \url{https://github.com/pdil/}
 }
 }

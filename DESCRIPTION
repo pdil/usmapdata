@@ -6,7 +6,7 @@ Description: Provides a container for data used by the 'usmap' package.
     file size of the 'usmap' package can be reduced greatly. The data in this
     package will be updated roughly once per year (plus bug fixes) as new
     shape files are provided by the US Census bureau.
-Authors@R: person("Paolo", "Di Lorenzo", email = "paolo@dilorenzo.pl", role = c("aut", "cre"))
+Authors@R: person("Paolo", "Di Lorenzo", email = "dilorenzo@hey.com", role = c("aut", "cre"))
 Depends:
     R (>= 3.5.0)
 License: GPL (>= 3)
@@ -20,4 +20,4 @@ Suggests:
     covr,
     testthat
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.3
