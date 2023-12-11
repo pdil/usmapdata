@@ -1,4 +1,9 @@
-# usmapdata 0.1.1.9999
+# usmapdata 0.1.2.9999
+
+
+
+# usmapdata 0.1.2
+Released Monday, December 11, 2023.
 
 * Add `fips_data` function to load raw FIPS data from included csv files.
     * `fips_data()`, `fips_data("state")`, or `fips_data("states")` load state FIPS codes
