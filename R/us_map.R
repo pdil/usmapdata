@@ -92,7 +92,7 @@ col_classes_map <- function(regions) {
 col_classes_centroids <- function(regions) {
   classes <- c("numeric", "numeric", "character", "character", "character")
 
-  if (regions == "county" | regions == "counties") {
+  if (regions == "county" || regions == "counties") {
     # add extra column for the county name
     classes <- c(classes, "character")
   }
