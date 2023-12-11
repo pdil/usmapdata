@@ -18,12 +18,12 @@ fips_data <- function(regions = c("states", "state", "counties", "county")) {
 
   if (regions_ == "state" || regions_ == "states")
     utils::read.csv(
-      system.file("extdata", "state_fips.csv", package = "usmap"),
+      system.file("extdata", "state_fips.csv", package = "usmapdata"),
       colClasses = rep("character", 3), stringsAsFactors = FALSE
     )
   else if (regions_ == "county" || regions_ == "counties")
     utils::read.csv(
-      system.file("extdata", "county_fips.csv", package = "usmap"),
+      system.file("extdata", "county_fips.csv", package = "usmapdata"),
       colClasses = rep("character", 4), stringsAsFactors = FALSE
     )
 }

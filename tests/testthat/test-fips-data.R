@@ -28,15 +28,15 @@ test_that("county FIPS codes load correctly", {
   expect_identical(county_fips, counties_fips)
 
   expect_equal(length(county_fips), 4)
-  expect_equal(length(county_fips[, 1]), 3235)
+  expect_equal(length(county_fips[, 1]), 3236)
 
   expect_equal(county_fips[1, "full"], "Alaska")
   expect_equal(county_fips[1, "abbr"], "AK")
   expect_equal(county_fips[1, "county"], "Aleutians West Census Area")
   expect_equal(county_fips[1, "fips"], "02016")
 
-  expect_equal(county_fips[3235, "full"], "Wyoming")
-  expect_equal(county_fips[3235, "abbr"], "WY")
-  expect_equal(county_fips[3235, "county"], "Washakie County")
-  expect_equal(county_fips[3235, "fips"], "56043")
+  expect_equal(county_fips[3236, "full"], "Wyoming")
+  expect_equal(county_fips[3236, "abbr"], "WY")
+  expect_equal(county_fips[3236, "county"], "Washakie County")
+  expect_equal(county_fips[3236, "fips"], "56043")
 })
