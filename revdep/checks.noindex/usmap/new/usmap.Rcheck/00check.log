@@ -4,11 +4,11 @@
 * R was compiled by
     Apple clang version 14.0.0 (clang-1400.0.29.202)
     GNU Fortran (GCC) 12.2.0
-* running under: macOS 14.0
+* running under: macOS 14.1.2
 * using session charset: UTF-8
 * using options ‘--no-manual --no-build-vignettes’
 * checking for file ‘usmap/DESCRIPTION’ ... OK
-* this is package ‘usmap’ version ‘0.6.2’
+* this is package ‘usmap’ version ‘0.6.3’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... OK

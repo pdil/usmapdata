@@ -471,7 +471,7 @@ detaching ‘package:ggplot2’
 
 > options(digits = 7L)
 > base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
-Time elapsed:  2.867 0.117 2.998 0 0 
+Time elapsed:  2.292 0.102 2.406 0 0 
 > grDevices::dev.off()
 null device 
           1 

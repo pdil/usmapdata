@@ -1,4 +1,11 @@
-# usmapdata 0.1.0.9999
+# usmapdata 0.1.1.9999
+
+* Add `fips_data` function to load raw FIPS data from included csv files.
+    * `fips_data()`, `fips_data("state")`, or `fips_data("states")` load state FIPS codes
+    * `fips_data("county")` or `fips_data("counties")` load county FIPS codes
+
+# usmapdata 0.1.1
+Released Saturday, October 21, 2023.
 
 * Update package author email and website.
 
