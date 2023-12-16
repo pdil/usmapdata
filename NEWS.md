@@ -1,6 +1,12 @@
 # usmapdata 0.1.2.9999
 
-
+### Improvements
+* Begin process of upgrading map data to use GeoPackage files instead of csv.
+  * Previously the files were created using now-retired packages `rgdal`, `rgeos`, and `maptools`.
+  * The new files can be accessed by passing `as_sf = TRUE` to the `us_map()` and `fips_data()` functions.
+  * Once the upgrade is complete, this parameter will be removed and the new functionality will be the default.
+  * The new map files are smaller in size while maintaining the same resolution.
+  * The format of the data also allows for easier manipulation in the future using the `sf` package.
 
 # usmapdata 0.1.2
 Released Monday, December 11, 2023.

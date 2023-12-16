@@ -1,7 +1,7 @@
 
-#' Create `usmap` shape files
+#' Create `usmap` shapefiles
 #'
-#' Internal function to create the modified shape files used by the
+#' Internal function to create the modified shapefiles used by the
 #' \link[usmap]{usmap} package. Using this function externally is not
 #' recommended since it makes certain undocumented assumptions that may
 #' not work with all inputs.
@@ -11,6 +11,12 @@
 #'
 #' In some cases where the raw data is required, the \link{us_map}
 #' function located in this package can be used instead.
+#'
+#' @references {
+#'  Rudis B (2014). “Moving The Earth
+#'  (well, Alaska & Hawaii) With R.”
+#'  <https://rud.is/b/2014/11/16/moving-the-earth-well-alaska-hawaii-with-r/>.
+#' }
 #'
 #' @keywords internal
 create_us_map <- function(

@@ -25,6 +25,13 @@ States (or counties) can be included such that all other states (or counties)
 are excluded using the \code{include} parameter.
 }
 
+\references{
+{
+Rudis B (2014). “Moving The Earth
+(well, Alaska & Hawaii) With R.”
+\url{https://rud.is/b/2014/11/16/moving-the-earth-well-alaska-hawaii-with-r/}.
+}
+}
 \seealso{
 Helpful links:
 \itemize{
@@ -32,7 +39,8 @@ Helpful links:
 \url{https://www.census.gov/geographies/mapping-files/time-series/geo/tiger-line-file.html}
 \item Map Features \cr
 \url{https://en.wikipedia.org/wiki/Map_projection}
-\url{https://en.wikipedia.org/wiki/Albers_projection}
+\url{https://en.wikipedia.org/wiki/Equal-area_projection}
+\url{https://epsg.io/9311}
 }
 }
 \author{
