@@ -27,7 +27,7 @@ The [Cartographic Boundary Files](https://www.census.gov/geographies/mapping-fil
             <li>States 1 : 20,000,000 (national) shapefile</li>
         </ul>
         <li>Run <code>usmapdata::create_map_data()</code> for both <code>type = "states"</code> and <code>type = "counties"</code> on the shapefiles, storing the outputs in <code>inst/extdata</code>.</li>
-        <li>Ensure all package tests continue to pass, e.g. with `devtools::test()`.</li>
+        <li>Ensure all package tests continue to pass, e.g. with <code>devtools::test()</code>.</li>
     </ol>
     </code>
     After applying these changes, <a href=https://github.com/pdil/usmapdata/compare>open a pull request</a> and await review.
@@ -36,19 +36,22 @@ The [Cartographic Boundary Files](https://www.census.gov/geographies/mapping-fil
 ## Installation
 This package should only be installed if you intend to manipulate the US mapping data frame, which contains coordinates to draw the US state and county boundaries. If you're interested in plotting data on a US map, use the [`usmap`](https://github.com/pdil/usmap) package.
 
-To install from CRAN (recommended), run the following code in an R console:
+📦 To install from CRAN (recommended), run the following code in an R console:
 ```r
 install.packages("usmapdata")
 ```
+
+### Developer Build
+⚠️ The developer build may be unstable and not function correctly, use with caution.
+
 To install the package from this repository, run the following code in an R console:
 ```r
 # install.package("devtools")
 devtools::install_github("pdil/usmapdata")
 ```
-Installing using `devtools::install_github` will provide the most recent developer build of `usmapdata`.
+This method will provide the most recent developer build of `usmapdata`.
 
-⚠️ The developer build may be unstable and not function correctly, use with caution.
-
+## Usage
 To begin using `usmapdata`, import the package using the `library` command:
 ```r
 library(usmapdata)
