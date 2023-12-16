@@ -3,3 +3,4 @@
 export(centroid_labels)
 export(fips_data)
 export(us_map)
+importFrom(rlang,.data)

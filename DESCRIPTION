@@ -15,6 +15,9 @@ LazyData: true
 URL: https://usmap.dev
 BugReports: https://github.com/pdil/usmapdata/issues
 Imports:
+    dplyr,
+    rlang,
+    sf,
     utils
 Suggests:
     covr,

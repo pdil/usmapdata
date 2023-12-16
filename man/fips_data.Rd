@@ -4,12 +4,18 @@
 \alias{fips_data}
 \title{Retrieve state and county FIPS codes}
 \usage{
-fips_data(regions = c("states", "state", "counties", "county"))
+fips_data(regions = c("states", "state", "counties", "county"), as_sf = FALSE)
 }
 \arguments{
 \item{regions}{The region breakdown for the map, can be one of
 (\code{"states"}, \code{"state"}, \code{"counties"}, \code{"county"}).
 The default is \code{"states"}.}
+
+\item{as_sf}{Whether the output should be an \link[sf]{sf} object or not. If
+\code{FALSE} (the current default), the output will be a \link{data.frame}. This is a
+temporary parameter to be used only during the shape file format upgrade.
+It will be removed in the future once the upgrade is complete and the value
+will effectively be \code{TRUE}.}
 }
 \value{
 A data frame of FIPS codes of the desired \code{regions}.
