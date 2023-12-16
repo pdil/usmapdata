@@ -59,7 +59,7 @@ library(usmapdata)
 
 ## Additional Information
 
-### Projection
+### Coordinate System
 `usmap` uses the [US National Atlas Equal Area](https://epsg.io/9311) coordinate system:
 
 <details>
@@ -107,12 +107,7 @@ library(usmapdata)
     ```
 </details>
 
-To obtain the projection used by `usmap`, use `usmap_crs()`.
-
-Alternatively, the CRS ([coordinate reference system](https://www.nceas.ucsb.edu/sites/default/files/2020-04/OverviewCoordinateReferenceSystems.pdf)) can be created manually with the following command:
-```r
-sf::st_crs(9311)
-```
+This [coordinate reference system (CRS)](https://www.nceas.ucsb.edu/sites/default/files/2020-04/OverviewCoordinateReferenceSystems.pdf) can also be obtained with `usmap::usmap_crs()`.
 
 ## Acknowledgments
 The code used to generate the map files was based on this blog post by [Bob Rudis](https://github.com/hrbrmstr):
