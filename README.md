@@ -8,9 +8,9 @@ You might be looking for the `usmap` package: [CRAN](https://cran.r-project.org/
 
 `usmapdata` is a container package for the map data frame used in the [`usmap`](https://github.com/pdil/usmap) package. This data has been extracted to keep `usmap` small and easier to maintain, while allowing the ability to keep the US map data frame updated as often as possible (independently of `usmap` updates).
 
-This package and repository will only contain functions and data relevant to the actual map data frame used to draw the map in the `usmap` package. All other functions, including FIPS and mapping convenience functions, will be contained in the `usmap` [repository](https://github.com/pdil/usmap).
+This package and repository will only contain functions and data relevant to the actual map and FIPS data used to draw the map in the `usmap` package. All other functions, including FIPS and mapping convenience functions, will be contained in the `usmap` [repository](https://github.com/pdil/usmap).
 
-## Shape Files
+## Shapefiles
 The shapefiles that we use to plot the maps in R are located in the `data-raw` folder. For more information refer to the [US Census Bureau](https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.html). Maps at both the state and county levels are included for convenience (zip code maps may be included in the future).
 
 ### Updating Shapefiles
@@ -26,7 +26,8 @@ The [Cartographic Boundary Files](https://www.census.gov/geographies/mapping-fil
             <li>Counties 1 : 20,000,000 (national) shapefile</li>
             <li>States 1 : 20,000,000 (national) shapefile</li>
         </ul>
-        <li>Run <code>usmapdata::create_map_data()</code> for both <code>type = "states"</code> and <code>type = "counties"</code> on the shapefiles, storing the outputs in <code>inst/extdata</code>.
+        <li>Run <code>usmapdata::create_map_data()</code> for both <code>type = "states"</code> and <code>type = "counties"</code> on the shapefiles, storing the outputs in <code>inst/extdata</code>.</li>
+        <li>Ensure all package tests continue to pass, e.g. with `devtools::test()`.</li>
     </ol>
     </code>
     After applying these changes, <a href=https://github.com/pdil/usmapdata/compare>open a pull request</a> and await review.
@@ -103,14 +104,11 @@ library(usmapdata)
     ```
 </details>
 
-This is the same projection used by the [US National Atlas](https://epsg.io/2163).
-
 To obtain the projection used by `usmap`, use `usmap_crs()`.
 
 Alternatively, the CRS ([coordinate reference system](https://www.nceas.ucsb.edu/sites/default/files/2020-04/OverviewCoordinateReferenceSystems.pdf)) can be created manually with the following command:
 ```r
-sp::CRS(paste("+proj=laea +lat_0=45 +lon_0=-100 +x_0=0 +y_0=0",
-              "+a=6370997 +b=6370997 +units=m +no_defs"))
+sf::st_crs(9311)
 ```
 
 ## Acknowledgments
