@@ -2,17 +2,16 @@
 #' Create `usmap` shape files
 #'
 #' Internal function to create the modified shape files used by the
-#' \link{usmap} package. Using this function externally is not recommended
-#' since it makes certain undocumented assumptions that may not work
-#' with all inputs.
+#' \link[usmap]{usmap} package. Using this function externally is not
+#' recommended since it makes certain undocumented assumptions that may
+#' not work with all inputs.
 #'
-#' It is strongly recommend that the \link{usmap} package is used
+#' It is strongly recommend that the \link[usmap]{usmap} package is used
 #' directly.
 #'
 #' In some cases where the raw data is required, the \link{us_map}
 #' function located in this package can be used instead.
 #'
-#' @importFrom dplyr %>%
 #' @keywords internal
 create_us_map <- function(
   type = c("states", "counties"),
@@ -52,7 +51,7 @@ create_us_map <- function(
   } else if (type == "counties") {
     cols <- c("GEOID", "STUSPS", "STATE_NAME", "NAMELSAD")
   }
-  us_ea <- us_ea %>% dplyr::select(dplyr::all_of(cols))
+  us_ea <- dplyr::select(us_ea, dplyr::all_of(cols))
 
   # rename remaining columns
   new_cols <- c()
@@ -61,27 +60,30 @@ create_us_map <- function(
   } else if (type == "counties") {
     new_cols <- c(fips = "GEOID", abbr = "STUSPS", full = "STATE_NAME", county = "NAMELSAD")
   }
-  us_ea <- us_ea %>% dplyr::rename(dplyr::all_of(new_cols))
+  us_ea <- dplyr::rename(us_ea, dplyr::all_of(new_cols))
 
   # sort output
   if (type == "states") {
-    us_ea <- us_ea %>% dplyr::arrange(abbr)
+    us_ea <- dplyr::arrange(us_ea, .data$abbr)
   } else if (type == "counties") {
-    us_ea <- us_ea %>% dplyr::arrange(abbr, county)
+    us_ea <- dplyr::arrange(us_ea, .data$abbr, .data$county)
   }
 
   # export modified shape file
   sf::st_write(us_ea, output_file, append = FALSE)
 }
 
+#' 2D transformation matrix
+#'
+#' @param angle The rotation angle of the transformation.
+#' @param scale The scale factor of the transformation.
+#'
+#' @return A two dimensional transformation matrix for the given
+#' rotation angle and scale factor.
+#'
 #' @keywords internal
 transform <- function(angle = 0, scale = 1) {
   r <- angle * pi / 180
   matrix(c(scale * cos(r), scale * sin(r),
            -scale * sin(r), scale * cos(r)), 2, 2)
-}
-
-#' @keywords internal
-scale <- function(s) {
-  matrix(c(s, 0, 0, s), 2, 2)
 }

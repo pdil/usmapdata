@@ -8,12 +8,12 @@ create_us_map(type = c("states", "counties"), input_file, output_file)
 }
 \description{
 Internal function to create the modified shape files used by the
-\link{usmap} package. Using this function externally is not recommended
-since it makes certain undocumented assumptions that may not work
-with all inputs.
+\link[usmap]{usmap} package. Using this function externally is not
+recommended since it makes certain undocumented assumptions that may
+not work with all inputs.
 }
 \details{
-It is strongly recommend that the \link{usmap} package is used
+It is strongly recommend that the \link[usmap]{usmap} package is used
 directly.
 
 In some cases where the raw data is required, the \link{us_map}

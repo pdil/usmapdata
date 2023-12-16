@@ -14,7 +14,7 @@
 #'  same name. The regions listed in the \code{include} parameter are applied first and the
 #'  \code{exclude} regions are then removed from the resulting map. Any excluded regions
 #'  not present in the included regions will be ignored.
-#' @param as_sf Whether the output should be an \link{sf} object or not. If
+#' @param as_sf Whether the output should be an \link[sf]{sf} object or not. If
 #'  `FALSE` (the current default), the output will be a \link{data.frame}. This is a
 #'  temporary parameter to be used only during the shape file format upgrade.
 #'  It will be removed in the future once the upgrade is complete and the value
@@ -30,7 +30,6 @@
 #'
 #' excl_west_coast <- us_map(exclude = c("CA", "OR", "WA"))
 #'
-#' @importFrom dplyr %>%
 #' @export
 us_map <- function(
   regions = c("states", "state", "counties", "county"),
@@ -71,7 +70,7 @@ us_map <- function(
                  substr(df$fips, 1, 2) %in% exclude), ]
   }
 
-  df %>% dplyr::arrange(abbr)
+  dplyr::arrange(df, .data$abbr)
 }
 
 #' Retrieve centroid labels
@@ -79,7 +78,7 @@ us_map <- function(
 #' @param regions The region breakdown for the map, can be one of
 #'   (\code{"states"}, \code{"counties"}, as specified by the internal file names.
 #'   The default is \code{"states"}.
-#' @param as_sf Whether the output should be an \link{sf} object or not. If
+#' @param as_sf Whether the output should be an \link[sf]{sf} object or not. If
 #'  `FALSE` (the current default), the output will be a \link{data.frame}. This is a
 #'  temporary parameter to be used only during the shape file format upgrade.
 #'  It will be removed in the future once the upgrade is complete and the value

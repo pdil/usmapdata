@@ -3,7 +3,7 @@
 #' @param regions The region breakdown for the map, can be one of
 #'   (\code{"states"}, \code{"state"}, \code{"counties"}, \code{"county"}).
 #'   The default is \code{"states"}.
-#' @param as_sf Whether the output should be an \link{sf} object or not. If
+#' @param as_sf Whether the output should be an \link[sf]{sf} object or not. If
 #'  `FALSE` (the current default), the output will be a \link{data.frame}. This is a
 #'  temporary parameter to be used only during the shape file format upgrade.
 #'  It will be removed in the future once the upgrade is complete and the value
