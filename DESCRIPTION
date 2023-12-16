@@ -15,12 +15,12 @@ LazyData: true
 URL: https://usmap.dev
 BugReports: https://github.com/pdil/usmapdata/issues
 Imports:
+    dplyr,
     rlang,
+    sf,
     utils
 Suggests:
     covr,
-    dplyr,
-    sf,
     testthat
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3

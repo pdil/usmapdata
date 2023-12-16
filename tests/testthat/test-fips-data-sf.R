@@ -7,10 +7,6 @@
 #' these tests will replace the ones in test-fips-data.R.
 context("Loading FIPS data")
 
-test_that("dependencies are verified", {
-  expect_package_error("sf", fips_data(as_sf = TRUE))
-})
-
 test_that("state FIPS codes load correctly", {
   fips <- fips_data(as_sf = TRUE)
   state_fips <- fips_data("state", as_sf = TRUE)

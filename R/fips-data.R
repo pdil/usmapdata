@@ -25,12 +25,6 @@ fips_data <- function(
   regions <- match.arg(regions)
 
   if (as_sf) {
-    # check for sf
-    if (!requireNamespace("sf", quietly = TRUE)) {
-      stop("`sf` must be installed to use `us_map`.
-         Use: install.packages(\"sf\") and try again.")
-    }
-
     map_data <- usmapdata::us_map(regions, as_sf = TRUE)
     sf::st_geometry(map_data) <- NULL
     map_data

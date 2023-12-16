@@ -7,10 +7,6 @@
 #' these tests will replace the ones in test-usmap.R.
 context("Loading US map data after sf upgrade")
 
-test_that("dependencies are verified", {
-  expect_package_error("sf", us_map(as_sf = TRUE))
-})
-
 states_map <- us_map(regions = "states", as_sf = TRUE)
 counties_map <- us_map(regions = "counties", as_sf = TRUE)
 

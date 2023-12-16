@@ -43,12 +43,6 @@ us_map <- function(
   else if (regions == "county") regions <- "counties"
 
   if (as_sf) {
-    # check for sf
-    if (!requireNamespace("sf", quietly = TRUE)) {
-      stop("`sf` must be installed to use `us_map`.
-         Use: install.packages(\"sf\") and try again.")
-    }
-
     df <- sf::read_sf(
       system.file("extdata", paste0("us_", regions, ".gpkg"),
                   package = "usmapdata")
