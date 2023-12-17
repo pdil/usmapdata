@@ -1,0 +1,68 @@
+
+name: Check for new shapefiles
+
+on:
+  schedule:
+      # runs at midnight on the 1st of March and September
+    - cron: '0 0 1 3,9 *'
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          cache: 'pip'
+
+      - name: Download shapefiles
+        run: python data-raw/scripts/shapefiles.py
+        continue-on-error: true
+
+      - name: Setup usmapdata
+        uses: r-lib/actions/setup-r-dependencies@v2
+
+      - name: Modify shapefiles
+        if: ${{ success() }}
+        env:
+          SHAPEFILE_DIR: "data-raw/scripts/shapefiles"
+          DATA_DIR: "inst/extdata"
+        run: |
+          usmapdata:::create_us_map("states", "$SHAPEFILE_DIR/${{ env.state_shp_path }}", "$DATA_DIR/us_states.gpkg")
+          usmapdata:::create_us_map("counties", "$SHAPEFILE_DIR/${{ env.county_shp_path }}", "$DATA_DIR/us_counties.gpkg")
+        shell: Rscript {0}
+
+      - name: Determine pull request parameters
+        run: |
+          echo "branch_name=data-update/$(date +'%B-%Y')" >> "$GITHUB_ENV"
+          echo "pr_title=Update map data - $(date +'%B %Y')" >> "$GITHUB_ENV"
+
+      - name: Open pull request
+        if: ${{ success() }}
+        uses: peter-evans/create-pull-request@v5
+        with:
+          commit-message: Update map data based on latest shapefiles
+          branch: ${{ env.branch_name }}
+          title: ${{ env.pr_title }}
+          body: |
+            Updated map data based on latest shapefiles from
+            the US Census Bureau's [cartographic boundary files][1].
+
+            ### Review Checklist
+            - [ ] Ensure all checks and tests pass
+            - [ ] Load current branch with `devtools::install_github("usmapdata", "${{ env.branch_name }}")` and test `usmap`
+            - [ ] Perform smoke test of all plotting features to ensure consistency
+            - [ ] Update data file changelog in [`usmap` `README.md`][2]
+
+            [1]: https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.html
+            [2]: https://github.com/pdil/usmap/blob/master/README.md
+          assignees: pdil
+          labels: data update
+          reviewers: pdil
+          delete-branch: true
+
