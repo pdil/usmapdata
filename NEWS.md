@@ -7,6 +7,8 @@
   * Once the upgrade is complete, this parameter will be removed and the new functionality will be the default.
   * The new map files are smaller in size while maintaining the same resolution.
   * The format of the data also allows for easier manipulation in the future using the `sf` package.
+* Add scripts to perform automated map data updates, see [Issue #5](https://github.com/pdil/usmapdata/issues/5).
+  * This is not yet fully functional and will be refined over time independent of `usmapdata` package updates.
 
 # usmapdata 0.1.2
 Released Monday, December 11, 2023.
