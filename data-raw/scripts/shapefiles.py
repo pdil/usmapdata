@@ -58,7 +58,7 @@ def download_shapefiles():
 
             if (gh_env := os.getenv("GITHUB_ENV")):
                 with open(gh_env, "a") as f:
-                    f.write(f"{entity}_shp_path=cb_{year}_us_{entity}_{res}.shp")
+                    f.write(f"{entity}_shp_path=cb_{year}_us_{entity}_{res}.shp\n")
 
         # update current year
         config.set(SECTION, "current_year", f"{year}")
