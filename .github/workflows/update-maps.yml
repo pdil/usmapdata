@@ -50,20 +50,18 @@ jobs:
       - name: Modify shapefiles
         if: ${{ success() }}
         env:
-          STATE_SHP_DIR: "data-raw/scripts/shapefiles/$state_shp_path"
-          COUNTY_SHP_DIR: "data-raw/scripts/shapefiles/$county_shp_path"
-          STATE_OUTPUT: "inst/extdata/us_states.gpkg"
-          COUNTY_OUTPUT: "inst/extdata/us_counties.gpkg"
+          STATE_SHP_DIR: data-raw/scripts/shapefiles/${{ env.state_shp_path }} 
+          COUNTY_SHP_DIR: data-raw/scripts/shapefiles/${{ env.county_shp_path }}
         run: |
           usmapdata:::create_us_map(
             "state",
             Sys.getenv("STATE_SHP_DIR"),
-            Sys.getenv("STATE_OUTPUT")
+            "inst/extdata/us_states.gpkg"
           ) 
           usmapdata:::create_us_map(
             "counties",
             Sys.getenv("COUNTY_SHP_DIR"),
-            Sys.getenv("COUNTY_OUTPUT")
+            "inst/extdata/us_counties.gpkg"
           )
         shell: Rscript {0} 
 
