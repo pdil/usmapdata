@@ -21,10 +21,20 @@ jobs:
           cache: 'pip'
 
       - name: Download shapefiles
-        run: python data-raw/scripts/shapefiles.py
+        run: |
+          python data-raw/scripts/shapefiles.py
+          echo "python_exit_code=$?" >> $GITHUB_ENV
         continue-on-error: true
 
+      - name: Send failure notification
+        if: ${{ failure() }}
+        env:
+          PUSHOVER_API_KEY: ${{ secrets.PUSHOVER_API_KEY }}
+          PUSHOVER_USER_KEY: ${{ secrets.PUSHOVER_USER_KEY }}
+        run: python pushover.py "⚠️ usmapdata updater failed to find new shapefiles." "LOW"
+
       - name: Setup usmapdata
+        if: ${{ success() }}
         uses: r-lib/actions/setup-r-dependencies@v2
 
       - name: Modify shapefiles
@@ -39,6 +49,7 @@ jobs:
           Rscript -e "usmapdata:::create_us_map('counties', Sys.getenv('COUNTY_SHP_DIR'), Sys.getenv('COUNTY_OUTPUT'))"
 
       - name: Determine pull request parameters
+        if: ${{ success() }}
         run: |
           echo "branch_name=data-update/$(date +'%B-%Y')" >> "$GITHUB_ENV"
           echo "pr_title=Update map data - $(date +'%B %Y')" >> "$GITHUB_ENV"
