@@ -24,6 +24,9 @@ jobs:
           python-version: '3.9'
           cache: 'pip'
 
+      - name: Install Python dependencies
+        run: pip install -r data-raw/scripts/requirements.txt
+
       - name: Download shapefiles
         run: |
           python data-raw/scripts/shapefiles.py
