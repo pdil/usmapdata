@@ -10,6 +10,9 @@ on:
 jobs:
   check:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: data-raw/scripts
     env:
       PUSHOVER_API_KEY: ${{ secrets.PUSHOVER_API_KEY }}
       PUSHOVER_USER_KEY: ${{ secrets.PUSHOVER_USER_KEY }}
@@ -25,23 +28,19 @@ jobs:
           cache: 'pip'
 
       - name: Install Python dependencies
-        run: pip install -r data-raw/scripts/requirements.txt
+        run: pip install -r requirements.txt
 
       - name: Download shapefiles
         run: |
-          python data-raw/scripts/shapefiles.py
+          python shapefiles.py
           echo "python_exit_code=$?" >> $GITHUB_ENV
         continue-on-error: true
-
-      - name: Send failure notification
-        if: ${{ failure() }}
-        run: python pushover.py "⚠️ usmapdata updater failed to find new shapefiles." "LOW"
 
       - name: Setup R
         if: ${{ success() }}
         uses: r-lib/actions/setup-r@v2
 
-      - name: Setup usmapdata
+      - name: Install R dependencies
         if: ${{ success() }}
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
@@ -50,51 +49,48 @@ jobs:
       - name: Modify shapefiles
         if: ${{ success() }}
         env:
-          STATE_SHP_DIR: data-raw/shapefiles/${{ env.state_shp_path }}
-          COUNTY_SHP_DIR: data-raw/shapefiles/${{ env.county_shp_path }}
+          STATE_SHP: data-raw/shapefiles/${{ env.state_shp }}
+          COUNTY_SHP: data-raw/shapefiles/${{ env.county_shp }}
         run: |
           usmapdata:::create_us_map(
             "state",
-            Sys.getenv("STATE_SHP_DIR"),
+            Sys.getenv("STATE_SHP"),
             "inst/extdata/us_states.gpkg"
           )
           usmapdata:::create_us_map(
             "counties",
-            Sys.getenv("COUNTY_SHP_DIR"),
+            Sys.getenv("COUNTY_SHP"),
             "inst/extdata/us_counties.gpkg"
           )
         shell: Rscript {0}
 
       - name: Determine pull request parameters
+        id: pr-params
         if: ${{ success() }}
         run: |
-          echo "branch_name=data-update/$(date +'%B-%Y')" >> "$GITHUB_ENV"
-          echo "pr_title=Update map data - $(date +'%B %Y')" >> "$GITHUB_ENV"
+          echo "branch_name=data-update/$(date +'%B-%Y')" >> "$GITHUB_OUTPUT"
+          echo "pr_title=Update map data - $(date +'%B %Y')" >> "$GITHUB_OUTPUT"
 
       - name: Open pull request
+        id: open-pr
         if: ${{ success() }}
         uses: peter-evans/create-pull-request@v5
         with:
-          commit-message: Update map data based on latest shapefiles
-          branch: ${{ env.branch_name }}
-          title: ${{ env.pr_title }}
-          body: |
-            Updated map data based on latest shapefiles from
-            the US Census Bureau's [cartographic boundary files][1].
-
-            ### Review Checklist
-            - [ ] Ensure all checks and tests pass
-            - [ ] Load current branch with `devtools::install_github("usmapdata", "${{ env.branch_name }}")` and test `usmap`
-            - [ ] Perform smoke test of all plotting features to ensure consistency
-            - [ ] Update data file changelog in [`usmap` `README.md`][2]
-
-            [1]: https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.html
-            [2]: https://github.com/pdil/usmap/blob/master/README.md
+          commit-message: "[automated] Update map data based on latest shapefiles"
+          branch: ${{ steps.pr-params.outputs.branch_name }}
+          title: ${{ steps.pr-params.outputs.pr_title }}
+          body: update-maps-pr-body.md
+          reviewers: pdil
           assignees: pdil
           labels: data update
-          reviewers: pdil
           delete-branch: true
 
       - name: Send success notification
         if: ${{ success() }}
-        run: python pushover.py "✅ usmapdata has updated its data files, a PR review is needed."
+        run: |
+          python pushover.py "✅ usmapdata has updated its data files, a PR review is needed: <a href='${{ steps.open-pr.outputs.pull-request-url }}'>PR #${{ steps.open-pr.outputs.pull-request-number }}</a>"
+
+      - name: Send failure notification
+        if: ${{ failure() }}
+        run: |
+          python pushover.py "⚠️ usmapdata updater failed to find new shapefiles. (error: ${{ env.python_exit_code }})" "LOW"
