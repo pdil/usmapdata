@@ -3,8 +3,8 @@ name: Update map data
 
 on:
   schedule:
-      # runs at midnight on the 1st of March and September
-    - cron: '0 0 1 3,9 *'
+      # runs at noon UTC on the 1st of each month
+    - cron: '0 12 1 * *'
   workflow_dispatch:
 
 jobs:
@@ -76,7 +76,7 @@ jobs:
           commit-message: "[automated] Update map data based on latest shapefiles"
           branch: ${{ steps.pr-params.outputs.branch_name }}
           title: ${{ steps.pr-params.outputs.pr_title }}
-          body-path: data-raw/scripts/update-maps-pr-body.md
+          body-path: data-raw/scripts/update-data-pr-body.md
           reviewers: pdil
           assignees: pdil
           labels: data update

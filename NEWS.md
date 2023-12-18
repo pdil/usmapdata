@@ -8,7 +8,9 @@
   * The new map files are smaller in size while maintaining the same resolution.
   * The format of the data also allows for easier manipulation in the future using the `sf` package.
 * Add scripts to perform automated map data updates, see [Issue #5](https://github.com/pdil/usmapdata/issues/5).
-  * This is not yet fully functional and will be refined over time independent of `usmapdata` package updates.
+  * The scripts will check for new shapefiles from the US Census Bureau twice a year and automatically update the data.
+  * The scripts can also be run manually as needed.
+  * Once data is updated a new `usmapdata` release will be created.
 
 # usmapdata 0.1.2
 Released Monday, December 11, 2023.

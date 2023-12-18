@@ -10,28 +10,12 @@ You might be looking for the `usmap` package: [CRAN](https://cran.r-project.org/
 
 This package and repository will only contain functions and data relevant to the actual map and FIPS data used to draw the map in the `usmap` package. All other functions, including FIPS and mapping convenience functions, will be contained in the `usmap` [repository](https://github.com/pdil/usmap).
 
-## Shapefiles
-The shapefiles that we use to plot the maps in R are located in the `data-raw` folder. For more information refer to the [US Census Bureau](https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.html). Maps at both the state and county levels are included for convenience (zip code maps may be included in the future).
+## Map Data
+The map data files that we use to plot the maps in R are located in the `inst/extdata` folder. They are generated from shapefiles published by the [US Census Bureau](https://www.census.gov/). Data files for maps and FIPS codes at both the state and county levels are included.
 
-### Updating Shapefiles
-The [Cartographic Boundary Files](https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.html) are used for mapping in `usmap`, specifically the 1:20m scale files. This low resolution allows for small file sizes while still allowing enough detail for simple choropleths. The file description can be read [here](https://www.census.gov/programs-surveys/geography/technical-documentation/naming-convention/cartographic-boundary-file.html).
+The [Cartographic Boundary Files](https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.html) are used for mapping in `usmap`—specifically the 1:20m scale files. This low resolution allows for small file sizes while still allowing enough detail for simple choropleths. The file description can be read [here](https://www.census.gov/programs-surveys/geography/technical-documentation/naming-convention/cartographic-boundary-file.html).
 
-<details>
-    <summary>Follow these steps to update the files used within the project (click to expand)</summary>
-    <br>
-    <ol>
-        <li>Go to https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.html and select the most recent year available.</li>
-        <li>In the <strong>Cartographic Boundary Files by Geography</strong> section, download the following files to the <code>data-raw</code> folder:</li>
-        <ul>
-            <li>Counties 1 : 20,000,000 (national) shapefile</li>
-            <li>States 1 : 20,000,000 (national) shapefile</li>
-        </ul>
-        <li>Run <code>usmapdata::create_map_data()</code> for both <code>type = "states"</code> and <code>type = "counties"</code> on the shapefiles, storing the outputs in <code>inst/extdata</code>.</li>
-        <li>Ensure all package tests continue to pass, e.g. with <code>devtools::test()</code>.</li>
-    </ol>
-    </code>
-    After applying these changes, <a href=https://github.com/pdil/usmapdata/compare>open a pull request</a> and await review.
-</details>
+Shapefiles are updated yearly by the US Census Bureau. This repository contains scripts which periodically check for new shapefiles and update the data in the package accordingly. For more details see the [`data-raw`](https://github.com/pdil/usmapdata/tree/master/data-raw) directory.
 
 ## Installation
 This package should only be installed if you intend to manipulate the US mapping data frame, which contains coordinates to draw the US state and county boundaries. If you're interested in plotting data on a US map, use the [`usmap`](https://github.com/pdil/usmap) package.
