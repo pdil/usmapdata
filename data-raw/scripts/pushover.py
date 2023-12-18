@@ -24,7 +24,8 @@ class Pushover:
             "token": self._token,
             "user": self._user,
             "message": message,
-            "priority": priority
+            "priority": priority,
+            "html": "1"
         }
 
         files = None
