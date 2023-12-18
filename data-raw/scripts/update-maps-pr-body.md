@@ -1,11 +1,11 @@
-Updated map data based on latest shapefiles from the US Census Bureau's [cartographic boundary files][1]. Review the changes and fix any issues before merging.
+🗺️ Updated map data based on latest shapefiles from the US Census Bureau's [cartographic boundary files][1]. Review the changes and fix any issues before merging.
 
-### Review Checklist
+### ✅ Review Checklist
 - [ ] Ensure all checks and tests pass
 - [ ] Load current branch with `devtools::install_github("usmapdata", "${{ env.branch_name }}")` and test `usmap`
-- [ ] Perform smoke test of all plotting features to ensure consistency
+- [ ] Perform visual smoke test of all plotting features to ensure consistency
 
-### Post-merge Steps
+### 📝 Post-merge Steps
 - Update data file changelog in [`usmap/README.md`][2]
 - Update [`usmapdata/NEWS.md`][3] with changes before next release
 
