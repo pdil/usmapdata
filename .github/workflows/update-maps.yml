@@ -10,9 +10,6 @@ on:
 jobs:
   check:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: data-raw/scripts
     env:
       PUSHOVER_API_KEY: ${{ secrets.PUSHOVER_API_KEY }}
       PUSHOVER_USER_KEY: ${{ secrets.PUSHOVER_USER_KEY }}
@@ -28,11 +25,11 @@ jobs:
           cache: 'pip'
 
       - name: Install Python dependencies
-        run: pip install -r requirements.txt
+        run: pip install -r data-raw/scripts/requirements.txt
 
       - name: Download shapefiles
         run: |
-          python shapefiles.py
+          python data-raw/scripts/shapefiles.py
           echo "python_exit_code=$?" >> $GITHUB_ENV
         continue-on-error: true
 
@@ -79,7 +76,7 @@ jobs:
           commit-message: "[automated] Update map data based on latest shapefiles"
           branch: ${{ steps.pr-params.outputs.branch_name }}
           title: ${{ steps.pr-params.outputs.pr_title }}
-          body: update-maps-pr-body.md
+          body: data-raw/scripts/update-maps-pr-body.md
           reviewers: pdil
           assignees: pdil
           labels: data update
@@ -88,9 +85,9 @@ jobs:
       - name: Send success notification
         if: ${{ success() }}
         run: |
-          python pushover.py "✅ usmapdata has updated its data files, a PR review is needed: <a href='${{ steps.open-pr.outputs.pull-request-url }}'>PR #${{ steps.open-pr.outputs.pull-request-number }}</a>"
+          python data-raw/scripts/pushover.py "✅ usmapdata has updated its data files, a PR review is needed: <a href='${{ steps.open-pr.outputs.pull-request-url }}'>PR #${{ steps.open-pr.outputs.pull-request-number }}</a>"
 
       - name: Send failure notification
         if: ${{ failure() }}
         run: |
-          python pushover.py "⚠️ usmapdata updater failed to find new shapefiles. (error: ${{ env.python_exit_code }})" "LOW"
+          python data-raw/scripts/pushover.py "⚠️ usmapdata failed to update map data files. (error: ${{ env.python_exit_code }})" "LOW"
