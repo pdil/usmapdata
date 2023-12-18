@@ -76,7 +76,7 @@ jobs:
           commit-message: "[automated] Update map data based on latest shapefiles"
           branch: ${{ steps.pr-params.outputs.branch_name }}
           title: ${{ steps.pr-params.outputs.pr_title }}
-          body: data-raw/scripts/update-maps-pr-body.md
+          body-path: data-raw/scripts/update-maps-pr-body.md
           reviewers: pdil
           assignees: pdil
           labels: data update
@@ -85,7 +85,7 @@ jobs:
       - name: Send success notification
         if: ${{ success() }}
         run: |
-          python data-raw/scripts/pushover.py "✅ usmapdata has updated its data files, a PR review is needed: <a href='${{ steps.open-pr.outputs.pull-request-url }}'>PR #${{ steps.open-pr.outputs.pull-request-number }}</a>"
+          python data-raw/scripts/pushover.py "✅ usmapdata has updated its data files, a PR review is needed: <a href=\"${{ steps.open-pr.outputs.pull-request-url }}\">PR #${{ steps.open-pr.outputs.pull-request-number }}</a>"
 
       - name: Send failure notification
         if: ${{ failure() }}
