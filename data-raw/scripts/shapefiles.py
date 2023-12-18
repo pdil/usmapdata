@@ -38,9 +38,9 @@ def download_shapefiles():
         shutil.os.makedirs(extract_dir)
 
     # get current configuration
-    CONFIG_FILE = "config.ini"
+    config_file = os.path.join(script_dir, "config.ini")
     config = ConfigParser()
-    config.read(os.path.join(script_dir, CONFIG_FILE))
+    config.read(config_file)
     SECTION = "shapefiles"
 
     url_template = config.get(SECTION, "url")
@@ -58,11 +58,11 @@ def download_shapefiles():
 
             if (gh_env := os.getenv("GITHUB_ENV")):
                 with open(gh_env, "a") as f:
-                    f.write(f"{entity}_shp_path=cb_{year}_us_{entity}_{res}.shp")
+                    f.write(f"{entity}_shp=cb_{year}_us_{entity}_{res}.shp\n")
 
         # update current year
         config.set(SECTION, "current_year", f"{year}")
-        with open(CONFIG_FILE, "w") as f:
+        with open(config_file, "w") as f:
             config.write(f)
     except DownloadError as e:
         if e.code == 404:   # i.e. shapefiles not found

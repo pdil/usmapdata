@@ -2,6 +2,7 @@
 import os
 import requests
 from strenum import StrEnum
+import sys
 
 class Pushover:
 
@@ -23,7 +24,8 @@ class Pushover:
             "token": self._token,
             "user": self._user,
             "message": message,
-            "priority": priority
+            "priority": priority,
+            "html": "1"
         }
 
         files = None
@@ -46,6 +48,6 @@ if __name__ == "__main__":
     except IndexError:
         raise SystemExit("Required message parameter not supplied")
 
-    priority = getattr(Pushover.Priority, sys.argv[2]) if len(args) >= 3 else Pushover.Priority.NORMAL)
+    priority = getattr(Pushover.Priority, sys.argv[2]) if len(args) >= 3 else Pushover.Priority.NORMAL
 
-    Pushover.send(message, attachment_url, priority)
+    pushover.send(message, priority)
