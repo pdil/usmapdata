@@ -24,6 +24,12 @@ create_us_map <- function(
   input_file,
   output_file
 ) {
+  # check for dplyr
+  if (!requireNamespace("dplyr", quietly = TRUE)) {
+    stop("`dplyr` must be installed to use `dplyr`.
+         Use: install.packages(\"dplyr\") and try again.")
+  }
+
   type <- match.arg(type)
 
   # import map shape file

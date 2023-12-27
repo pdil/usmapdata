@@ -70,7 +70,7 @@ us_map <- function(
                  substr(df$fips, 1, 2) %in% exclude), ]
   }
 
-  dplyr::arrange(df, .data$abbr)
+  df[order(df$abbr), ]
 }
 
 #' Retrieve centroid labels
