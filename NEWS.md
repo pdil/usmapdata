@@ -1,4 +1,4 @@
-# usmapdata 0.1.2.9999
+# usmapdata 0.2.0
 
 ### Improvements
 * Update map data to use [2022 shape files](https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.2022.html#list-tab-1883739534).
