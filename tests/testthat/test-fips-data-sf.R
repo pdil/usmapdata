@@ -5,7 +5,6 @@
 #'
 #' When the upgrade is complete and the legacy files can be retired,
 #' these tests will replace the ones in test-fips-data.R.
-context("Loading FIPS data")
 
 test_that("state FIPS codes load correctly", {
   fips <- fips_data(as_sf = TRUE)

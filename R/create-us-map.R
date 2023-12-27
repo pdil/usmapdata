@@ -76,7 +76,7 @@ create_us_map <- function(
   }
 
   # export modified shape file
-  sf::st_write(us_ea, output_file, append = FALSE)
+  sf::st_write(us_ea, output_file, quiet = TRUE, append = FALSE)
 }
 
 #' 2D transformation matrix

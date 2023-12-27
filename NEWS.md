@@ -1,6 +1,7 @@
 # usmapdata 0.1.2.9999
 
 ### Improvements
+* Update map data to use [2022 shape files](https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.2022.html#list-tab-1883739534).
 * Begin process of upgrading map data to use GeoPackage files instead of csv.
   * Previously the files were created using now-retired packages `rgdal`, `rgeos`, and `maptools`.
   * The new files can be accessed by passing `as_sf = TRUE` to the `us_map()` and `fips_data()` functions.

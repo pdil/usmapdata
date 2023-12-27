@@ -1,4 +1,3 @@
-context("Loading US map data")
 
 states_map <- us_map(regions = "states")
 counties_map <- us_map(regions = "counties")

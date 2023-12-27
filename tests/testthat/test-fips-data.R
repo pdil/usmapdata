@@ -1,4 +1,3 @@
-context("Loading FIPS data")
 
 test_that("state FIPS codes load correctly", {
   fips <- fips_data()

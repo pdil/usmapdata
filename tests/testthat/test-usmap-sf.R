@@ -5,7 +5,6 @@
 #'
 #' When the upgrade is complete and the legacy files can be retired,
 #' these tests will replace the ones in test-usmap.R.
-context("Loading US map data after sf upgrade")
 
 states_map <- us_map(regions = "states", as_sf = TRUE)
 counties_map <- us_map(regions = "counties", as_sf = TRUE)
