@@ -2,25 +2,44 @@
 % Please edit documentation in R/create-us-map.R
 \name{create_us_map}
 \alias{create_us_map}
-\title{Create \code{usmap} shapefiles}
+\alias{transform2D}
+\alias{compute_centroids}
+\title{Internal map creation tools}
 \usage{
 create_us_map(type = c("states", "counties"), input_file, output_file)
+
+transform2D(angle = 0, scale = 1)
+
+compute_centroids(polygons, iterations = 3, initial_width_step = 10)
 }
 \description{
-Internal function to create the modified shapefiles used by the
-\link[usmap]{usmap} package. Using this function externally is not
-recommended since it makes certain undocumented assumptions that may
-not work with all inputs.
+\code{create_us_map()} creates the modified shapefiles used by the
+\link[usmap]{usmap} package.
+
+\code{transform2D()} computes a two dimensional affine transformation matrix
+for the provided rotation angle and scale factor.
+
+\code{compute_centroids()} computes the modified centroids for each state or
+county polygon using a center-of-mass technique on the largest polygon in
+the region.
 }
-\details{
+\note{
+Using these functions externally is not recommended since they make certain
+undocumented assumptions that may not work with all inputs.
+
 It is strongly recommend that the \link[usmap]{usmap} package is used
 directly.
 
-In some cases where the raw data is required, the \link{us_map}
-function located in this package can be used instead.
+In some cases where the raw data is required, the \link{us_map} and
+\link{centroid_labels} functions located in this package can be used instead.
 }
 \references{
 {
+Gert (2017). “How to calculate
+polygon centroids in R (for
+non-contiguous shapes).”
+\url{https://gis.stackexchange.com/a/265475}.
+
 Rudis B (2014). “Moving The Earth
 (well, Alaska & Hawaii) With R.”
 \url{https://rud.is/b/2014/11/16/moving-the-earth-well-alaska-hawaii-with-r/}.

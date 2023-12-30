@@ -95,9 +95,10 @@ centroid_labels <- function(
   regions <- match.arg(regions)
 
   if (as_sf) {
-    map_data <- usmapdata::us_map(regions, as_sf = TRUE)
-    sf::st_agr(map_data) <- "constant"
-    sf::st_centroid(map_data)
+    sf::read_sf(
+      system.file("extdata", paste0("us_", regions, "_centroids.gpkg"),
+                  package = "usmapdata")
+    )
   } else {
     utils::read.csv(system.file("extdata", "legacy", paste0("us_", regions, "_centroids.csv"),
                                 package = "usmapdata"),
