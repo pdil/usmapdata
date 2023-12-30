@@ -50,7 +50,7 @@ jobs:
           COUNTY_SHP: data-raw/shapefiles/${{ env.county_shp }}
         run: |
           usmapdata:::create_us_map(
-            "state",
+            "states",
             Sys.getenv("STATE_SHP"),
             "inst/extdata/us_states.gpkg"
           )

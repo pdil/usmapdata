@@ -11,6 +11,7 @@ Depends:
     R (>= 3.5.0)
 License: GPL (>= 3)
 Encoding: UTF-8
+Language: en-US
 LazyData: true
 URL: https://usmap.dev
 BugReports: https://github.com/pdil/usmapdata/issues
