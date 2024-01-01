@@ -31,7 +31,6 @@ jobs:
         run: |
           python data-raw/scripts/shapefiles.py
           echo "python_exit_code=$?" >> $GITHUB_ENV
-        continue-on-error: true
 
       - name: Setup R
         if: ${{ success() }}
