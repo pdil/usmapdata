@@ -1,5 +1,5 @@
 
-name: Update map data
+name: update-map-data
 
 on:
   schedule:
