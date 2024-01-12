@@ -12,14 +12,20 @@
 0 errors | 0 warnings | 1 notes
 
 * `extdata` contains the state and county map data frames
-which are vital to the function of this package. The data
-is unlikely to change often (at most once per year).
+which are vital to the function of this package. The size of this
+data will be greatly reduced in an upcoming future update of
+`usmapdata` (reduced to ~1-2 MB). It is currently this size for
+compatability with the current version of `usmap` which relies
+on the old data format. Once `usmap` is updated another update
+to this package will be released which removes the large data
+files.
+
 Here is the ```R CMD check``` output:
 ```
 ❯ checking installed package size ... NOTE
-    installed size is  6.7Mb
+    installed size is  8.5Mb
     sub-directories of 1Mb or more:
-      extdata   6.6Mb
+      extdata   8.4Mb
 ```
 
 ## Downstream dependencies

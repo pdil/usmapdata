@@ -100,7 +100,7 @@ create_us_map <- function(
   sf::st_write(us_ea, output_file, quiet = TRUE, append = FALSE)
 
   # compute centroids
-  centroids <- usmapdata:::compute_centroids(us_ea)
+  centroids <- compute_centroids(us_ea)
 
   # determine centroids file path
   centroids_output_file <- file.path(

@@ -1,6 +1,5 @@
 ^\.github$
 ^\.lintr$
-^\.codecov\.yml$
 ^usmapdata\.Rproj$
 ^data-raw$
 ^.*\.png$
@@ -11,6 +10,6 @@
 ^doc$
 ^Meta$
 ^CRAN-RELEASE$
-^codecov\.yml$
+^codecov\.yaml$
 ^LICENSE\.md$
 ^\.lintr$
