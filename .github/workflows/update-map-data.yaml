@@ -28,22 +28,19 @@ jobs:
         run: pip install -r data-raw/scripts/requirements.txt
 
       - name: Download shapefiles
+        id: dl-shp
         run: |
           python data-raw/scripts/shapefiles.py
-          echo "python_exit_code=$?" >> $GITHUB_ENV
 
       - name: Setup R
-        if: ${{ success() }}
         uses: r-lib/actions/setup-r@v2
 
       - name: Install R dependencies
-        if: ${{ success() }}
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: local::.
 
       - name: Modify shapefiles
-        if: ${{ success() }}
         env:
           STATE_SHP: data-raw/shapefiles/${{ env.state_shp }}
           COUNTY_SHP: data-raw/shapefiles/${{ env.county_shp }}
@@ -62,14 +59,12 @@ jobs:
 
       - name: Determine pull request parameters
         id: pr-params
-        if: ${{ success() }}
         run: |
           echo "branch_name=data-update/$(date +'%B-%Y')" >> "$GITHUB_OUTPUT"
           echo "pr_title=$(date +'%B %Y') map data update" >> "$GITHUB_OUTPUT"
 
       - name: Open pull request
         id: open-pr
-        if: ${{ success() }}
         uses: peter-evans/create-pull-request@v5
         with:
           commit-message: "[automated] Update map data based on latest shapefiles"
@@ -82,11 +77,10 @@ jobs:
           delete-branch: true
 
       - name: Send success notification
-        if: ${{ success() }}
         run: |
           python data-raw/scripts/pushover.py "✅ usmapdata has updated its data files, a PR review is needed: <a href=\"${{ steps.open-pr.outputs.pull-request-url }}\">PR #${{ steps.open-pr.outputs.pull-request-number }}</a>"
 
       - name: Send failure notification
         if: ${{ failure() }}
         run: |
-          python data-raw/scripts/pushover.py "⚠️ usmapdata failed to update map data files. (error: ${{ env.python_exit_code }})" "LOW"
+          python data-raw/scripts/pushover.py "⚠️ usmapdata failed to update map data files. (error: ${{ steps.dl-shp.outputs.python_exit_code }})" "LOW"

@@ -70,6 +70,10 @@ def download_shapefiles():
         else:               # other download errors
             print(e)
 
+        if (gh_env := os.getenv("GITHUB_OUTPUT")):
+            with open(gh_env, "a") as f:
+                f.write(f"python_exit_code={e.code}")
+
         sys.exit(e.code)
 
 
