@@ -4,21 +4,18 @@
 \alias{centroid_labels}
 \title{Retrieve centroid labels}
 \usage{
-centroid_labels(regions = c("states", "counties"), as_sf = FALSE)
+centroid_labels(regions = c("states", "counties"), as_sf = TRUE)
 }
 \arguments{
 \item{regions}{The region breakdown for the map, can be one of
 (\code{"states"}, \code{"counties"}, as specified by the internal file names.
 The default is \code{"states"}.}
 
-\item{as_sf}{Whether the output should be an \link[sf]{sf} object or not. If
-\code{FALSE} (the current default), the output will be a \link{data.frame}. This is a
-temporary parameter to be used only during the shape file format upgrade.
-It will be removed in the future once the upgrade is complete and the value
-will effectively be \code{TRUE}.}
+\item{as_sf}{DEPRECATED. This parameter has no effect and will be removed in
+the future.}
 }
 \value{
-A data frame of state or county centroid labels and positions
+An \code{sf} data frame of state or county centroid labels and positions
 relative to the coordinates returned by the \code{us_map} function.
 }
 \description{

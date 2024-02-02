@@ -13,3 +13,4 @@
 ^codecov\.yaml$
 ^LICENSE\.md$
 ^\.lintr$
+^\.covrignore$

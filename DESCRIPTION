@@ -5,7 +5,7 @@ Description: Provides a container for data used by the 'usmap' package.
     The data used by 'usmap' has been extracted into this package so that the
     file size of the 'usmap' package can be reduced greatly. The data in this
     package will be updated roughly once per year (plus bug fixes) as new
-    shape files are provided by the US Census bureau.
+    shapefiles are provided by the US Census bureau.
 Authors@R: person("Paolo", "Di Lorenzo", email = "dilorenzo@hey.com", role = c("aut", "cre"))
 Depends:
     R (>= 3.5.0)
@@ -17,12 +17,11 @@ URL: https://usmap.dev
 BugReports: https://github.com/pdil/usmapdata/issues
 Imports:
     rlang,
-    sf,
-    utils
+    sf
 Suggests:
     covr,
     dplyr,
     testthat (>= 3.0.0)
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 Config/testthat/edition: 3

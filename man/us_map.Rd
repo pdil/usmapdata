@@ -8,7 +8,7 @@ us_map(
   regions = c("states", "state", "counties", "county"),
   include = c(),
   exclude = c(),
-  as_sf = FALSE
+  as_sf = TRUE
 )
 }
 \arguments{
@@ -29,14 +29,11 @@ same name. The regions listed in the \code{include} parameter are applied first 
 \code{exclude} regions are then removed from the resulting map. Any excluded regions
 not present in the included regions will be ignored.}
 
-\item{as_sf}{Whether the output should be an \link[sf]{sf} object or not. If
-\code{FALSE} (the current default), the output will be a \link{data.frame}. This is a
-temporary parameter to be used only during the shape file format upgrade.
-It will be removed in the future once the upgrade is complete and the value
-will effectively be \code{TRUE}.}
+\item{as_sf}{DEPRECATED. This parameter has no effect and will be removed in
+the future.}
 }
 \value{
-A data frame of US map coordinates divided by the desired \code{regions}.
+An \code{sf} data frame of US map coordinates divided by the desired \code{regions}.
 }
 \description{
 Retrieve US map data

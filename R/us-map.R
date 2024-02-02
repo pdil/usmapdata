@@ -14,13 +14,10 @@
 #'  same name. The regions listed in the \code{include} parameter are applied first and the
 #'  \code{exclude} regions are then removed from the resulting map. Any excluded regions
 #'  not present in the included regions will be ignored.
-#' @param as_sf Whether the output should be an \link[sf]{sf} object or not. If
-#'  `FALSE` (the current default), the output will be a \link{data.frame}. This is a
-#'  temporary parameter to be used only during the shape file format upgrade.
-#'  It will be removed in the future once the upgrade is complete and the value
-#'  will effectively be `TRUE`.
+#' @param as_sf DEPRECATED. This parameter has no effect and will be removed in
+#'  the future.
 #'
-#' @return A data frame of US map coordinates divided by the desired \code{regions}.
+#' @return An `sf` data frame of US map coordinates divided by the desired \code{regions}.
 #'
 #' @examples
 #' str(us_map())
@@ -35,26 +32,21 @@ us_map <- function(
   regions = c("states", "state", "counties", "county"),
   include = c(),
   exclude = c(),
-  as_sf = FALSE
+  as_sf = TRUE
 ) {
   regions <- match.arg(regions)
+
+  if (!missing("as_sf"))
+    warning("`as_sf` is deprecated and no longer has any effect, all data is
+            returned as an `sf` object.")
 
   if (regions == "state") regions <- "states"
   else if (regions == "county") regions <- "counties"
 
-  if (as_sf) {
-    df <- sf::read_sf(
-      system.file("extdata", paste0("us_", regions, ".gpkg"),
-                  package = "usmapdata")
-    )
-  } else {
-    df <- utils::read.csv(
-      system.file("extdata", "legacy", paste0("us_", regions, ".csv"),
-                  package = "usmapdata"),
-      colClasses = col_classes_map(regions),
-      stringsAsFactors = FALSE
-    )
-  }
+  df <- sf::read_sf(
+    system.file("extdata", paste0("us_", regions, ".gpkg"),
+                package = "usmapdata")
+  )
 
   if (length(include) > 0) {
     df <- df[df$full %in% include |
@@ -78,58 +70,25 @@ us_map <- function(
 #' @param regions The region breakdown for the map, can be one of
 #'   (\code{"states"}, \code{"counties"}, as specified by the internal file names.
 #'   The default is \code{"states"}.
-#' @param as_sf Whether the output should be an \link[sf]{sf} object or not. If
-#'  `FALSE` (the current default), the output will be a \link{data.frame}. This is a
-#'  temporary parameter to be used only during the shape file format upgrade.
-#'  It will be removed in the future once the upgrade is complete and the value
-#'  will effectively be `TRUE`.
+#' @param as_sf DEPRECATED. This parameter has no effect and will be removed in
+#'  the future.
 #'
-#' @return A data frame of state or county centroid labels and positions
+#' @return An `sf` data frame of state or county centroid labels and positions
 #'   relative to the coordinates returned by the \code{us_map} function.
 #'
 #' @export
 centroid_labels <- function(
   regions = c("states", "counties"),
-  as_sf = FALSE
+  as_sf = TRUE
 ) {
   regions <- match.arg(regions)
 
-  if (as_sf) {
-    sf::read_sf(
-      system.file("extdata", paste0("us_", regions, "_centroids.gpkg"),
-                  package = "usmapdata")
-    )
-  } else {
-    utils::read.csv(system.file("extdata", "legacy", paste0("us_", regions, "_centroids.csv"),
-                                package = "usmapdata"),
-                    colClasses = col_classes_centroids(regions),
-                    stringsAsFactors = FALSE)
-  }
-}
+  if (!missing("as_sf"))
+    warning("`as_sf` is deprecated and no longer has any effect, all data is
+            returned as an `sf` object.")
 
-#' Map data column classes
-#'
-#' @keywords internal
-col_classes_map <- function(regions) {
-  classes <- c("numeric", "numeric", "integer", "logical", "integer", rep("character", 4))
-
-  if (regions %in% c("county", "counties")) {
-    classes <- c(classes, "character")    # add extra column for county name
-  }
-
-  classes
-}
-
-#' Centroid label column classes
-#'
-#' @keywords internal
-col_classes_centroids <- function(regions) {
-  classes <- c("numeric", "numeric", "character", "character", "character")
-
-  if (regions == "county" || regions == "counties") {
-    # add extra column for the county name
-    classes <- c(classes, "character")
-  }
-
-  classes
+  sf::read_sf(
+    system.file("extdata", paste0("us_", regions, "_centroids.gpkg"),
+                package = "usmapdata")
+  )
 }

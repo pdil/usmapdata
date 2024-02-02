@@ -2,8 +2,8 @@
 % Please edit documentation in R/usmapdata-package.R
 \docType{package}
 \name{usmapdata}
-\alias{usmapdata}
 \alias{usmapdata-package}
+\alias{usmapdata}
 \title{usmapdata: Mapping Data for usmap Package}
 \description{
 It is usually difficult or inconvenient to create US maps that
