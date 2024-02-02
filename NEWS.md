@@ -5,6 +5,7 @@
 * The `as_sf` parameter is now deprecated and no longer has any effect.
   * As part of this removal, the default behavior for `us_map()`, `centroid_labels()`, and `fips_data()` is equivalent to `as_sf = TRUE` which is to return their data as an `sf` object (see `0.2.0` release notes for more details).
   * This parameter will be completely removed in a future version but continues to exist for compatibility reasons.
+* Legacy `.csv` files containing mapping and FIPS data have been removed, greatly reducing package size.  
 
 # usmapdata 0.2.0
 Released Friday, January 12, 2024.
