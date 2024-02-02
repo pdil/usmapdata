@@ -20,24 +20,11 @@
 #' @export
 fips_data <- function(
   regions = c("states", "state", "counties", "county"),
-  as_sf = FALSE
+  as_sf = TRUE
 ) {
   regions <- match.arg(regions)
 
-  if (as_sf) {
-    map_data <- usmapdata::us_map(regions, as_sf = TRUE)
-    sf::st_geometry(map_data) <- NULL
-    map_data
-  } else {
-    if (regions == "state" || regions == "states")
-      utils::read.csv(
-        system.file("extdata", "legacy", "state_fips.csv", package = "usmapdata"),
-        colClasses = rep("character", 3), stringsAsFactors = FALSE
-      )
-    else if (regions == "county" || regions == "counties")
-      utils::read.csv(
-        system.file("extdata", "legacy", "county_fips.csv", package = "usmapdata"),
-        colClasses = rep("character", 4), stringsAsFactors = FALSE
-      )
-  }
+  map_data <- usmapdata::us_map(regions)
+  sf::st_geometry(map_data) <- NULL
+  map_data
 }

@@ -35,26 +35,21 @@ us_map <- function(
   regions = c("states", "state", "counties", "county"),
   include = c(),
   exclude = c(),
-  as_sf = FALSE
+  as_sf = TRUE
 ) {
   regions <- match.arg(regions)
+
+  if (!missing("as_sf"))
+    warning("`as_sf` is deprecated and no longer has any effect, all data is
+            returned as an `sf` object.")
 
   if (regions == "state") regions <- "states"
   else if (regions == "county") regions <- "counties"
 
-  if (as_sf) {
-    df <- sf::read_sf(
-      system.file("extdata", paste0("us_", regions, ".gpkg"),
-                  package = "usmapdata")
-    )
-  } else {
-    df <- utils::read.csv(
-      system.file("extdata", "legacy", paste0("us_", regions, ".csv"),
-                  package = "usmapdata"),
-      colClasses = col_classes_map(regions),
-      stringsAsFactors = FALSE
-    )
-  }
+  df <- sf::read_sf(
+    system.file("extdata", paste0("us_", regions, ".gpkg"),
+                package = "usmapdata")
+  )
 
   if (length(include) > 0) {
     df <- df[df$full %in% include |
@@ -90,46 +85,12 @@ us_map <- function(
 #' @export
 centroid_labels <- function(
   regions = c("states", "counties"),
-  as_sf = FALSE
+  as_sf = TRUE
 ) {
   regions <- match.arg(regions)
 
-  if (as_sf) {
-    sf::read_sf(
-      system.file("extdata", paste0("us_", regions, "_centroids.gpkg"),
-                  package = "usmapdata")
-    )
-  } else {
-    utils::read.csv(system.file("extdata", "legacy", paste0("us_", regions, "_centroids.csv"),
-                                package = "usmapdata"),
-                    colClasses = col_classes_centroids(regions),
-                    stringsAsFactors = FALSE)
-  }
-}
-
-#' Map data column classes
-#'
-#' @keywords internal
-col_classes_map <- function(regions) {
-  classes <- c("numeric", "numeric", "integer", "logical", "integer", rep("character", 4))
-
-  if (regions %in% c("county", "counties")) {
-    classes <- c(classes, "character")    # add extra column for county name
-  }
-
-  classes
-}
-
-#' Centroid label column classes
-#'
-#' @keywords internal
-col_classes_centroids <- function(regions) {
-  classes <- c("numeric", "numeric", "character", "character", "character")
-
-  if (regions == "county" || regions == "counties") {
-    # add extra column for the county name
-    classes <- c(classes, "character")
-  }
-
-  classes
+  sf::read_sf(
+    system.file("extdata", paste0("us_", regions, "_centroids.gpkg"),
+                package = "usmapdata")
+  )
 }

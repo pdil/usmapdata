@@ -40,7 +40,7 @@ test_that("correct states are excluded", {
 
 
 test_that("structure of counties df is correct", {
-  expect_equal(length(unique(counties_map$fips)), 3143)
+  expect_equal(length(unique(counties_map$fips)), 3144)
 })
 
 test_that("correct counties are included", {
@@ -71,6 +71,10 @@ test_that("error occurs for invalid region", {
 })
 
 test_that("centroid labels are loaded", {
-  expect_equal(length(centroid_labels("states")[, 1]), 51)
-  expect_equal(length(centroid_labels("counties")[, 1]), 3143)
+  expect_equal(length(centroid_labels("states")[[1]]), 51)
+  expect_equal(length(centroid_labels("counties")[[1]]), 3144)
+})
+
+test_that("as_sf deprecation warning occurs", {
+  expect_warning(us_map(as_sf = TRUE))
 })
