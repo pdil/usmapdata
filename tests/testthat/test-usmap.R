@@ -77,4 +77,5 @@ test_that("centroid labels are loaded", {
 
 test_that("as_sf deprecation warning occurs", {
   expect_warning(us_map(as_sf = TRUE))
+  expect_warning(centroid_labels(as_sf = TRUE))
 })

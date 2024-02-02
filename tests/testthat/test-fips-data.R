@@ -1,8 +1,8 @@
 
 test_that("state FIPS codes load correctly", {
-  fips <- fips_data(as_sf = TRUE)
-  state_fips <- fips_data("state", as_sf = TRUE)
-  states_fips <- fips_data("states", as_sf = TRUE)
+  fips <- fips_data()
+  state_fips <- fips_data("state")
+  states_fips <- fips_data("states")
 
   expect_identical(fips, state_fips)
   expect_identical(fips, states_fips)
@@ -21,8 +21,8 @@ test_that("state FIPS codes load correctly", {
 })
 
 test_that("county FIPS codes load correctly", {
-  county_fips <- fips_data("county", as_sf = TRUE)
-  counties_fips <- fips_data("counties", as_sf = TRUE)
+  county_fips <- fips_data("county")
+  counties_fips <- fips_data("counties")
 
   expect_identical(county_fips, counties_fips)
 
@@ -38,4 +38,8 @@ test_that("county FIPS codes load correctly", {
   expect_equal(county_fips[[3144, "abbr"]], "WY")
   expect_equal(county_fips[[3144, "county"]], "Weston County")
   expect_equal(county_fips[[3144, "fips"]], "56045")
+})
+
+test_that("as_sf deprecation warning occurs", {
+  expect_warning(fips_data(as_sf = TRUE))
 })
