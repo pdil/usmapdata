@@ -11,7 +11,7 @@ centroid_labels(regions = c("states", "counties"), as_sf = TRUE)
 (\code{"states"}, \code{"counties"}, as specified by the internal file names.
 The default is \code{"states"}.}
 
-\item{as_sf}{DEPRECATED. This parameter has no effect and will be removed in
+\item{as_sf}{Defunct, this parameter no longer has any effect and will be removed in
 the future.}
 }
 \value{

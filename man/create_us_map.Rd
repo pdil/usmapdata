@@ -2,26 +2,52 @@
 % Please edit documentation in R/create-us-map.R
 \name{create_us_map}
 \alias{create_us_map}
+\alias{ea_crs}
 \alias{transform2D}
+\alias{transform_alaska}
+\alias{transform_hawaii}
 \alias{compute_centroids}
+\alias{alaska_bbox}
+\alias{hawaii_bbox}
 \title{Internal map creation tools}
 \usage{
 create_us_map(type = c("states", "counties"), input_file, output_file)
 
+ea_crs()
+
 transform2D(angle = 0, scale = 1)
 
+transform_alaska(alaska)
+
+transform_hawaii(hawaii)
+
 compute_centroids(polygons, iterations = 3, initial_width_step = 10)
+
+alaska_bbox()
+
+hawaii_bbox()
 }
 \description{
 \code{create_us_map()} creates the modified shapefiles used by the
 \link[usmap]{usmap} package.
 
+\code{ea_crs()} returns the US National Atlas Equal Area coordinate reference system
+(CRS) used by this package and \code{usmap}.
+
 \code{transform2D()} computes a two dimensional affine transformation matrix
 for the provided rotation angle and scale factor.
+
+\code{transform_alaska()} applies the appropriate transform for the Alaska polygons.
+
+\code{transform_hawaii()} applies the appropriate transform for the Hawaii polygons.
 
 \code{compute_centroids()} computes the modified centroids for each state or
 county polygon using a center-of-mass technique on the largest polygon in
 the region.
+
+\code{alaska_bbox()} returns the bounding box of Alaska pre-transformation.
+
+\code{hawaii_bbox()} returns the bounding box of Hawaii pre-transformation.
 }
 \note{
 Using these functions externally is not recommended since they make certain

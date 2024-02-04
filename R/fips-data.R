@@ -3,7 +3,7 @@
 #' @param regions The region breakdown for the map, can be one of
 #'   (\code{"states"}, \code{"state"}, \code{"counties"}, \code{"county"}).
 #'   The default is \code{"states"}.
-#' @param as_sf DEPRECATED. This parameter has no effect and will be removed in
+#' @param as_sf Defunct, this parameter no longer has any effect and will be removed in
 #'  the future.
 #'
 #' @return An data frame of FIPS codes of the desired \code{regions}.
@@ -20,10 +20,6 @@ fips_data <- function(
   as_sf = TRUE
 ) {
   regions <- match.arg(regions)
-
-  if (!missing("as_sf"))
-    warning("`as_sf` is deprecated and no longer has any effect, all data is
-            returned as an `sf` object.")
 
   map_data <- usmapdata::us_map(regions)
   sf::st_geometry(map_data) <- NULL
