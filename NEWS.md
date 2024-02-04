@@ -1,4 +1,6 @@
-# usmapdata 0.2.0.9999
+# usmapdata 0.2.1
+
+This update continues the `sf` migration by setting the `as_sf` parameter to default to the behavior of `TRUE`. This parameter no longer has any effect, as explained below. The next phase will involve updating `usmap` to no longer make use of this parameter, in which case it can be completely removed.
 
 ### Removed
 

@@ -1,1 +1,7 @@
-*.noindex/
+checks
+library
+checks.noindex
+library.noindex
+data.sqlite
+*.html
+cloud.noindex
