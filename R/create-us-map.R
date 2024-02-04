@@ -5,12 +5,23 @@
 #' `create_us_map()` creates the modified shapefiles used by the
 #' \link[usmap]{usmap} package.
 #'
+#' `ea_crs()` returns the US National Atlas Equal Area coordinate reference system
+#' (CRS) used by this package and `usmap`.
+#'
 #' `transform2D()` computes a two dimensional affine transformation matrix
 #' for the provided rotation angle and scale factor.
+#'
+#' `transform_alaska()` applies the appropriate transform for the Alaska polygons.
+#'
+#' `transform_hawaii()` applies the appropriate transform for the Hawaii polygons.
 #'
 #' `compute_centroids()` computes the modified centroids for each state or
 #' county polygon using a center-of-mass technique on the largest polygon in
 #' the region.
+#'
+#' `alaska_bbox()` returns the bounding box of Alaska pre-transformation.
+#'
+#' `hawaii_bbox()` returns the bounding box of Hawaii pre-transformation.
 #'
 #' @note
 #' Using these functions externally is not recommended since they make certain
@@ -51,20 +62,13 @@ create_us_map <- function(
   us <- sf::read_sf(input_file)
 
   # ea: US National Atlas Equal Area
-  ea_crs <- sf::st_crs(9311)
-  us_ea <- sf::st_transform(us, ea_crs)
+  us_ea <- sf::st_transform(us, ea_crs())
 
   # FIPS code for Alaska = 02
-  alaska <- us_ea[us_ea$STATEFP == "02", ]
-  sf::st_geometry(alaska) <- sf::st_geometry(alaska) * transform2D(-50, 1 / 2)
-  sf::st_geometry(alaska) <- sf::st_geometry(alaska) + c(3e5, -2e6)
-  sf::st_crs(alaska) <- ea_crs
+  alaska <- transform_alaska(us_ea[us_ea$STATEFP == "02", ])
 
   # FIPS code for Hawaii = 15
-  hawaii <- us_ea[us_ea$STATEFP == "15", ]
-  sf::st_geometry(hawaii) <- sf::st_geometry(hawaii) * transform2D(-35)
-  sf::st_geometry(hawaii) <- sf::st_geometry(hawaii) + c(3.6e6, 1.8e6)
-  sf::st_crs(hawaii) <- ea_crs
+  hawaii <- transform_hawaii(us_ea[us_ea$STATEFP == "15", ])
 
   # keep only US states (i.e. remove territories, minor outlying islands, etc.)
   # also remove Alaska (02) and Hawaii (15) so that we can add in shifted one
@@ -118,10 +122,36 @@ create_us_map <- function(
 
 #' @rdname create_us_map
 #' @keywords internal
+ea_crs <- function() {
+  sf::st_crs(9311)  # US National Atlas Equal Area coordinate reference system
+}
+
+#' @rdname create_us_map
+#' @keywords internal
 transform2D <- function(angle = 0, scale = 1) {
   r <- angle * pi / 180
   matrix(c(scale * cos(r), scale * sin(r),
            -scale * sin(r), scale * cos(r)), 2, 2)
+}
+
+#' @rdname create_us_map
+#' @keywords internal
+transform_alaska <- function(alaska) {
+  sf::st_geometry(alaska) <- sf::st_geometry(alaska) * transform2D(-50, 1 / 2)
+  sf::st_geometry(alaska) <- sf::st_geometry(alaska) + c(3e5, -2e6)
+  sf::st_crs(alaska) <- ea_crs()
+
+  alaska
+}
+
+#' @rdname create_us_map
+#' @keywords internal
+transform_hawaii <- function(hawaii) {
+  sf::st_geometry(hawaii) <- sf::st_geometry(hawaii) * transform2D(-35)
+  sf::st_geometry(hawaii) <- sf::st_geometry(hawaii) + c(3.6e6, 1.8e6)
+  sf::st_crs(hawaii) <- ea_crs()
+
+  hawaii
 }
 
 #' @rdname create_us_map
@@ -194,4 +224,32 @@ compute_centroids <- function(polygons, iterations = 3, initial_width_step = 10)
   # Return centroids of newly computed polygons
   sf::st_agr(new_polygons) <- "constant"
   sf::st_centroid(new_polygons)
+}
+
+#' @rdname create_us_map
+#' @keywords internal
+alaska_bbox <- function() {
+  sf::st_bbox(
+    c(
+      xmin = -4377000,
+      xmax = -1519000,
+      ymin = 1466000,
+      ymax = 3914000
+    ),
+    crs = ea_crs()
+  )
+}
+
+#' @rdname create_us_map
+#' @keywords internal
+hawaii_bbox <- function() {
+  sf::st_bbox(
+    c(
+      xmin = -5750000,
+      xmax = -5450000,
+      ymin = -1050000,
+      ymax = -441000
+    ),
+    crs = ea_crs()
+  )
 }
