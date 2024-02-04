@@ -29,7 +29,7 @@ same name. The regions listed in the \code{include} parameter are applied first 
 \code{exclude} regions are then removed from the resulting map. Any excluded regions
 not present in the included regions will be ignored.}
 
-\item{as_sf}{DEPRECATED. This parameter has no effect and will be removed in
+\item{as_sf}{Defunct, this parameter no longer has any effect and will be removed in
 the future.}
 }
 \value{

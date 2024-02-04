@@ -11,7 +11,7 @@ fips_data(regions = c("states", "state", "counties", "county"), as_sf = TRUE)
 (\code{"states"}, \code{"state"}, \code{"counties"}, \code{"county"}).
 The default is \code{"states"}.}
 
-\item{as_sf}{DEPRECATED. This parameter has no effect and will be removed in
+\item{as_sf}{Defunct, this parameter no longer has any effect and will be removed in
 the future.}
 }
 \value{
