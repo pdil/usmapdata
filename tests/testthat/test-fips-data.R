@@ -39,7 +39,3 @@ test_that("county FIPS codes load correctly", {
   expect_equal(county_fips[[3144, "county"]], "Weston County")
   expect_equal(county_fips[[3144, "fips"]], "56045")
 })
-
-test_that("as_sf deprecation warning occurs", {
-  expect_warning(fips_data(as_sf = TRUE))
-})

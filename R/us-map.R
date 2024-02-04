@@ -14,7 +14,7 @@
 #'  same name. The regions listed in the \code{include} parameter are applied first and the
 #'  \code{exclude} regions are then removed from the resulting map. Any excluded regions
 #'  not present in the included regions will be ignored.
-#' @param as_sf DEPRECATED. This parameter has no effect and will be removed in
+#' @param as_sf Defunct, this parameter no longer has any effect and will be removed in
 #'  the future.
 #'
 #' @return An `sf` data frame of US map coordinates divided by the desired \code{regions}.
@@ -35,10 +35,6 @@ us_map <- function(
   as_sf = TRUE
 ) {
   regions <- match.arg(regions)
-
-  if (!missing("as_sf"))
-    warning("`as_sf` is deprecated and no longer has any effect, all data is
-            returned as an `sf` object.")
 
   if (regions == "state") regions <- "states"
   else if (regions == "county") regions <- "counties"
@@ -70,7 +66,7 @@ us_map <- function(
 #' @param regions The region breakdown for the map, can be one of
 #'   (\code{"states"}, \code{"counties"}, as specified by the internal file names.
 #'   The default is \code{"states"}.
-#' @param as_sf DEPRECATED. This parameter has no effect and will be removed in
+#' @param as_sf Defunct, this parameter no longer has any effect and will be removed in
 #'  the future.
 #'
 #' @return An `sf` data frame of state or county centroid labels and positions
@@ -82,10 +78,6 @@ centroid_labels <- function(
   as_sf = TRUE
 ) {
   regions <- match.arg(regions)
-
-  if (!missing("as_sf"))
-    warning("`as_sf` is deprecated and no longer has any effect, all data is
-            returned as an `sf` object.")
 
   sf::read_sf(
     system.file("extdata", paste0("us_", regions, "_centroids.gpkg"),
