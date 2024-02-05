@@ -229,27 +229,31 @@ compute_centroids <- function(polygons, iterations = 3, initial_width_step = 10)
 #' @rdname create_us_map
 #' @keywords internal
 alaska_bbox <- function() {
-  sf::st_bbox(
-    c(
-      xmin = -4377000,
-      xmax = -1519000,
-      ymin = 1466000,
-      ymax = 3914000
-    ),
-    crs = ea_crs()
+  sf::st_as_sfc(
+    sf::st_bbox(
+      c(
+        xmin = -4377000,
+        xmax = -1519000,
+        ymin = 1466000,
+        ymax = 3914000
+      ),
+      crs = ea_crs()
+    )
   )
 }
 
 #' @rdname create_us_map
 #' @keywords internal
 hawaii_bbox <- function() {
-  sf::st_bbox(
-    c(
-      xmin = -5750000,
-      xmax = -5450000,
-      ymin = -1050000,
-      ymax = -441000
-    ),
-    crs = ea_crs()
+  sf::st_as_sfc(
+    sf::st_bbox(
+      c(
+        xmin = -5750000,
+        xmax = -5450000,
+        ymin = -1050000,
+        ymax = -441000
+      ),
+      crs = ea_crs()
+    )
   )
 }
