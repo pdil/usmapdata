@@ -1,5 +1,8 @@
 # [unreleased]
 
+### Improvements
+* Improve language in `DESCRIPTION` and minor documentation, see [Issue #19](https://github.com/pdil/usmapdata/issues/19).
+
 ### Bug Fixes
 * `alaska_bbox()` and `hawaii_bbox()` now output correct `sf` type (`sfc polygon`).
 

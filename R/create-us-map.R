@@ -52,13 +52,13 @@ create_us_map <- function(
 ) {
   # check for dplyr
   if (!requireNamespace("dplyr", quietly = TRUE)) {
-    stop("`dplyr` must be installed to use `dplyr`.
+    stop("`dplyr` must be installed to use `create_us_map()`.
          Use: install.packages(\"dplyr\") and try again.")
   }
 
   type <- match.arg(type)
 
-  # import map shape file
+  # import map file
   us <- sf::read_sf(input_file)
 
   # ea: US National Atlas Equal Area

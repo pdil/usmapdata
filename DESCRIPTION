@@ -4,8 +4,8 @@ Version: 0.2.1.9999
 Description: Provides a container for data used by the 'usmap' package.
     The data used by 'usmap' has been extracted into this package so that the
     file size of the 'usmap' package can be reduced greatly. The data in this
-    package will be updated roughly once per year (plus bug fixes) as new
-    shapefiles are provided by the US Census bureau.
+    package will be updated roughly once per year as new map data files are 
+    provided by the US Census Bureau.
 Authors@R: person("Paolo", "Di Lorenzo", email = "dilorenzo@hey.com", role = c("aut", "cre"))
 Depends:
     R (>= 3.5.0)
