@@ -1,6 +1,7 @@
 # [unreleased]
 
-
+### Bug Fixes
+* `alaska_bbox()` and `hawaii_bbox()` now output correct `sf` type (`sfc polygon`).
 
 # usmapdata 0.2.1
 Released Sunday, February 4, 2024.
