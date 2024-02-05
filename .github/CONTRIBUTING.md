@@ -1,5 +1,4 @@
 `usmapdata` is open to any of the following contributions:
-* Map data updates from official shape files
 * Augmentation or improvement of existing features
 * Bug fixes and code refactoring
 * Additional or improved documentation (especially new examples, typo fixes, clearer language, etc.)
