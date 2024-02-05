@@ -10,7 +10,7 @@
 |collate  |English_United States.utf8          |
 |ctype    |English_United States.utf8          |
 |tz       |America/New_York                    |
-|date     |2024-02-03                          |
+|date     |2024-02-05                          |
 |rstudio  |2023.12.1+402 Ocean Storm (desktop) |
 |pandoc   |NA                                  |
 
@@ -18,7 +18,7 @@
 
 |package   |old    |new        |Δ  |
 |:---------|:------|:----------|:--|
-|usmapdata |0.2.0  |0.2.0.9999 |*  |
+|usmapdata |0.2.1  |0.2.1.9999 |*  |
 |classInt  |0.4-10 |0.4-10     |   |
 |DBI       |1.2.1  |1.2.1      |   |
 |e1071     |1.7-14 |1.7-14     |   |
