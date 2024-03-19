@@ -1,4 +1,4 @@
-🚀 `usmap v{{ .version }}` release candidate
+🚀 `usmapdata v{{ .version }}` release candidate
 
 ### 📝 Pre-release checklist
 - [ ] Review automated changes
