@@ -1,6 +1,6 @@
 # 🗺 usmapdata
 
-[![R-CMD check](https://github.com/pdil/usmapdata/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/pdil/usmapdata/actions/workflows/R-CMD-check.yaml) [![codecov](https://codecov.io/gh/pdil/usmapdata/branch/master/graph/badge.svg)](https://app.codecov.io/gh/pdil/usmapdata)
+[![CRAN](http://www.r-pkg.org/badges/version/usmapdata?color=blue)](https://cran.r-project.org/package=usmap) [![check](https://github.com/pdil/usmap/actions/workflows/check.yaml/badge.svg)](https://github.com/pdil/usmap/actions/workflows/check.yaml) [![codecov](https://codecov.io/gh/pdil/usmapdata/branch/master/graph/badge.svg)](https://app.codecov.io/gh/pdil/usmapdata)
 
 You might be looking for the `usmap` package: [CRAN](https://cran.r-project.org/package=usmap) | [GitHub](https://github.com/pdil/usmap) | [Website](https://usmap.dev)
 
