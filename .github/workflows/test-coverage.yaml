@@ -1,12 +1,13 @@
 # Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
 
+name: test-coverage
+
 on:
   push:
-    branches: [main, master]
+    branches: master
   pull_request:
-    branches: [main, master]
-
-name: test-coverage
+    branches: master
+  workflow_call:
 
 jobs:
   test-coverage:

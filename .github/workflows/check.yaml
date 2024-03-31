@@ -1,12 +1,13 @@
 # Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
 
+name: check
+
 on:
   push:
     branches: master
   pull_request:
     branches: master
-
-name: check
+  workflow_call:
 
 jobs:
   check:
