@@ -78,7 +78,7 @@ jobs:
         with:
           template: data-raw/scripts/update-data-pr-body.md
           vars: |
-            branch-name: ${{ steps.pr-params.outputs.branch_name }}
+            branch_name: ${{ steps.pr-params.outputs.branch_name }}
 
       - name: Open pull request
         id: open-pr
