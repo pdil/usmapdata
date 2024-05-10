@@ -8,7 +8,7 @@
                  xmlns:srv="http://www.isotc211.org/2005/srv"
                  xsi:schemaLocation="http://www.isotc211.org/2005/gmi https://data.noaa.gov/resources/iso19139/schema.xsd">
    <gmd:fileIdentifier>
-      <gco:CharacterString>cb_2022_us_county_20m.shp.iso.xml</gco:CharacterString>
+      <gco:CharacterString>cb_2023_us_county_20m.shp.iso.xml</gco:CharacterString>
    </gmd:fileIdentifier>
    <gmd:language>
       <gco:CharacterString>eng; USA</gco:CharacterString>
@@ -24,7 +24,7 @@
    <gmd:contact>
       <gmd:CI_ResponsibleParty>
          <gmd:organisationName>
-            <gco:CharacterString>U.S. Department of Commerce, U.S. Census Bureau, Geography Division, Customer Engagement Branch</gco:CharacterString>
+            <gco:CharacterString>U.S. Department of Commerce, U.S. Census Bureau, Geography Division</gco:CharacterString>
          </gmd:organisationName>
          <gmd:contactInfo>
             <gmd:CI_Contact>
@@ -69,7 +69,7 @@
       </gmd:CI_ResponsibleParty>
    </gmd:contact>
    <gmd:dateStamp>
-      <gco:Date>2023-04</gco:Date>
+      <gco:Date>2024-05</gco:Date>
    </gmd:dateStamp>
    <gmd:metadataStandardName>
       <gco:CharacterString>ISO 19115-2 Geographic Information - Metadata - Part 2: Extensions for Imagery and Gridded Data</gco:CharacterString>
@@ -78,7 +78,7 @@
       <gco:CharacterString>ISO 19115-2:2009(E)</gco:CharacterString>
    </gmd:metadataStandardVersion>
    <gmd:dataSetURI>
-      <gco:CharacterString>https://meta.geo.census.gov/data/existing/decennial/GEO/CPMB/boundary/2022/shp/19115/cb_2022_us_county_20m.shp.iso.xml</gco:CharacterString>
+      <gco:CharacterString>https://meta.geo.census.gov/data/existing/decennial/GEO/CPMB/boundary/2023/19115/shp/cb_2023_us_county_20m.shp.iso.xml</gco:CharacterString>
    </gmd:dataSetURI>
    <gmd:spatialRepresentationInfo>
       <gmd:MD_VectorSpatialRepresentation>
@@ -162,12 +162,12 @@
          <gmd:citation>
             <gmd:CI_Citation>
                <gmd:title>
-                  <gco:CharacterString>2022 Cartographic Boundary File (SHP), Current County and Equivalent for United States, 1:20,000,000</gco:CharacterString>
+                  <gco:CharacterString>2023 Cartographic Boundary File (SHP), County and Equivalent for United States, 1:20,000,000</gco:CharacterString>
                </gmd:title>
                <gmd:date>
                   <gmd:CI_Date>
                      <gmd:date>
-                        <gco:Date>2023-04</gco:Date>
+                        <gco:Date>2024-05</gco:Date>
                      </gmd:date>
                      <gmd:dateType>
                         <gmd:CI_DateTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode"
@@ -178,7 +178,7 @@
                <gmd:date>
                   <gmd:CI_Date>
                      <gmd:date>
-                        <gco:Date>2023-04</gco:Date>
+                        <gco:Date>2024-05</gco:Date>
                      </gmd:date>
                      <gmd:dateType>
                         <gmd:CI_DateTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode"
@@ -189,7 +189,7 @@
                <gmd:date>
                   <gmd:CI_Date>
                      <gmd:date>
-                        <gco:Date>2023-04</gco:Date>
+                        <gco:Date>2024-05</gco:Date>
                      </gmd:date>
                      <gmd:dateType>
                         <gmd:CI_DateTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode"
@@ -200,14 +200,14 @@
                <gmd:identifier>
                   <gmd:MD_Identifier>
                      <gmd:code>
-                        <gco:CharacterString>cb_2022_us_county_20m</gco:CharacterString>
+                        <gco:CharacterString>cb_2023_us_county_20m</gco:CharacterString>
                      </gmd:code>
                   </gmd:MD_Identifier>
                </gmd:identifier>
                <gmd:citedResponsibleParty>
                   <gmd:CI_ResponsibleParty>
                      <gmd:organisationName>
-                        <gco:CharacterString>U.S. Department of Commerce, U.S. Census Bureau, Geography Division, Customer Engagement Branch</gco:CharacterString>
+                        <gco:CharacterString>U.S. Department of Commerce, U.S. Census Bureau, Geography Division</gco:CharacterString>
                      </gmd:organisationName>
                      <gmd:contactInfo>
                         <gmd:CI_Contact>
@@ -258,11 +258,11 @@
             </gmd:CI_Citation>
          </gmd:citation>
          <gmd:abstract>
-            <gco:CharacterString>The 2022 cartographic boundary shapefiles are simplified representations of selected geographic areas from the U.S. Census Bureau's Master Address File / Topologically Integrated Geographic Encoding and Referencing (MAF/TIGER) Database (MTDB). These boundary files are specifically designed for small-scale thematic mapping. When possible, generalization is performed with the intent to maintain the hierarchical relationships among geographies and to maintain the alignment of geographies within a file set for a given year. Geographic areas may not align with the same areas from another year. Some geographies are available as nation-based files while others are available only as state-based files.
+            <gco:CharacterString>The 2023 cartographic boundary shapefiles are simplified representations of selected geographic areas from the U.S. Census Bureau's Master Address File / Topologically Integrated Geographic Encoding and Referencing (MAF/TIGER) Database (MTDB). These boundary files are specifically designed for small-scale thematic mapping. When possible, generalization is performed with the intent to maintain the hierarchical relationships among geographies and to maintain the alignment of geographies within a file set for a given year. Geographic areas may not align with the same areas from another year. Some geographies are available as nation-based files while others are available only as state-based files.
 
 The primary legal divisions of most states are termed counties. In Louisiana, these divisions are known as parishes. In Alaska, which has no counties, the equivalent entities are the organized boroughs, city and boroughs, municipalities, and for the unorganized area, census areas. The latter are delineated cooperatively for statistical purposes by the State of Alaska and the Census Bureau. In four states (Maryland, Missouri, Nevada, and Virginia), there are one or more incorporated places that are independent of any county organization and thus constitute primary divisions of their states. These incorporated places are known as independent cities and are treated as equivalent entities for purposes of data presentation. The District of Columbia and Guam have no primary divisions, and each area is considered an equivalent entity for purposes of data presentation. The Census Bureau treats the following entities as equivalents of counties for purposes of data presentation: Municipios in Puerto Rico, Districts and Islands in American Samoa, Municipalities in the Commonwealth of the Northern Mariana Islands, and Islands in the U.S. Virgin Islands. The entire area of the United States, Puerto Rico, and the Island Areas is covered by counties or equivalent entities.
 
-The generalized boundaries for counties and equivalent entities are based on those as of January 1, 2022, primarily as reported through the Census Bureau's Boundary and Annexation Survey (BAS).</gco:CharacterString>
+The generalized boundaries for counties and equivalent entities are based on those as of January 1, 2023, primarily as reported through the Census Bureau's Boundary and Annexation Survey (BAS).</gco:CharacterString>
          </gmd:abstract>
          <gmd:purpose>
             <gco:CharacterString>These files were specifically created to support small-scale thematic mapping. To improve the appearance of shapes at small scales, areas are represented with fewer vertices than detailed TIGER/Line Shapefiles. Cartographic boundary files take up less disk space than their ungeneralized counterparts. Cartographic boundary files take less time to render on screen than TIGER/Line Shapefiles. You can join this file with table data downloaded from American FactFinder by using the AFFGEOID field in the cartographic boundary file. If detailed boundaries are required, please use the TIGER/Line Shapefiles instead of the generalized cartographic boundary files.</gco:CharacterString>
@@ -274,7 +274,7 @@ The generalized boundaries for counties and equivalent entities are based on tho
          <gmd:pointOfContact>
             <gmd:CI_ResponsibleParty>
                <gmd:organisationName>
-                  <gco:CharacterString>U.S. Department of Commerce, U.S. Census Bureau, Geography Division, Customer Engagement Branch</gco:CharacterString>
+                  <gco:CharacterString>U.S. Department of Commerce, U.S. Census Bureau, Geography Division</gco:CharacterString>
                </gmd:organisationName>
                <gmd:contactInfo>
                   <gmd:CI_Contact>
@@ -329,7 +329,7 @@ The generalized boundaries for counties and equivalent entities are based on tho
          <gmd:descriptiveKeywords>
             <gmd:MD_Keywords>
                <gmd:keyword>
-                  <gco:CharacterString>2022</gco:CharacterString>
+                  <gco:CharacterString>2023</gco:CharacterString>
                </gmd:keyword>
                <gmd:keyword>
                   <gco:CharacterString>SHP</gco:CharacterString>
@@ -405,7 +405,7 @@ The generalized boundaries for counties and equivalent entities are based on tho
                <gmd:thesaurusName>
                   <gmd:CI_Citation>
                      <gmd:title>
-                        <gco:CharacterString>ISO 3166 Codes for the representation of names of countries and their subdivisions</gco:CharacterString>
+                        <gco:CharacterString>ISO 3166 codes for the representation of names of countries and their subdivisions</gco:CharacterString>
                      </gmd:title>
                      <gmd:date gco:nilReason="unknown"/>
                   </gmd:CI_Citation>
@@ -423,7 +423,7 @@ The generalized boundaries for counties and equivalent entities are based on tho
                                           codeListValue="otherRestrictions">otherRestrictions</gmd:MD_RestrictionCode>
                </gmd:useConstraints>
                <gmd:otherConstraints>
-                  <gco:CharacterString>Access_Constraints: None</gco:CharacterString>
+                  <gco:CharacterString>Access constraints: None</gco:CharacterString>
                </gmd:otherConstraints>
                <gmd:otherConstraints>
                   <gco:CharacterString>Use Constraints: The intended display scale for this file is 1:20,000,000. This file should not be displayed at scales larger than 1:20,000,000.
@@ -472,7 +472,7 @@ These products are free to use in a product or publication, however acknowledgem
                      <gmd:extent>
                         <gml:TimeInstant gml:id="boundingTemporalExtentASingleDate">
                            <gml:description>publication date</gml:description>
-                           <gml:timePosition>2023-04</gml:timePosition>
+                           <gml:timePosition>2024-05</gml:timePosition>
                         </gml:TimeInstant>
                      </gmd:extent>
                   </gmd:EX_TemporalExtent>
@@ -492,12 +492,12 @@ These products are free to use in a product or publication, however acknowledgem
          <gmd:featureCatalogueCitation>
             <gmd:CI_Citation>
                <gmd:title>
-                  <gco:CharacterString>Feature Catalog for the 2022 Counties and Equivalent Areas Cartographic Boundary File</gco:CharacterString>
+                  <gco:CharacterString>Feature Catalog for the 2023 County and Equivalent for United States Cartographic Boundary File</gco:CharacterString>
                </gmd:title>
                <gmd:date>
                   <gmd:CI_Date>
                      <gmd:date>
-                        <gco:Date>2022</gco:Date>
+                        <gco:Date>2023</gco:Date>
                      </gmd:date>
                      <gmd:dateType>
                         <gmd:CI_DateTypeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_DateTypeCode"
@@ -508,7 +508,7 @@ These products are free to use in a product or publication, however acknowledgem
                <gmd:citedResponsibleParty>
                   <gmd:CI_ResponsibleParty>
                      <gmd:organisationName>
-                        <gco:CharacterString>U.S. Department of Commerce, U.S. Census Bureau, Geography Division, Customer Engagement Branch</gco:CharacterString>
+                        <gco:CharacterString>U.S. Department of Commerce, U.S. Census Bureau, Geography Division</gco:CharacterString>
                      </gmd:organisationName>
                      <gmd:contactInfo>
                         <gmd:CI_Contact>
@@ -553,7 +553,7 @@ These products are free to use in a product or publication, however acknowledgem
                   </gmd:CI_ResponsibleParty>
                </gmd:citedResponsibleParty>
                <gmd:otherCitationDetails>
-                  <gco:CharacterString>https://meta.geo.census.gov/data/existing/decennial/GEO/CPMB/boundary/2022/shp/19110/cb_2022_us_county_20m.shp.ea.iso.xml</gco:CharacterString>
+                  <gco:CharacterString>https://meta.geo.census.gov/data/existing/decennial/GEO/CPMB/boundary/2023/19110/shp/cb_2023_us_county_20m.shp.ea.iso.xml</gco:CharacterString>
                </gmd:otherCitationDetails>
             </gmd:CI_Citation>
          </gmd:featureCatalogueCitation>
@@ -574,7 +574,7 @@ These products are free to use in a product or publication, however acknowledgem
                <gmd:distributorContact>
                   <gmd:CI_ResponsibleParty>
                      <gmd:organisationName>
-                        <gco:CharacterString>U.S. Department of Commerce, U.S. Census Bureau, Geography Division, Customer Engagement Branch</gco:CharacterString>
+                        <gco:CharacterString>U.S. Department of Commerce, U.S. Census Bureau, Geography Division</gco:CharacterString>
                      </gmd:organisationName>
                      <gmd:contactInfo>
                         <gmd:CI_Contact>
@@ -632,13 +632,13 @@ These products are free to use in a product or publication, however acknowledgem
                <gmd:onLine>
                   <gmd:CI_OnlineResource>
                      <gmd:linkage>
-                        <gmd:URL>https://www2.census.gov/geo/tiger/GENZ2022/shp/cb_2022_us_county_20m.zip</gmd:URL>
+                        <gmd:URL>https://www2.census.gov/geo/tiger/GENZ2023/shp/cb_2023_us_county_20m.zip</gmd:URL>
                      </gmd:linkage>
                      <gmd:applicationProfile>
                         <gco:CharacterString>Shapefile Zip File</gco:CharacterString>
                      </gmd:applicationProfile>
                      <gmd:name>
-                        <gco:CharacterString>cb_2022_us_county_20m.zip</gco:CharacterString>
+                        <gco:CharacterString>cb_2023_us_county_20m.zip</gco:CharacterString>
                      </gmd:name>
                      <gmd:description>
                         <gco:CharacterString>The cartographic boundary files are simplified representations of selected geographic areas specifically designed for small scale thematic mapping.  These files contain simplified extracts of selected geographic areas from the U.S. Census Bureau's Master Address File/Topologically Integrated Geographic Encoding and Referencing (MAF/TIGER) database.</gco:CharacterString>
@@ -656,13 +656,13 @@ These products are free to use in a product or publication, however acknowledgem
                <gmd:onLine>
                   <gmd:CI_OnlineResource>
                      <gmd:linkage>
-                        <gmd:URL>https://meta.geo.census.gov/data/existing/decennial/GEO/CPMB/boundary/2022/shp/19110/cb_2022_us_county_20m.shp.ea.iso.xml</gmd:URL>
+                        <gmd:URL>https://meta.geo.census.gov/data/existing/decennial/GEO/CPMB/boundary/2023/19110/shp/cb_2023_us_county_20m.shp.ea.iso.xml</gmd:URL>
                      </gmd:linkage>
                      <gmd:applicationProfile>
                         <gco:CharacterString>XML</gco:CharacterString>
                      </gmd:applicationProfile>
                      <gmd:name>
-                        <gco:CharacterString>cb_2022_us_county_20m.shp.ea.iso.xml</gco:CharacterString>
+                        <gco:CharacterString>cb_2023_us_county_20m.shp.ea.iso.xml</gco:CharacterString>
                      </gmd:name>
                      <gmd:description>
                         <gco:CharacterString>Entity and attribute file</gco:CharacterString>
@@ -680,13 +680,13 @@ These products are free to use in a product or publication, however acknowledgem
                <gmd:onLine>
                   <gmd:CI_OnlineResource>
                      <gmd:linkage>
-                        <gmd:URL>https://www2.census.gov/geo/tiger/GENZ2022/2022_file_name_def.pdf</gmd:URL>
+                        <gmd:URL>https://www2.census.gov/geo/tiger/GENZ2023/2023_file_name_def.pdf</gmd:URL>
                      </gmd:linkage>
                      <gmd:applicationProfile>
                         <gco:CharacterString>PDF</gco:CharacterString>
                      </gmd:applicationProfile>
                      <gmd:name>
-                        <gco:CharacterString>2022_file_name_def.pdf</gco:CharacterString>
+                        <gco:CharacterString>2023_file_name_def.pdf</gco:CharacterString>
                      </gmd:name>
                      <gmd:description>
                         <gco:CharacterString>The file naming convention for the cartographic boundary files.</gco:CharacterString>
@@ -704,7 +704,7 @@ These products are free to use in a product or publication, however acknowledgem
                <gmd:onLine>
                   <gmd:CI_OnlineResource>
                      <gmd:linkage>
-                        <gmd:URL>https://www2.census.gov/geo/tiger/GENZ2022/description.pdf</gmd:URL>
+                        <gmd:URL>https://www2.census.gov/geo/tiger/GENZ2023/description.pdf</gmd:URL>
                      </gmd:linkage>
                      <gmd:applicationProfile>
                         <gco:CharacterString>PDF</gco:CharacterString>
