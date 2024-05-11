@@ -1,4 +1,4 @@
-# [unreleased]
+# usmapdata 0.3.0
 
 * Update map data to use [2023 shape files](https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.2023.html#list-tab-1883739534).
 
