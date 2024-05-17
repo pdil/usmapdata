@@ -1,12 +1,12 @@
 
 ## Test environments
-* local macOS install, R 4.3.2
-* local Windows install, R 4.3.2
+* local macOS install, R 4.4.0
+* local Windows install, R 4.4.0
 
 #### On Github Actions
-* macOS-latest (release), R 4.3.2
-* windows-latest (release), R 4.3.2
-* ubuntu-latest (oldrel, devel, release), R 4.3.2
+* macOS-latest (release), R 4.4.0
+* windows-latest (release), R 4.4.0
+* ubuntu-latest (oldrel, devel, release), R 4.4.0
 
 ## R CMD check results
 
