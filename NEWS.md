@@ -1,3 +1,7 @@
+# usmapdata 0.3.0.9000
+
+* Update package author email.
+
 # usmapdata 0.3.0
 Released Friday, May 15, 2024.
 
