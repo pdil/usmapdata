@@ -124,7 +124,7 @@ create_us_map <- function(
   )
 
   # export centroids
-  sf::st_write(centroids, centroids_output_file, quiet = TRUE, append = FALSE)
+  sf::st_write(centroids, centroids_output_path, quiet = TRUE, append = FALSE)
 }
 
 #' @rdname create_us_map

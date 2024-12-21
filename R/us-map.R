@@ -45,7 +45,6 @@ us_map <- function(
   data_year = NULL
 ) {
   regions <- match.arg(regions)
-
   if (regions == "state") regions <- "states"
   else if (regions == "county") regions <- "counties"
 
@@ -73,22 +72,20 @@ us_map <- function(
 
 #' Retrieve centroid labels
 #'
-#' @param regions The region breakdown for the map, can be one of
-#'   (\code{"states"}, \code{"counties"}, as specified by the internal file names.
-#'   The default is \code{"states"}.
-#' @param as_sf Defunct, this parameter no longer has any effect and will be removed in
-#'  the future.
+#' @inheritParams us_map
 #'
 #' @return An `sf` data frame of state or county centroid labels and positions
 #'   relative to the coordinates returned by the \code{us_map} function.
 #'
 #' @export
 centroid_labels <- function(
-  regions = c("states", "counties"),
+  regions = c("states", "state", "counties", "county"),
   as_sf = TRUE,
   data_year = NULL
 ) {
   regions <- match.arg(regions)
+  if (regions == "state") regions <- "states"
+  else if (regions == "county") regions <- "counties"
 
   map_year <- select_map_year(data_year)
   file_name <- paste0("us_", regions, "_centroids.gpkg")

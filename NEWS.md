@@ -13,6 +13,7 @@
 
 ### Improvements
 * Improve python script and GitHub Actions workflow that download and process map shapefiles to be more flexible and support new `data_year` feature listed above.
+* `centroid_labels()` now accepts `"state"` and `"county"` as inputs for the `regions` parameter like `us_map()` and `fips_data()`.
 * Update package author email.
 
 # usmapdata 0.3.0
