@@ -28,14 +28,17 @@ def _download_and_extract(file_url: str, extract_dir: str) -> bool:
     else:
         raise DownloadError(f"Failed to download {file_url}.", code=response.status_code)
 
-def download_shapefiles():
-    # create output directory
-    script_dir = os.path.abspath(os.path.dirname(__file__))
-    extract_dir = os.path.join(script_dir, "..", "shapefiles")
+def download_shapefiles(selected_year=None):
+    """
+    Downloads shapefiles for a given year.
 
-    if os.path.exists(extract_dir):
-        shutil.rmtree(extract_dir)
-        shutil.os.makedirs(extract_dir)
+    Parameters:
+    selected_year (optional): The year for which to download shapefiles.
+        If None, uses the next year according to config.ini.
+    """
+
+    # get script directory
+    script_dir = os.path.abspath(os.path.dirname(__file__))
 
     # get current configuration
     config_file = os.path.join(script_dir, "config.ini")
@@ -48,7 +51,17 @@ def download_shapefiles():
     entities = config.get(SECTION, "entities").split(",")
     res = config.get(SECTION, "res")
 
-    year = current_year + 1
+    if selected_year is None:
+        year = current_year + 1
+    else:
+        year = selected_year
+
+    # create output directory
+    extract_dir = os.path.join(script_dir, "..", "shapefiles", year)
+
+    if os.path.exists(extract_dir):
+        shutil.rmtree(extract_dir)
+        shutil.os.makedirs(extract_dir)
 
     try:
         # attempt shapefile downloads
@@ -61,9 +74,14 @@ def download_shapefiles():
                     f.write(f"{entity}_shp=cb_{year}_us_{entity}_{res}.shp\n")
 
         # update current year
-        config.set(SECTION, "current_year", f"{year}")
-        with open(config_file, "w") as f:
-            config.write(f)
+        if selected_year is None:
+            config.set(SECTION, "current_year", f"{year}")
+            with open(config_file, "w") as f:
+                config.write(f)
+
+        if (gh_env := os.getenv("GITHUB_ENV")):
+            with open(gh_env, "a") as f:
+                f.write(f"shp_year={year}n")
     except DownloadError as e:
         if e.code == 404:   # i.e. shapefiles not found
             print(f"The shapefiles for {year} were not found. Better luck next time!")
@@ -78,4 +96,5 @@ def download_shapefiles():
 
 
 if __name__ == "__main__":
-    download_shapefiles()
+    selected_year = sys.argv[1] if len(sys.argv) > 1 else None
+    download_shapefiles(selected_year)

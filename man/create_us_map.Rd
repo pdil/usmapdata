@@ -11,7 +11,12 @@
 \alias{hawaii_bbox}
 \title{Internal map creation tools}
 \usage{
-create_us_map(type = c("states", "counties"), input_file, output_file)
+create_us_map(
+  type = c("states", "counties"),
+  input_file,
+  output_dir,
+  output_file
+)
 
 ea_crs()
 

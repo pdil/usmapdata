@@ -1,5 +1,18 @@
-# usmapdata 0.3.0.9000
+# [unreleased]
 
+### New Features
+* Add `data_year` parameter to `us_map()`, see [Issue #34](https://github.com/pdil/usmapdata/issues/34).
+  * Allows user to select the year for which to plot US map.
+  * This will allow the user to match the map that is provided to the data they are using.
+  * To start with, 2022 and 2023 maps are included.
+  * Going forward, each year will be added to the package and previous years can be accessed with this parameter.
+  * If the value provided via `data_year` is not available, the package will select the next year for which data exists.
+    * For example, if data sets 2022 and 2023 are available and the user calls `us_map(data_year = 2019)`, 2022 will be used.
+    * A warning is presented when this occurs to alert the user.
+  * Further reading on the impetus for this change: [major changes made to Connecticut counties in 2023](https://www.ctinsider.com/projects/2023/ct-planning-regions/).
+
+### Improvements
+* Improve python script and GitHub Actions workflow that download and process map shapefiles to be more flexible and support new `data_year` feature listed above.
 * Update package author email.
 
 # usmapdata 0.3.0
@@ -14,7 +27,7 @@ Released Friday, March 8, 2024.
 * Improve language in `DESCRIPTION` and minor documentation, see [Issue #19](https://github.com/pdil/usmapdata/issues/19).
 
 ### Bug Fixes
-* `alaska_bbox()` and `hawaii_bbox()` now output correct `sf` type (`sfc polygon`).
+* `alaska_bbox()` and `hawaii_bbox()` now output correct `sf` type (`sfc_POLYGON`).
 
 # usmapdata 0.2.1
 Released Sunday, February 4, 2024.

@@ -4,7 +4,11 @@
 \alias{fips_data}
 \title{Retrieve state and county FIPS codes}
 \usage{
-fips_data(regions = c("states", "state", "counties", "county"), as_sf = TRUE)
+fips_data(
+  regions = c("states", "state", "counties", "county"),
+  as_sf = TRUE,
+  data_year = NULL
+)
 }
 \arguments{
 \item{regions}{The region breakdown for the map, can be one of

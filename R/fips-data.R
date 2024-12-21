@@ -17,11 +17,12 @@
 #' @export
 fips_data <- function(
   regions = c("states", "state", "counties", "county"),
-  as_sf = TRUE
+  as_sf = TRUE,
+  data_year = NULL
 ) {
   regions <- match.arg(regions)
 
-  map_data <- usmapdata::us_map(regions)
+  map_data <- usmapdata::us_map(regions, data_year = data_year)
   sf::st_geometry(map_data) <- NULL
   map_data
 }

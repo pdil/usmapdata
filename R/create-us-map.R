@@ -48,6 +48,7 @@
 create_us_map <- function(
   type = c("states", "counties"),
   input_file,
+  output_dir,
   output_file
 ) {
   # check for dplyr
@@ -100,19 +101,25 @@ create_us_map <- function(
     us_ea <- dplyr::arrange(us_ea, .data$abbr, .data$county)
   }
 
+  # prepare output directory
+  if (!dir.exists(output_dir)) {
+    dir.create(output_dir, recursive = TRUE)
+  }
+  output_path <- file.path(output_dir, output_file)
+
   # export modified shape file
-  sf::st_write(us_ea, output_file, quiet = TRUE, append = FALSE)
+  sf::st_write(us_ea, output_path, quiet = TRUE, append = FALSE)
 
   # compute centroids
   centroids <- compute_centroids(us_ea)
 
   # determine centroids file path
-  centroids_output_file <- file.path(
-    dirname(output_file),
+  centroids_output_path <- file.path(
+    output_dir,
     paste0(
-      tools::file_path_sans_ext(basename(output_file)),
+      tools::file_path_sans_ext(basename(output_path)),
       "_centroids.",
-      tools::file_ext(output_file)
+      tools::file_ext(output_path)
     )
   )
 
