@@ -90,7 +90,6 @@ centroid_labels <- function(
   map_year <- select_map_year(data_year)
   file_name <- paste0("us_", regions, "_centroids.gpkg")
   file_path <- system.file("extdata", map_year, file_name, package = "usmapdata")
-  df <- sf::read_sf(file_path)
 
   sf::read_sf(file_path)
 }
