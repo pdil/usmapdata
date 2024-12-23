@@ -49,7 +49,7 @@ jobs:
       - name: Modify shapefiles
         env:
           STATE_SHP: ${{ env.state_shp }}
-          COUNTY_SHP: $ {{ env.county_shp }}
+          COUNTY_SHP: ${{ env.county_shp }}
           YEAR: ${{ env.shp_year }}
         run: |
           input_dir <- file.path("data-raw", "shapefiles", Sys.getenv("YEAR"))
