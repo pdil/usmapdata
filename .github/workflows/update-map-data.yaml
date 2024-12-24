@@ -1,6 +1,6 @@
 
 name: update-map-data
-run-name: Update map data
+run-name: Add ${{ inputs.year }} map data
 
 on:
   schedule:
@@ -79,9 +79,11 @@ jobs:
 
       - name: Determine pull request parameters
         id: pr-params
+        env:
+          YEAR: ${{ env.shp_year }}
         run: |
-          echo "branch_name=data-update/$(date +'%B-%Y')" >> "$GITHUB_OUTPUT"
-          echo "pr_title=$(date +'%B %Y') map data update" >> "$GITHUB_OUTPUT"
+          echo "branch_name=data-update/$YEAR" >> "$GITHUB_OUTPUT"
+          echo "pr_title=Add $YEAR map data" >> "$GITHUB_OUTPUT"
 
       - name: Render pull request body
         id: pr-body
