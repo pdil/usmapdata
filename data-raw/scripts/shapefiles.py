@@ -90,7 +90,16 @@ def download_shapefiles(selected_year=None):
 
         if (gh_env := os.getenv("GITHUB_OUTPUT")):
             with open(gh_env, "a") as f:
-                f.write(f"python_exit_code={e.code}")
+                f.write(f"exit_code={e.code}")
+
+        if e.code != 404:
+            sys.exit(e.code)
+    except Exception as e:
+        print(e)
+
+        if (gh_env := os.getenv("GITHUB_OUTPUT")):
+            with open(gh_env, "a") as f:
+                f.write(f"exit_code={e.code}")
 
         sys.exit(e.code)
 

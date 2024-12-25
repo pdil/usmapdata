@@ -110,10 +110,17 @@ jobs:
           delete-branch: true
 
       - name: Send success notification
+        if: ${{ steps.dl-shp.outputs.exit_code == '' }}
         run: |
           python data-raw/scripts/pushover.py "✅ usmapdata has updated its data files, a PR review is needed: <a href=\"${{ steps.open-pr.outputs.pull-request-url }}\">PR #${{ steps.open-pr.outputs.pull-request-number }}</a>"
+
+      - name: Send data not found notification
+        if: ${{ steps.dl-shp.outputs.exit_code != '' }}
+        run: |
+          python data-raw/scripts/pushover.py "⚠️ usmapdata failed to find map data files for ${{ env.shp_year }}." "LOW"
 
       - name: Send failure notification
         if: ${{ failure() }}
         run: |
-          python data-raw/scripts/pushover.py "⚠️ usmapdata failed to update map data files. (error: ${{ steps.dl-shp.outputs.python_exit_code }})" "LOW"
+          python data-raw/scripts/pushover.py "❌ usmapdata failed to update map data files. (error: ${{ steps.dl-shp.outputs.exit_code }})" "LOW"
+
