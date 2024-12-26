@@ -123,7 +123,7 @@ select_map_year <- function(data_year) {
   } else if (!(data_year %in% years)) {
     warn <- function(provided, used) {
       warning(
-        paste0(provided, " data not available, using ", used, " instead.\n\n",
+        paste0(provided, " map data not available, using ", used, " instead.\n\n",
                "See available years with `usmapdata::available_map_years()`."),
         call. = FALSE
       )
