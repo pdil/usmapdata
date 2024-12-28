@@ -1,15 +1,20 @@
 
-name: update-map-data
-run-name: Update map data
+name: build-map-data
+run-name: Add ${{ inputs.year }} map data
 
 on:
   schedule:
       # runs at noon UTC on the 1st of each month
     - cron: '0 12 1 * *'
   workflow_dispatch:
+    inputs:
+      year:
+        description: "Shape file year"
+        required: false
+        default: ''
 
 jobs:
-  check:
+  build:
     runs-on: ubuntu-latest
     env:
       PUSHOVER_API_KEY: ${{ secrets.PUSHOVER_API_KEY }}
@@ -31,7 +36,7 @@ jobs:
       - name: Download shapefiles
         id: dl-shp
         run: |
-          python data-raw/scripts/shapefiles.py
+          python data-raw/scripts/shapefiles.py ${{ inputs.year }}
 
       - name: Setup R
         uses: r-lib/actions/setup-r@v2
@@ -43,18 +48,24 @@ jobs:
 
       - name: Modify shapefiles
         env:
-          STATE_SHP: data-raw/shapefiles/${{ env.state_shp }}
-          COUNTY_SHP: data-raw/shapefiles/${{ env.county_shp }}
+          STATE_SHP: ${{ env.state_shp }}
+          COUNTY_SHP: ${{ env.county_shp }}
+          YEAR: ${{ env.shp_year }}
         run: |
+          input_dir <- file.path("data-raw", "shapefiles", Sys.getenv("YEAR"))
+          output_dir <- file.path("inst", "extdata", Sys.getenv("YEAR"))
+
           usmapdata:::create_us_map(
             "states",
-            Sys.getenv("STATE_SHP"),
-            "inst/extdata/us_states.gpkg"
+            file.path(input_dir, Sys.getenv("STATE_SHP")),
+            output_dir,
+            "us_states.gpkg"
           )
           usmapdata:::create_us_map(
             "counties",
-            Sys.getenv("COUNTY_SHP"),
-            "inst/extdata/us_counties.gpkg"
+            file.path(input_dir, Sys.getenv("COUNTY_SHP")),
+            output_dir,
+            "us_counties.gpkg"
           )
         shell: Rscript {0}
 
@@ -68,9 +79,11 @@ jobs:
 
       - name: Determine pull request parameters
         id: pr-params
+        env:
+          YEAR: ${{ env.shp_year }}
         run: |
-          echo "branch_name=data-update/$(date +'%B-%Y')" >> "$GITHUB_OUTPUT"
-          echo "pr_title=$(date +'%B %Y') map data update" >> "$GITHUB_OUTPUT"
+          echo "branch_name=data-update/$YEAR" >> "$GITHUB_OUTPUT"
+          echo "pr_title=Add $YEAR map data" >> "$GITHUB_OUTPUT"
 
       - name: Render pull request body
         id: pr-body
@@ -100,7 +113,13 @@ jobs:
         run: |
           python data-raw/scripts/pushover.py "✅ usmapdata has updated its data files, a PR review is needed: <a href=\"${{ steps.open-pr.outputs.pull-request-url }}\">PR #${{ steps.open-pr.outputs.pull-request-number }}</a>"
 
-      - name: Send failure notification
-        if: ${{ failure() }}
+      - name: Send data not found notification
+        if: ${{ failure() && steps.dl-shp.outputs.exit_code == '404' }}
         run: |
-          python data-raw/scripts/pushover.py "⚠️ usmapdata failed to update map data files. (error: ${{ steps.dl-shp.outputs.python_exit_code }})" "LOW"
+          python data-raw/scripts/pushover.py "⚠️ usmapdata failed to find map data files for ${{ env.shp_year }}." "LOW"
+
+      - name: Send failure notification
+        if: ${{ failure() && steps.dl-shp.outputs.exit_code != '404' }}
+        run: |
+          python data-raw/scripts/pushover.py "❌ usmapdata failed to update map data files. (error: ${{ steps.dl-shp.outputs.exit_code }})" "LOW"
+

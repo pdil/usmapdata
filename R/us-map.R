@@ -16,6 +16,13 @@
 #'  not present in the included regions will be ignored.
 #' @param as_sf Defunct, this parameter no longer has any effect and will be removed in
 #'  the future.
+#' @param data_year The year for which to obtain map data.
+#' If the value is \code{NULL}, the most recent year's data is used. If the
+#' provided year is not found from the available map data sets, the next most
+#' recent year's data is used. This can be used if an older data set is being
+#' plotted on the US map so that the data matches the map more accurately.
+#' Therefore, the provided value should match the year of the plotted data set.
+#' The default is \code{NULL}, i.e. the most recent available year is used.
 #'
 #' @return An `sf` data frame of US map coordinates divided by the desired \code{regions}.
 #'
@@ -27,22 +34,24 @@
 #'
 #' excl_west_coast <- us_map(exclude = c("CA", "OR", "WA"))
 #'
+#' ct_counties_as_of_2022 <- us_map(regions = "counties", include = "CT", data_year = 2022)
+#'
 #' @export
 us_map <- function(
   regions = c("states", "state", "counties", "county"),
   include = c(),
   exclude = c(),
-  as_sf = TRUE
+  as_sf = TRUE,
+  data_year = NULL
 ) {
   regions <- match.arg(regions)
-
   if (regions == "state") regions <- "states"
   else if (regions == "county") regions <- "counties"
 
-  df <- sf::read_sf(
-    system.file("extdata", paste0("us_", regions, ".gpkg"),
-                package = "usmapdata")
-  )
+  map_year <- select_map_year(data_year)
+  file_name <- paste0("us_", regions, ".gpkg")
+  file_path <- system.file("extdata", map_year, file_name, package = "usmapdata")
+  df <- sf::read_sf(file_path)
 
   if (length(include) > 0) {
     df <- df[df$full %in% include |
@@ -63,24 +72,75 @@ us_map <- function(
 
 #' Retrieve centroid labels
 #'
-#' @param regions The region breakdown for the map, can be one of
-#'   (\code{"states"}, \code{"counties"}, as specified by the internal file names.
-#'   The default is \code{"states"}.
-#' @param as_sf Defunct, this parameter no longer has any effect and will be removed in
-#'  the future.
+#' @inheritParams us_map
 #'
 #' @return An `sf` data frame of state or county centroid labels and positions
 #'   relative to the coordinates returned by the \code{us_map} function.
 #'
 #' @export
 centroid_labels <- function(
-  regions = c("states", "counties"),
-  as_sf = TRUE
+  regions = c("states", "state", "counties", "county"),
+  as_sf = TRUE,
+  data_year = NULL
 ) {
   regions <- match.arg(regions)
+  if (regions == "state") regions <- "states"
+  else if (regions == "county") regions <- "counties"
 
-  sf::read_sf(
-    system.file("extdata", paste0("us_", regions, "_centroids.gpkg"),
-                package = "usmapdata")
-  )
+  map_year <- select_map_year(data_year)
+  file_name <- paste0("us_", regions, "_centroids.gpkg")
+  file_path <- system.file("extdata", map_year, file_name, package = "usmapdata")
+
+  sf::read_sf(file_path)
+}
+
+#' Years for which US map data is available
+#'
+#' @return A numeric vector of available map data years,
+#' sorted in descending order.
+#'
+#' @examples
+#' available_map_years()
+#'
+#' @export
+available_map_years <- function() {
+  sort(as.numeric(list.files(system.file("extdata", package = "usmapdata"))))
+}
+
+#' Select appropriate map data year from available years
+#'
+#' @param data_year The year for which to obtain \code{usmap} data.
+#' If the value is \code{NULL}, the most recent year is returned. If the
+#' provided year is not found from the available map data sets, the next most
+#' recent available year is returned.
+#'
+#' @keywords internal
+select_map_year <- function(data_year) {
+  years <- available_map_years()
+
+  if (is.null(data_year)) {
+    max(years)
+  } else if (!(data_year %in% years)) {
+    warn <- function(provided, used) {
+      warning(
+        paste0(provided, " map data not available, using ", used, " instead.\n\n",
+               "See available years with `usmapdata::available_map_years()`."),
+        call. = FALSE
+      )
+    }
+
+    years_greater <- years[years >= data_year]
+
+    if (length(years_greater) == 0) {
+      last_available <- max(years[years < data_year])
+      warn(data_year, last_available)
+      last_available
+    } else {
+      next_available <- min(years_greater)
+      warn(data_year, next_available)
+      next_available
+    }
+  } else {
+    data_year
+  }
 }

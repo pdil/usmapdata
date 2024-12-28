@@ -4,7 +4,11 @@
 \alias{fips_data}
 \title{Retrieve state and county FIPS codes}
 \usage{
-fips_data(regions = c("states", "state", "counties", "county"), as_sf = TRUE)
+fips_data(
+  regions = c("states", "state", "counties", "county"),
+  as_sf = TRUE,
+  data_year = NULL
+)
 }
 \arguments{
 \item{regions}{The region breakdown for the map, can be one of
@@ -13,6 +17,14 @@ The default is \code{"states"}.}
 
 \item{as_sf}{Defunct, this parameter no longer has any effect and will be removed in
 the future.}
+
+\item{data_year}{The year for which to obtain map data.
+If the value is \code{NULL}, the most recent year's data is used. If the
+provided year is not found from the available map data sets, the next most
+recent year's data is used. This can be used if an older data set is being
+plotted on the US map so that the data matches the map more accurately.
+Therefore, the provided value should match the year of the plotted data set.
+The default is \code{NULL}, i.e. the most recent available year is used.}
 }
 \value{
 An data frame of FIPS codes of the desired \code{regions}.
