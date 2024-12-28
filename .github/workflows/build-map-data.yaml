@@ -1,6 +1,6 @@
 
 name: build-map-data
-run-name: Add ${{ inputs.year }} map data
+run-name: Add ${{ inputs.year || 'latest' }} map data
 
 on:
   schedule:
