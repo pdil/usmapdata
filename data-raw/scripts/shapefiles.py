@@ -64,7 +64,7 @@ def download_shapefiles(selected_year=None):
         year = selected_year
 
     # create output directory
-    extract_dir = os.path.join(script_dir, "..", "shapefiles", year)
+    extract_dir = os.path.join(script_dir, "..", "shapefiles", str(year))
 
     if os.path.exists(extract_dir):
         shutil.rmtree(extract_dir)
