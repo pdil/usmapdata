@@ -39,17 +39,14 @@ jobs:
           python data-raw/scripts/shapefiles.py ${{ inputs.year }}
 
       - name: Setup R
-        if: ${{ steps.dl-shp.outputs.exit_code == '' }}
         uses: r-lib/actions/setup-r@v2
 
       - name: Install R dependencies
-        if: ${{ steps.dl-shp.outputs.exit_code == '' }}
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: local::.
 
       - name: Modify shapefiles
-        if: ${{ steps.dl-shp.outputs.exit_code == '' }}
         env:
           STATE_SHP: ${{ env.state_shp }}
           COUNTY_SHP: ${{ env.county_shp }}
@@ -73,7 +70,6 @@ jobs:
         shell: Rscript {0}
 
       - name: Import GPG signing key
-        if: ${{ steps.dl-shp.outputs.exit_code == '' }}
         uses: crazy-max/ghaction-import-gpg@v6
         with:
           gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
@@ -82,7 +78,6 @@ jobs:
           git_commit_gpgsign: true
 
       - name: Determine pull request parameters
-        if: ${{ steps.dl-shp.outputs.exit_code == '' }}
         id: pr-params
         env:
           YEAR: ${{ env.shp_year }}
@@ -91,7 +86,6 @@ jobs:
           echo "pr_title=Add $YEAR map data" >> "$GITHUB_OUTPUT"
 
       - name: Render pull request body
-        if: ${{ steps.dl-shp.outputs.exit_code == '' }}
         id: pr-body
         uses: chuhlomin/render-template@v1
         with:
@@ -100,7 +94,6 @@ jobs:
             branch_name: ${{ steps.pr-params.outputs.branch_name }}
 
       - name: Open pull request
-        if: ${{ steps.dl-shp.outputs.exit_code == '' }}
         id: open-pr
         uses: peter-evans/create-pull-request@v5
         with:
@@ -117,17 +110,16 @@ jobs:
           delete-branch: true
 
       - name: Send success notification
-        if: ${{ steps.dl-shp.outputs.exit_code == '' }}
         run: |
           python data-raw/scripts/pushover.py "✅ usmapdata has updated its data files, a PR review is needed: <a href=\"${{ steps.open-pr.outputs.pull-request-url }}\">PR #${{ steps.open-pr.outputs.pull-request-number }}</a>"
 
       - name: Send data not found notification
-        if: ${{ steps.dl-shp.outputs.exit_code != '' }}
+        if: ${{ failure() && steps.dl-shp.outputs.exit_code == '404' }}
         run: |
           python data-raw/scripts/pushover.py "⚠️ usmapdata failed to find map data files for ${{ env.shp_year }}." "LOW"
 
       - name: Send failure notification
-        if: ${{ failure() }}
+        if: ${{ failure() && steps.dl-shp.outputs.exit_code != '404' }}
         run: |
           python data-raw/scripts/pushover.py "❌ usmapdata failed to update map data files. (error: ${{ steps.dl-shp.outputs.exit_code }})" "LOW"
 

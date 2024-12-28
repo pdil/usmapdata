@@ -28,6 +28,13 @@ def _download_and_extract(file_url: str, extract_dir: str) -> bool:
     else:
         raise DownloadError(f"Failed to download {file_url}.", code=response.status_code)
 
+def _failed(code: int):
+    if (gh_env := os.getenv("GITHUB_OUTPUT")):
+        with open(gh_env, "a") as f:
+            f.write(f"exit_code={e.code}")
+
+    sys.exit(e.code)
+
 def download_shapefiles(selected_year=None):
     """
     Downloads shapefiles for a given year.
@@ -88,20 +95,10 @@ def download_shapefiles(selected_year=None):
         else:               # other download errors
             print(e)
 
-        if (gh_env := os.getenv("GITHUB_OUTPUT")):
-            with open(gh_env, "a") as f:
-                f.write(f"exit_code={e.code}")
-
-        if e.code != 404:
-            sys.exit(e.code)
+        _failed(e.code)
     except Exception as e:
         print(e)
-
-        if (gh_env := os.getenv("GITHUB_OUTPUT")):
-            with open(gh_env, "a") as f:
-                f.write(f"exit_code={e.code}")
-
-        sys.exit(e.code)
+        _failed(e.code)
 
 
 if __name__ == "__main__":
