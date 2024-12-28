@@ -62,6 +62,10 @@ def download_shapefiles(selected_year=None):
         year = current_year + 1
     else:
         year = selected_year
+        
+    if (gh_env := os.getenv("GITHUB_ENV")):
+        with open(gh_env, "a") as f:
+            f.write(f"shp_year={year}") 
 
     # create output directory
     extract_dir = os.path.join(script_dir, "..", "shapefiles", str(year))
@@ -85,10 +89,6 @@ def download_shapefiles(selected_year=None):
             config.set(SECTION, "current_year", f"{year}")
             with open(config_file, "w") as f:
                 config.write(f)
-
-        if (gh_env := os.getenv("GITHUB_ENV")):
-            with open(gh_env, "a") as f:
-                f.write(f"shp_year={year}")
     except DownloadError as e:
         if e.code == 404:   # i.e. shapefiles not found
             print(f"The shapefiles for {year} were not found. Better luck next time!")
