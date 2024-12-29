@@ -31,7 +31,7 @@ def _download_and_extract(file_url: str, extract_dir: str) -> bool:
 def _failed(code: int):
     if (gh_env := os.getenv("GITHUB_OUTPUT")):
         with open(gh_env, "a") as f:
-            f.write(f"exit_code={code}")
+            f.write(f"exit_code={code}\n")
 
     sys.exit(code)
 
@@ -65,7 +65,7 @@ def download_shapefiles(selected_year=None):
         
     if (gh_env := os.getenv("GITHUB_ENV")):
         with open(gh_env, "a") as f:
-            f.write(f"shp_year={year}") 
+            f.write(f"shp_year={year}\n") 
 
     # create output directory
     extract_dir = os.path.join(script_dir, "..", "shapefiles", str(year))
