@@ -73,4 +73,27 @@ test_that("error occurs for invalid region", {
 test_that("centroid labels are loaded", {
   expect_equal(length(centroid_labels("states")[[1]]), 51)
   expect_equal(length(centroid_labels("counties")[[1]]), 3144)
+  expect_equal(length(centroid_labels("state")[[1]]), 51)
+  expect_equal(length(centroid_labels("county")[[1]]), 3144)
+  expect_identical(centroid_labels("counties"), centroid_labels("county"))
+  expect_identical(centroid_labels("states"), centroid_labels("state"))
+})
+
+test_that("warning produced for unavailable map years", {
+  expect_warning(us_map(data_year = 1900))
+  expect_warning(us_map(data_year = 2100))
+})
+
+test_that("correct year chosen when unavailable year provided", {
+  available_years <- usmapdata:::available_map_years()
+
+  expect_equal(usmapdata:::select_map_year(2023), 2023)
+  expect_equal(
+    suppressWarnings(usmapdata:::select_map_year(1000)),
+    min(available_years)
+  )
+  expect_equal(
+    suppressWarnings(usmapdata:::select_map_year(3000)),
+    max(available_years)
+  )
 })
