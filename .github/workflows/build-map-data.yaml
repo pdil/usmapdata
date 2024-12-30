@@ -100,7 +100,7 @@ jobs:
           token: ${{ secrets.BOT_PAT }}
           author: ${{ secrets.BOT_USER }}
           committer: ${{ secrets.BOT_USER }}
-          commit-message: "[automated] Update map data based on latest shapefiles"
+          commit-message: "[automated] Add ${{ env.shp_year }} map data based on available shapefiles"
           branch: ${{ steps.pr-params.outputs.branch_name }}
           title: ${{ steps.pr-params.outputs.pr_title }}
           body: ${{ steps.pr-body.outputs.result }}
