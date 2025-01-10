@@ -2,7 +2,7 @@
 
 ### ✅ Review Checklist
 - [ ] Ensure all checks and tests pass
-- [ ] Load current branch with `devtools::install_github("usmapdata", "{{ .branch_name }}")` and test `usmap`
+- [ ] Load current branch with `devtools::install_github("pdil/usmapdata", "{{ .branch_name }}")` and test `usmap`
 - [ ] Perform visual smoke test of all plotting features to ensure consistency
 
 ### 📝 Post-merge Steps
