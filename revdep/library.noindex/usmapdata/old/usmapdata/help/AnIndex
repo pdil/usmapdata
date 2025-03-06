@@ -1,0 +1,13 @@
+usmapdata-package	usmapdata
+alaska_bbox	create_us_map
+centroid_labels	centroid_labels
+compute_centroids	create_us_map
+create_us_map	create_us_map
+ea_crs	create_us_map
+fips_data	fips_data
+hawaii_bbox	create_us_map
+transform2D	create_us_map
+transform_alaska	create_us_map
+transform_hawaii	create_us_map
+usmapdata	usmapdata
+us_map	us_map

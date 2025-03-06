@@ -1,40 +1,31 @@
 # Platform
 
-|field    |value                        |
-|:--------|:----------------------------|
-|version  |R version 4.4.2 (2024-10-31) |
-|os       |Ubuntu 24.04.1 LTS           |
-|system   |x86_64, linux-gnu            |
-|ui       |X11                          |
-|language |(EN)                         |
-|collate  |C.UTF-8                      |
-|ctype    |C.UTF-8                      |
-|tz       |UTC                          |
-|date     |2025-01-19                   |
-|pandoc   |3.1.3 @ /usr/bin/pandoc      |
+|field    |value                                                                        |
+|:--------|:----------------------------------------------------------------------------|
+|version  |R version 4.4.3 (2025-02-28)                                                 |
+|os       |macOS Sequoia 15.3.1                                                         |
+|system   |aarch64, darwin20                                                            |
+|ui       |RStudio                                                                      |
+|language |(EN)                                                                         |
+|collate  |en_US.UTF-8                                                                  |
+|ctype    |en_US.UTF-8                                                                  |
+|tz       |America/New_York                                                             |
+|date     |2025-03-05                                                                   |
+|rstudio  |2023.06.0+421 Mountain Hydrangea (desktop)                                   |
+|pandoc   |NA                                                                           |
+|quarto   |1.3.353 @ /Applications/RStudio.app/Contents/Resources/app/quarto/bin/quarto |
 
 # Dependencies
 
-|package   |old    |new        |Δ  |
-|:---------|:------|:----------|:--|
-|usmapdata |0.3.0  |0.3.0.9000 |*  |
-|classInt  |0.4-11 |0.4-11     |   |
-|DBI       |1.2.3  |1.2.3      |   |
-|e1071     |1.7-16 |1.7-16     |   |
-|magrittr  |2.0.3  |2.0.3      |   |
-|proxy     |0.4-27 |0.4-27     |   |
-|Rcpp      |1.0.14 |1.0.14     |   |
-|rlang     |1.1.5  |1.1.5      |   |
-|s2        |1.1.7  |1.1.7      |   |
-|sf        |1.0-19 |1.0-19     |   |
-|units     |0.8-5  |0.8-5      |   |
-|wk        |0.9.4  |0.9.4      |   |
+|package   |old   |new   |Δ  |
+|:---------|:-----|:-----|:--|
+|usmapdata |0.3.0 |0.4.0 |*  |
 
 # Revdeps
 
-## Failed to check (1)
+## New problems (1)
 
-|package |version |error |warning |note |
-|:-------|:-------|:-----|:-------|:----|
-|usmap   |?       |      |        |     |
+|package |version |error |warning |note     |
+|:-------|:-------|:-----|:-------|:--------|
+|[usmap](problems.md#usmap)|0.7.1   |      |        |1 __+1__ |
 
