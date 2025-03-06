@@ -1,5 +1,8 @@
 # [unreleased]
 
+# usmapdata 0.4.0
+Released Thursday, March 6, 2025.
+
 ### New Features
 * Add `data_year` parameter to `us_map()`, see [Issue #34](https://github.com/pdil/usmapdata/issues/34).
   * Allows user to select the year for which to plot US map.
