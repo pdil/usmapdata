@@ -11,8 +11,8 @@ class DownloadError(Exception):
         super().__init__(message)
         self.code = code
 
-def _download_and_extract(file_url: str, extract_dir: str) -> bool:
-    response = requests.get(file_url)
+def _download_and_extract(file_url: str, extract_dir: str, cert_url: str) -> bool:
+    response = requests.get(file_url, verify = cert_url)
     LOCAL_FILE = "download.zip"
 
     if response.status_code == 200:
@@ -54,6 +54,7 @@ def download_shapefiles(selected_year=None):
     SECTION = "shapefiles"
 
     url_template = config.get(SECTION, "url")
+    cert_file = config.get(SECTION, "cert")
     current_year = config.getint(SECTION, "current_year")
     entities = config.get(SECTION, "entities").split(",")
     res = config.get(SECTION, "res")
@@ -62,10 +63,13 @@ def download_shapefiles(selected_year=None):
         year = current_year + 1
     else:
         year = selected_year
-        
+
     if (gh_env := os.getenv("GITHUB_ENV")):
         with open(gh_env, "a") as f:
-            f.write(f"shp_year={year}\n") 
+            f.write(f"shp_year={year}\n")
+
+    # create cert file URL
+    cert_url = os.path.join(script_dir, "..", "certs", cert_file)
 
     # create output directory
     extract_dir = os.path.join(script_dir, "..", "shapefiles", str(year))
@@ -78,7 +82,7 @@ def download_shapefiles(selected_year=None):
         # attempt shapefile downloads
         for entity in entities:
             url = url_template.format(year=year, entity=entity, res=res)
-            _download_and_extract(url, extract_dir)
+            _download_and_extract(url, extract_dir, cert_url)
 
             if (gh_env := os.getenv("GITHUB_ENV")):
                 with open(gh_env, "a") as f:
