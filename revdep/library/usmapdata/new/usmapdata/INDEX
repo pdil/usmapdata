@@ -1,0 +1,5 @@
+available_map_years     Years for which US map data is available
+centroid_labels         Retrieve centroid labels
+fips_data               Retrieve state and county FIPS codes
+us_map                  Retrieve US map data
+usmapdata               usmapdata: Mapping Data for usmap Package
