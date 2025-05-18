@@ -17,9 +17,9 @@ of data are included due to significant changes in 2021/2022.
 Here is the ```R CMD check``` output:
 ```
 ❯ checking installed package size ... NOTE
-    installed size is  7.4Mb
+    installed size is  9.8Mb
     sub-directories of 1Mb or more:
-      extdata   7.3Mb
+      extdata   9.7Mb
 ```
 
 ## Downstream dependencies

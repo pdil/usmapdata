@@ -4,7 +4,7 @@
 * R was compiled by
     Apple clang version 14.0.0 (clang-1400.0.29.202)
     GNU Fortran (GCC) 12.2.0
-* running under: macOS Sequoia 15.3.1
+* running under: macOS Sequoia 15.4.1
 * using session charset: UTF-8
 * using options ‘--no-manual --no-build-vignettes’
 * checking for file ‘usmap/DESCRIPTION’ ... OK
@@ -34,8 +34,12 @@
 * checking whether the package can be unloaded cleanly ... OK
 * checking whether the namespace can be loaded with stated dependencies ... OK
 * checking whether the namespace can be unloaded cleanly ... OK
-* checking loading without being on the library search path ... OK
-* checking dependencies in R code ... OK
+* checking dependencies in R code ... NOTE
+Unexported objects imported by ':::' calls:
+  ‘usmapdata:::alaska_bbox’ ‘usmapdata:::ea_crs’
+  ‘usmapdata:::hawaii_bbox’ ‘usmapdata:::transform_alaska’
+  ‘usmapdata:::transform_hawaii’
+  See the note in ?`:::` about the use of this operator.
 * checking S3 generic/method consistency ... OK
 * checking replacement functions ... OK
 * checking foreign function calls ... OK
@@ -68,4 +72,4 @@
   ‘usmap3.Rmd’ using ‘UTF-8’... OK
 * checking re-building of vignette outputs ... SKIPPED
 * DONE
-Status: 1 NOTE
+Status: 2 NOTEs
