@@ -1,4 +1,7 @@
+# [unreleased]
+
 # usmapdata 0.5.0
+Released Thursday, May 22, 2025.
 
 * Add [2024 shape files](https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.2024.html#list-tab-1883739534).
 
