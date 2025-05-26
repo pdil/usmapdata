@@ -15,10 +15,13 @@
 ### 📝 Post-release checklist
 - [ ] `git tag v{{ .version }}`
 - [ ] `git push --tags`
-- [ ] Update `DESCRIPTION` and `NEWS.md` versions to `{{ .version }}.9000`
+- [ ] Update `DESCRIPTION` versions to `{{ .version }}.9000`
+- [ ] Add `[unreleased]` title at top of `NEWS.md`
 - [ ] Add release date of latest version to `NEWS.md`
   - Example `Released Monday, February 31, 2020.`
 - [ ] Commit changes with message `Prepare for next release`
-- [ ] Run `usethis::use_github_release()` from this branch
 
 ✅ Merge this pull request when all post-release tasks are complete.
+
+### 📝 Post-merge Steps
+- Create [release](https://github.com/pdil/usmapdata/releases) linked to `v{{ .version }}` tag with release notes from `NEWS.md`.

@@ -11,7 +11,6 @@ on:
         type: string
   # When calling this workflow from another repo, ensure the following files are
   # located in the local .github/workflow-resources directory:
-  #   • release-checklist.R
   #   • release-pr-body.md
   #   • release-version-check.sh
   workflow_call:
@@ -22,6 +21,10 @@ on:
         type: string
 
 jobs:
+  revdep-check:
+    name: Check reverse dependencies
+    uses: r-devel/recheck/.github/workflows/recheck.yml@v1
+
   release:
     runs-on: ubuntu-latest
 
@@ -43,20 +46,12 @@ jobs:
           extra-packages: |
             any::devtools
             any::rhub
-            github::r-lib/revdepcheck
 
-      - name: Run release checks
+      - name: Update DESCRIPTION version
         env:
-          EMAIL: ${{ secrets.RHUB_EMAIL }}
-          TOKEN: ${{ secrets.RHUB_TOKEN }}
           VERSION: ${{ inputs.version }}
         run: |
-          source(".github/workflow-resources/release-checklist.R")
-          release_checklist(
-            Sys.getenv("EMAIL"),
-            Sys.getenv("TOKEN"),
-            Sys.getenv("VERSION")
-          )
+          desc::desc_set_version(Sys.getenv("VERSION"))
         shell: Rscript {0}
 
       - name: Update NEWS.md version
