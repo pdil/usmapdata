@@ -23,6 +23,8 @@ on:
 jobs:
   revdep-check:
     uses: r-devel/recheck/.github/workflows/recheck.yml@v1
+    with:
+      which: most
 
   release:
     runs-on: ubuntu-latest
@@ -76,6 +78,7 @@ jobs:
           template: .github/workflow-resources/release-pr-body.md
           vars: |
             version: ${{ inputs.version }}
+            artifacts_url: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}#artifacts
 
       - name: Open pull request
         uses: peter-evans/create-pull-request@v6
