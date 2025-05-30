@@ -6,7 +6,6 @@
 \usage{
 centroid_labels(
   regions = c("states", "state", "counties", "county"),
-  as_sf = TRUE,
   data_year = NULL
 )
 }
@@ -14,9 +13,6 @@ centroid_labels(
 \item{regions}{The region breakdown for the map, can be one of
 (\code{"states"}, \code{"state"}, \code{"counties"}, \code{"county"}).
 The default is \code{"states"}.}
-
-\item{as_sf}{Defunct, this parameter no longer has any effect and will be removed in
-the future.}
 
 \item{data_year}{The year for which to obtain map data.
 If the value is \code{NULL}, the most recent year's data is used. If the
