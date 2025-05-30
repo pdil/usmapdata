@@ -8,7 +8,6 @@ us_map(
   regions = c("states", "state", "counties", "county"),
   include = c(),
   exclude = c(),
-  as_sf = TRUE,
   data_year = NULL
 )
 }
@@ -29,9 +28,6 @@ For counties, the FIPS must be provided as there can be multiple counties with t
 same name. The regions listed in the \code{include} parameter are applied first and the
 \code{exclude} regions are then removed from the resulting map. Any excluded regions
 not present in the included regions will be ignored.}
-
-\item{as_sf}{Defunct, this parameter no longer has any effect and will be removed in
-the future.}
 
 \item{data_year}{The year for which to obtain map data.
 If the value is \code{NULL}, the most recent year's data is used. If the

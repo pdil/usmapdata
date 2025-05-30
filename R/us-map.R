@@ -14,8 +14,6 @@
 #'  same name. The regions listed in the \code{include} parameter are applied first and the
 #'  \code{exclude} regions are then removed from the resulting map. Any excluded regions
 #'  not present in the included regions will be ignored.
-#' @param as_sf Defunct, this parameter no longer has any effect and will be removed in
-#'  the future.
 #' @param data_year The year for which to obtain map data.
 #' If the value is \code{NULL}, the most recent year's data is used. If the
 #' provided year is not found from the available map data sets, the next most
@@ -41,7 +39,6 @@ us_map <- function(
   regions = c("states", "state", "counties", "county"),
   include = c(),
   exclude = c(),
-  as_sf = TRUE,
   data_year = NULL
 ) {
   regions <- match.arg(regions)
@@ -80,7 +77,6 @@ us_map <- function(
 #' @export
 centroid_labels <- function(
   regions = c("states", "state", "counties", "county"),
-  as_sf = TRUE,
   data_year = NULL
 ) {
   regions <- match.arg(regions)
