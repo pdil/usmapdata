@@ -13,7 +13,6 @@
 #' @export
 fips_data <- function(
   regions = c("states", "state", "counties", "county"),
-  as_sf = TRUE,
   data_year = NULL
 ) {
   regions <- match.arg(regions)
