@@ -1,4 +1,4 @@
-# [unreleased]
+# usmapdata 0.6.0
 
 * Change output of `us_map()` and `centroid_labels()` to data frame instead of tibble.
   * If `tibble` format is required use `tibble:as_tibble()`.
