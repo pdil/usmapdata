@@ -1,5 +1,8 @@
 # [unreleased]
 
+* Change output of `us_map()` and `centroid_labels()` to data frame instead of tibble.
+  * If `tibble` format is required use `tibble:as_tibble()`.
+
 # usmapdata 0.5.0
 Released Thursday, May 22, 2025.
 

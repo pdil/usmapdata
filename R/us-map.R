@@ -51,7 +51,7 @@ us_map <- function(
   map_year <- select_map_year(data_year)
   file_name <- paste0("us_", regions, ".gpkg")
   file_path <- system.file("extdata", map_year, file_name, package = "usmapdata")
-  df <- sf::read_sf(file_path)
+  df <- sf::read_sf(file_path, as_tibble = FALSE)
 
   if (length(include) > 0) {
     df <- df[df$full %in% include |
@@ -91,7 +91,7 @@ centroid_labels <- function(
   file_name <- paste0("us_", regions, "_centroids.gpkg")
   file_path <- system.file("extdata", map_year, file_name, package = "usmapdata")
 
-  sf::read_sf(file_path)
+  sf::read_sf(file_path, as_tibble = FALSE)
 }
 
 #' Years for which US map data is available
