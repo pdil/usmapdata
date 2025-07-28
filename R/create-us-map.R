@@ -60,7 +60,7 @@ create_us_map <- function(
   type <- match.arg(type)
 
   # import map file
-  us <- sf::read_sf(input_file)
+  us <- sf::read_sf(input_file, as_tibble = FALSE)
 
   # ea: US National Atlas Equal Area
   us_ea <- sf::st_transform(us, ea_crs())

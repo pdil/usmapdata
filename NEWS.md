@@ -5,6 +5,12 @@
   * It was no longer used by `usmap` nor did it have any effect if set.
   * Any existing code that sets it can safely delete it from `usmapdata` function calls.
 
+# usmapdata 0.6.0
+Released Saturday, June 14, 2025.
+
+* Change output of `us_map()` and `centroid_labels()` to data frame instead of tibble.
+  * If `tibble` format is required use `tibble::as_tibble()` on the output.
+
 # usmapdata 0.5.0
 Released Thursday, May 22, 2025.
 
