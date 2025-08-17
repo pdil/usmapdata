@@ -46,7 +46,19 @@ jobs:
         with:
           extra-packages: |
             any::devtools
-            any::rhub
+
+      - name: Set R CMD check environment
+        run: |
+          Sys.setenv("_R_CHECK_CRAN_INCOMING_" = "true")
+        shell: Rscript {0}
+
+      - name: Run R CMD check as CRAN
+        uses: r-lib/actions/check-r-package@v2
+        with:
+          upload-results: true
+          upload-snapshots: true
+          build_args: 'c("--no-manual","--compact-vignettes=gs+qpdf")'
+          artifact-name: "check-result"
 
       - name: Update DESCRIPTION version
         env:
