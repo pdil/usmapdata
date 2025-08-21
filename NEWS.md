@@ -3,9 +3,8 @@
 ### New Features
 * Puerto Rico has been added!
   * Finally, after years of procrastinating, Puerto Rico has finally been added to the map, see [Issue #48](https://github.com/pdil/usmapdata/issues/48).
-  * By default, it is not shown. It can be shown by setting `include = "PR"` (or using any combination of `include`/`exclude` parameters that results in `PR` being shown).
-  * The default can be changed to show `PR` by setting the environment variable `USMAP_EXCLUDE_PR = FALSE`.
   * All included map files have been retroactively updated to include Puerto Rico, so any valid value of `data_year` will include Puerto Rico if desired.
+  * `us_map()` and `fips_data()` both return Puerto Rico in their data sets and it can be included or excluded just like any state (using FIPS, full name, abbreviation, etc.).
   * Special thanks [@dcaud](https://github.com/dcaud) who started this work [years ago](https://github.com/pdil/usmap/pull/34).
 
 ### Enhancements

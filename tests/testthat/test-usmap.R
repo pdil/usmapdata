@@ -2,22 +2,8 @@
 states_map <- us_map(regions = "states")
 counties_map <- us_map(regions = "counties")
 
-test_that("default us_map exclude is set", {
-  withr::with_envvar(c("USMAP_EXCLUDE_PR" = NA), {
-    expect_equal(usmapdata:::.pkg_env$usmap_default_exclude(), c("PR"))
-  })
-
-  withr::with_envvar(c("USMAP_EXCLUDE_PR" = FALSE), {
-    expect_equal(usmapdata:::.pkg_env$usmap_default_exclude(), c())
-  })
-
-  withr::with_envvar(c("USMAP_EXCLUDE_PR" = TRUE), {
-    expect_equal(usmapdata:::.pkg_env$usmap_default_exclude(), c("PR"))
-  })
-})
-
 test_that("structure of states df is correct", {
-  expect_equal(length(unique(states_map$fips)), 51)
+  expect_equal(length(unique(states_map$fips)), 52)
 })
 
 test_that("correct states are included", {
@@ -66,7 +52,7 @@ test_that("include takes precedence over exclude", {
 })
 
 test_that("structure of counties df is correct", {
-  expect_equal(length(unique(counties_map$fips)), 3144)
+  expect_equal(length(unique(counties_map$fips)), 3222)
 })
 
 test_that("correct counties are included", {
@@ -97,10 +83,10 @@ test_that("error occurs for invalid region", {
 })
 
 test_that("centroid labels are loaded", {
-  expect_equal(length(centroid_labels("states")[[1]]), 51)
-  expect_equal(length(centroid_labels("counties")[[1]]), 3144)
-  expect_equal(length(centroid_labels("state")[[1]]), 51)
-  expect_equal(length(centroid_labels("county")[[1]]), 3144)
+  expect_equal(length(centroid_labels("states")[[1]]), 52)
+  expect_equal(length(centroid_labels("counties")[[1]]), 3222)
+  expect_equal(length(centroid_labels("state")[[1]]), 52)
+  expect_equal(length(centroid_labels("county")[[1]]), 3222)
   expect_identical(centroid_labels("counties"), centroid_labels("county"))
   expect_identical(centroid_labels("states"), centroid_labels("state"))
 })

@@ -11,18 +11,16 @@
 #' @param exclude The regions to exclude in the resulting map. If `regions` is
 #'  `"states"`/`"state"`, the value can be either a state name, abbreviation or FIPS code.
 #'  For counties, the FIPS must be provided as there can be multiple counties with the
-#'  same name. The regions listed in the `include` parameter are applied first and the
-#'  `exclude` regions are then removed from the resulting map. Any excluded regions
-#'  not present in the included regions will be ignored. The default value is "PR".
-#'  The default can be set to be an empty vector by setting the environment variable
-#'  `USMAP_EXCLUDE_PR = FALSE`.
+#'  same name. The regions listed in the `include` parameter take precedence over
+#'  regions listed in `exclude`. If both parameters include the same region(s) they
+#'  will be included in the map.
 #' @param data_year The year for which to obtain map data.
-#' If the value is `NULL`, the most recent year's data is used. If the
-#' provided year is not found from the available map data sets, the next most
-#' recent year's data is used. This can be used if an older data set is being
-#' plotted on the US map so that the data matches the map more accurately.
-#' Therefore, the provided value should match the year of the plotted data set.
-#' The default is `NULL`, i.e. the most recent available year is used.
+#'  If the value is `NULL`, the most recent year's data is used. If the
+#'  provided year is not found from the available map data sets, the next most
+#'  recent year's data is used. This can be used if an older data set is being
+#'  plotted on the US map so that the data matches the map more accurately.
+#'  Therefore, the provided value should match the year of the plotted data set.
+#'  The default is `NULL`, i.e. the most recent available year is used.
 #'
 #' @return An `sf` data frame of US map coordinates divided by the desired `regions`.
 #'
@@ -40,7 +38,7 @@
 us_map <- function(
   regions = c("states", "state", "counties", "county"),
   include = c(),
-  exclude = .pkg_env$usmap_default_exclude(),
+  exclude = c(),
   data_year = NULL
 ) {
   regions <- match.arg(regions)
@@ -146,12 +144,4 @@ select_map_year <- function(data_year) {
   } else {
     data_year
   }
-}
-
-#' @keywords internal
-.pkg_env$usmap_default_exclude <- function() {
-  if (Sys.getenv("USMAP_EXCLUDE_PR", unset = TRUE))
-    c("PR")
-  else
-    c()
 }
