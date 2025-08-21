@@ -2,6 +2,20 @@
 states_map <- us_map(regions = "states")
 counties_map <- us_map(regions = "counties")
 
+test_that("default us_map exclude is set", {
+  withr::with_envvar(c("USMAP_EXCLUDE_PR" = NA), {
+    expect_equal(usmapdata:::.pkg_env$usmap_default_exclude(), c("PR"))
+  })
+
+  withr::with_envvar(c("USMAP_EXCLUDE_PR" = FALSE), {
+    expect_equal(usmapdata:::.pkg_env$usmap_default_exclude(), c())
+  })
+
+  withr::with_envvar(c("USMAP_EXCLUDE_PR" = TRUE), {
+    expect_equal(usmapdata:::.pkg_env$usmap_default_exclude(), c("PR"))
+  })
+})
+
 test_that("structure of states df is correct", {
   expect_equal(length(unique(states_map$fips)), 51)
 })
@@ -38,6 +52,18 @@ test_that("correct states are excluded", {
   expect_equal(length(unique(full_map$fips)) - length(unique(map_fips$fips)), length(exclude_fips))
 })
 
+test_that("include takes precedence over exclude", {
+  full_map <- us_map(regions = "states")
+
+  include <- c("AK", "AR", "CA")
+  exclude <- c("AK", "AL", "AZ")
+  map <- us_map(regions = "states", include = include, exclude = exclude)
+
+  expect_in(map$abbr, include)
+  expect_true("AK" %in% map$abbr)
+  expect_false("AL" %in% map$abbr)
+  expect_false("AZ" %in% map$abbr)
+})
 
 test_that("structure of counties df is correct", {
   expect_equal(length(unique(counties_map$fips)), 3144)

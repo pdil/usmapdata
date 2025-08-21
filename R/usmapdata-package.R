@@ -9,14 +9,14 @@
 #' @section Map data frames:
 #' Alaska and Hawaii have been manually moved to a new location so that
 #' their new coordinates place them to the bottom-left corner of
-#' the map. These maps can be accessed by using the \code{\link{us_map}} function.
+#' the map. These maps can be accessed by using the \link{us_map} function.
 #'
 #' The function provides the ability to retrieve maps with either
-#' state borders or county borders using the \code{regions} parameter
+#' state borders or county borders using the `regions` parameter
 #' for convenience.
 #'
 #' States (or counties) can be included such that all other states (or counties)
-#' are excluded using the \code{include} parameter.
+#' are excluded using the `include` parameter.
 #'
 #' @author Paolo Di Lorenzo \cr
 #' \itemize{

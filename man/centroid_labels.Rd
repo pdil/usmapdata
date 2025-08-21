@@ -24,7 +24,7 @@ The default is \code{NULL}, i.e. the most recent available year is used.}
 }
 \value{
 An \code{sf} data frame of state or county centroid labels and positions
-relative to the coordinates returned by the \code{us_map} function.
+relative to the coordinates returned by the \link{us_map} function.
 }
 \description{
 Retrieve centroid labels

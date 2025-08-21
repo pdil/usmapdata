@@ -5,7 +5,7 @@
 #' \link[usmap]{usmap} package.
 #'
 #' `ea_crs()` returns the US National Atlas Equal Area coordinate reference system
-#' (CRS) used by this package and `usmap`.
+#' (CRS) used by this package and \link[usmap]{usmap}.
 #'
 #' `transform2D()` computes a two dimensional affine transformation matrix
 #' for the provided rotation angle and scale factor.

@@ -2,7 +2,7 @@
 #'
 #' @inheritParams us_map
 #'
-#' @return An data frame of FIPS codes of the desired \code{regions}.
+#' @return An data frame of FIPS codes of the desired `regions`.
 #'
 #' @examples
 #' str(fips_data())

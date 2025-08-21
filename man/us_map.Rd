@@ -7,7 +7,7 @@
 us_map(
   regions = c("states", "state", "counties", "county"),
   include = c(),
-  exclude = c(),
+  exclude = .pkg_env$usmap_default_exclude(),
   data_year = NULL
 )
 }
@@ -27,7 +27,9 @@ will be returned.}
 For counties, the FIPS must be provided as there can be multiple counties with the
 same name. The regions listed in the \code{include} parameter are applied first and the
 \code{exclude} regions are then removed from the resulting map. Any excluded regions
-not present in the included regions will be ignored.}
+not present in the included regions will be ignored. The default value is "PR".
+The default can be set to be an empty vector by setting the environment variable
+\code{USMAP_EXCLUDE_PR = FALSE}.}
 
 \item{data_year}{The year for which to obtain map data.
 If the value is \code{NULL}, the most recent year's data is used. If the

@@ -1,5 +1,17 @@
 # [unreleased]
 
+### New Features
+* Puerto Rico has been added!
+  * Finally, after years of procrastinating, Puerto Rico has finally been added to the map, see [Issue #48](https://github.com/pdil/usmapdata/issues/48).
+  * By default, it is not shown. It can be shown by setting `include = "PR"` (or using any combination of `include`/`exclude` parameters that results in `PR` being shown).
+  * The default can be changed to show `PR` by setting the environment variable `USMAP_EXCLUDE_PR = FALSE`.
+  * All included map files have been retroactively updated to include Puerto Rico, so any valid value of `data_year` will include Puerto Rico if desired.
+  * Special thanks [@dcaud](https://github.com/dcaud) who started this work [years ago](https://github.com/pdil/usmap/pull/34).
+
+### Enhancements
+* `include` now takes precedence over `exclude` in `us_map()`.
+  * Any items that are in both the `include` and `exclude` vectors will be _included_.
+
 ### Removed
 * The `as_sf` parameter has been completely removed from `us_map()`, `centroid_labels()`, and `fips_data()`.
   * It was no longer used by `usmap` nor did it have any effect if set.

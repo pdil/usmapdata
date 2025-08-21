@@ -7,7 +7,7 @@
 select_map_year(data_year)
 }
 \arguments{
-\item{data_year}{The year for which to obtain \code{usmap} data.
+\item{data_year}{The year for which to obtain \link{us_map} data.
 If the value is \code{NULL}, the most recent year is returned. If the
 provided year is not found from the available map data sets, the next most
 recent available year is returned.}
