@@ -1,0 +1,229 @@
+
+R version 4.5.1 (2025-06-13) -- "Great Square Root"
+Copyright (C) 2025 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> pkgname <- "usmapdata"
+> source(file.path(R.home("share"), "R", "examples-header.R"))
+> options(warn = 1)
+> base::assign(".ExTimings", "usmapdata-Ex.timings", pos = 'CheckExEnv')
+> base::cat("name\tuser\tsystem\telapsed\n", file=base::get(".ExTimings", pos = 'CheckExEnv'))
+> base::assign(".format_ptime",
++ function(x) {
++   if(!is.na(x[4L])) x[1L] <- x[1L] + x[4L]
++   if(!is.na(x[5L])) x[2L] <- x[2L] + x[5L]
++   options(OutDec = '.')
++   format(x[1L:3L], digits = 7L)
++ },
++ pos = 'CheckExEnv')
+> 
+> ### * </HEADER>
+> library('usmapdata')
+> 
+> base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+> base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+> cleanEx()
+> nameEx("available_map_years")
+> ### * available_map_years
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: available_map_years
+> ### Title: Years for which US map data is available
+> ### Aliases: available_map_years
+> 
+> ### ** Examples
+> 
+> available_map_years()
+[1] 2021 2022 2023 2024
+> 
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("available_map_years", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("fips_data")
+> ### * fips_data
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: fips_data
+> ### Title: Retrieve state and county FIPS codes
+> ### Aliases: fips_data
+> 
+> ### ** Examples
+> 
+> str(fips_data())
+'data.frame':	52 obs. of  3 variables:
+ $ fips: chr  "02" "01" "05" "04" ...
+ $ abbr: chr  "AK" "AL" "AR" "AZ" ...
+ $ full: chr  "Alaska" "Alabama" "Arkansas" "Arizona" ...
+> 
+> state_fips <- fips_data()
+> county_fips <- fips_data(regions = "counties")
+> 
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("fips_data", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> cleanEx()
+> nameEx("us_map")
+> ### * us_map
+> 
+> flush(stderr()); flush(stdout())
+> 
+> base::assign(".ptime", proc.time(), pos = "CheckExEnv")
+> ### Name: us_map
+> ### Title: Retrieve US map data
+> ### Aliases: us_map
+> 
+> ### ** Examples
+> 
+> str(us_map())
+Classes ‘sf’ and 'data.frame':	52 obs. of  4 variables:
+ $ fips: chr  "02" "01" "05" "04" ...
+ $ abbr: chr  "AK" "AL" "AR" "AZ" ...
+ $ full: chr  "Alaska" "Alabama" "Arkansas" "Arizona" ...
+ $ geom:sfc_MULTIPOLYGON of length 52; first list element: List of 47
+  ..$ :List of 1
+  .. ..$ : num [1:9, 1:2] -2390688 -2387144 -2385403 -2381808 -2383378 ...
+  ..$ :List of 1
+  .. ..$ : num [1:14, 1:2] -2421123 -2418972 -2411531 -2404828 -2402353 ...
+  ..$ :List of 1
+  .. ..$ : num [1:7, 1:2] -2421477 -2418935 -2417999 -2420152 -2421314 ...
+  ..$ :List of 1
+  .. ..$ : num [1:6, 1:2] -2431161 -2427289 -2426334 -2426972 -2429909 ...
+  ..$ :List of 1
+  .. ..$ : num [1:7, 1:2] -2431855 -2429938 -2428889 -2429380 -2431964 ...
+  ..$ :List of 1
+  .. ..$ : num [1:20, 1:2] -2460029 -2456927 -2454788 -2451596 -2448993 ...
+  ..$ :List of 1
+  .. ..$ : num [1:7, 1:2] -2546091 -2540802 -2538816 -2538986 -2544230 ...
+  ..$ :List of 1
+  .. ..$ : num [1:12, 1:2] -2563369 -2559866 -2556791 -2553131 -2556338 ...
+  ..$ :List of 1
+  .. ..$ : num [1:20, 1:2] -2583384 -2577340 -2573060 -2564056 -2561139 ...
+  ..$ :List of 1
+  .. ..$ : num [1:77, 1:2] -995482 -993129 -992198 -991411 -991958 ...
+  ..$ :List of 1
+  .. ..$ : num [1:63, 1:2] -1028654 -1026842 -1024708 -1023942 -1020501 ...
+  ..$ :List of 1
+  .. ..$ : num [1:45, 1:2] -1076257 -1072785 -1069351 -1066830 -1066041 ...
+  ..$ :List of 1
+  .. ..$ : num [1:78, 1:2] -1111408 -1111895 -1109805 -1108349 -1110959 ...
+  ..$ :List of 1
+  .. ..$ : num [1:7, 1:2] -1554894 -1552649 -1549532 -1550566 -1551737 ...
+  ..$ :List of 1
+  .. ..$ : num [1:8, 1:2] -1588623 -1585891 -1583836 -1581859 -1582607 ...
+  ..$ :List of 1
+  .. ..$ : num [1:121, 1:2] -1608701 -1606747 -1605064 -1602725 -1599728 ...
+  ..$ :List of 1
+  .. ..$ : num [1:14, 1:2] -1604364 -1601124 -1596099 -1587321 -1584055 ...
+  ..$ :List of 1
+  .. ..$ : num [1:9, 1:2] -1627275 -1625709 -1623661 -1621346 -1621629 ...
+  ..$ :List of 1
+  .. ..$ : num [1:7, 1:2] -1657811 -1656434 -1654243 -1654087 -1655836 ...
+  ..$ :List of 1
+  .. ..$ : num [1:8, 1:2] -1676496 -1673257 -1670826 -1667267 -1669250 ...
+  ..$ :List of 1
+  .. ..$ : num [1:24, 1:2] -1757988 -1756550 -1756659 -1755316 -1752054 ...
+  ..$ :List of 1
+  .. ..$ : num [1:19, 1:2] -1777341 -1776044 -1772492 -1767347 -1762003 ...
+  ..$ :List of 1
+  .. ..$ : num [1:9, 1:2] -1789067 -1788516 -1784782 -1778901 -1778285 ...
+  ..$ :List of 1
+  .. ..$ : num [1:6, 1:2] -1794182 -1792112 -1791302 -1791596 -1794859 ...
+  ..$ :List of 1
+  .. ..$ : num [1:5, 1:2] -1802384 -1797220 -1798192 -1802119 -1802384 ...
+  ..$ :List of 1
+  .. ..$ : num [1:9, 1:2] -1835867 -1827860 -1820421 -1821704 -1824056 ...
+  ..$ :List of 1
+  .. ..$ : num [1:14, 1:2] -1920106 -1915975 -1910208 -1905914 -1901830 ...
+  ..$ :List of 1
+  .. ..$ : num [1:13, 1:2] -1934092 -1930947 -1928153 -1920680 -1916190 ...
+  ..$ :List of 1
+  .. ..$ : num [1:44, 1:2] -1954353 -1951268 -1946003 -1941602 -1939148 ...
+  ..$ :List of 1
+  .. ..$ : num [1:58, 1:2] -1988599 -1985507 -1982287 -1978047 -1975315 ...
+  ..$ :List of 1
+  .. ..$ : num [1:1245, 1:2] -1932890 -1929114 -1921577 -1913002 -1900860 ...
+  ..$ :List of 1
+  .. ..$ : num [1:33, 1:2] -2036582 -2028705 -2025934 -2022659 -2020219 ...
+  ..$ :List of 1
+  .. ..$ : num [1:7, 1:2] -2037520 -2031769 -2027800 -2027418 -2031313 ...
+  ..$ :List of 1
+  .. ..$ : num [1:16, 1:2] -2064322 -2061420 -2059278 -2054122 -2050942 ...
+  ..$ :List of 1
+  .. ..$ : num [1:7, 1:2] -2051199 -2047795 -2043338 -2043410 -2047971 ...
+  ..$ :List of 1
+  .. ..$ : num [1:8, 1:2] -2085142 -2080322 -2076015 -2078002 -2081197 ...
+  ..$ :List of 1
+  .. ..$ : num [1:6, 1:2] -2101236 -2099338 -2097542 -2098768 -2101144 ...
+  ..$ :List of 1
+  .. ..$ : num [1:54, 1:2] -2034221 -2032618 -2031844 -2029803 -2026867 ...
+  ..$ :List of 1
+  .. ..$ : num [1:9, 1:2] -2142932 -2140571 -2137363 -2133659 -2133046 ...
+  ..$ :List of 1
+  .. ..$ : num [1:13, 1:2] -2093048 -2090033 -2089266 -2082743 -2078886 ...
+  ..$ :List of 1
+  .. ..$ : num [1:37, 1:2] -2228763 -2220057 -2215311 -2209935 -2204698 ...
+  ..$ :List of 1
+  .. ..$ : num [1:39, 1:2] -2283095 -2281187 -2276684 -2275798 -2276826 ...
+  ..$ :List of 1
+  .. ..$ : num [1:17, 1:2] -2305126 -2299351 -2293704 -2290844 -2289077 ...
+  ..$ :List of 1
+  .. ..$ : num [1:19, 1:2] -2320076 -2316655 -2312400 -2310960 -2306956 ...
+  ..$ :List of 1
+  .. ..$ : num [1:7, 1:2] -2344705 -2337623 -2333827 -2335286 -2340149 ...
+  ..$ :List of 1
+  .. ..$ : num [1:6, 1:2] -2341800 -2338668 -2337871 -2340054 -2342947 ...
+  ..$ :List of 1
+  .. ..$ : num [1:7, 1:2] -2356315 -2349468 -2347609 -2347445 -2353387 ...
+  ..- attr(*, "class")= chr [1:3] "XY" "MULTIPOLYGON" "sfg"
+ - attr(*, "sf_column")= chr "geom"
+ - attr(*, "agr")= Factor w/ 3 levels "constant","aggregate",..: NA NA NA
+  ..- attr(*, "names")= chr [1:3] "fips" "abbr" "full"
+> 
+> df <- us_map(regions = "counties")
+> west_coast <- us_map(include = c("CA", "OR", "WA"))
+> 
+> excl_west_coast <- us_map(exclude = c("CA", "OR", "WA"))
+> 
+> ct_counties_as_of_2022 <- us_map(regions = "counties", include = "CT", data_year = 2022)
+> 
+> 
+> 
+> 
+> base::assign(".dptime", (proc.time() - get(".ptime", pos = "CheckExEnv")), pos = "CheckExEnv")
+> base::cat("us_map", base::get(".format_ptime", pos = 'CheckExEnv')(get(".dptime", pos = "CheckExEnv")), "\n", file=base::get(".ExTimings", pos = 'CheckExEnv'), append=TRUE, sep="\t")
+> ### * <FOOTER>
+> ###
+> cleanEx()
+> options(digits = 7L)
+> base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+Time elapsed:  0.725 0.051 0.777 0 0 
+> grDevices::dev.off()
+null device 
+          1 
+> ###
+> ### Local variables: ***
+> ### mode: outline-minor ***
+> ### outline-regexp: "\\(> \\)?### [*]+" ***
+> ### End: ***
+> quit('no')

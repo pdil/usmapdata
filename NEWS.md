@@ -1,4 +1,4 @@
-# [unreleased]
+# usmapdata 1.0.0
 
 ### New Features
 * Puerto Rico has been added!
