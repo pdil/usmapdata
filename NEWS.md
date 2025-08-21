@@ -1,5 +1,21 @@
 # [unreleased]
 
+### New Features
+* Puerto Rico has been added!
+  * Finally, after years of procrastinating, Puerto Rico has finally been added to the map, see [Issue #48](https://github.com/pdil/usmapdata/issues/48).
+  * All included map files have been retroactively updated to include Puerto Rico, so any valid value of `data_year` will include Puerto Rico if desired.
+  * `us_map()` and `fips_data()` both return Puerto Rico in their data sets and it can be included or excluded just like any state (using FIPS, full name, abbreviation, etc.).
+  * Special thanks [@dcaud](https://github.com/dcaud) who started this work [years ago](https://github.com/pdil/usmap/pull/34).
+
+### Enhancements
+* `include` now takes precedence over `exclude` in `us_map()`.
+  * Any items that are in both the `include` and `exclude` vectors will be _included_.
+
+### Removed
+* The `as_sf` parameter has been completely removed from `us_map()`, `centroid_labels()`, and `fips_data()`.
+  * It was no longer used by `usmap` nor did it have any effect if set.
+  * Any existing code that sets it can safely delete it from `usmapdata` function calls.
+
 # usmapdata 0.6.0
 Released Saturday, June 14, 2025.
 
@@ -51,7 +67,6 @@ Released Sunday, February 4, 2024.
 This update continues the `sf` migration by setting the `as_sf` parameter to default to the behavior of `TRUE`. This parameter no longer has any effect, as explained below. The next phase will involve updating `usmap` to no longer make use of this parameter, in which case it can be completely removed.
 
 ### Removed
-
 * The `as_sf` parameter is now deprecated and no longer has any effect.
   * As part of this removal, the default behavior for `us_map()`, `centroid_labels()`, and `fips_data()` is equivalent to `as_sf = TRUE` which is to return their data as an `sf` object (see `0.2.0` release notes for more details).
   * This parameter will be completely removed in a future version but continues to exist for compatibility reasons.

@@ -1,4 +1,3 @@
-
 #' Internal map creation tools
 #'
 #' @description
@@ -6,7 +5,7 @@
 #' \link[usmap]{usmap} package.
 #'
 #' `ea_crs()` returns the US National Atlas Equal Area coordinate reference system
-#' (CRS) used by this package and `usmap`.
+#' (CRS) used by this package and \link[usmap]{usmap}.
 #'
 #' `transform2D()` computes a two dimensional affine transformation matrix
 #' for the provided rotation angle and scale factor.
@@ -15,6 +14,8 @@
 #'
 #' `transform_hawaii()` applies the appropriate transform for the Hawaii polygons.
 #'
+#' `transform_puerto_rico()` applies the appropriate transform for the Puerto Rico polygons.
+#'
 #' `compute_centroids()` computes the modified centroids for each state or
 #' county polygon using a center-of-mass technique on the largest polygon in
 #' the region.
@@ -22,6 +23,8 @@
 #' `alaska_bbox()` returns the bounding box of Alaska pre-transformation.
 #'
 #' `hawaii_bbox()` returns the bounding box of Hawaii pre-transformation.
+#'
+#' `puerto_rico_bbox()` returns the bounding box of Puerto Rico pre-transformation.
 #'
 #' @note
 #' Using these functions externally is not recommended since they make certain
@@ -71,10 +74,14 @@ create_us_map <- function(
   # FIPS code for Hawaii = 15
   hawaii <- transform_hawaii(us_ea[us_ea$STATEFP == "15", ])
 
+  # FIPS code for Puerto Rico = 72
+  puerto_rico <- transform_puerto_rico(us_ea[us_ea$STATEFP == "72", ])
+
   # keep only US states (i.e. remove territories, minor outlying islands, etc.)
-  # also remove Alaska (02) and Hawaii (15) so that we can add in shifted one
-  us_ea <- us_ea[!us_ea$STATEFP %in% c(as.character(57:80), "02", "15"), ]
-  us_ea <- rbind(us_ea, alaska, hawaii)
+  # also remove Alaska (02), Hawaii (15), Puerto Rico (72) so that we can add in
+  # shifted versions
+  us_ea <- us_ea[!us_ea$STATEFP %in% c(as.character(57:80), "02", "15", "72"), ]
+  us_ea <- rbind(us_ea, alaska, hawaii, puerto_rico)
 
   # delete unused columns
   cols <- c()
@@ -159,6 +166,16 @@ transform_hawaii <- function(hawaii) {
   sf::st_crs(hawaii) <- ea_crs()
 
   hawaii
+}
+
+#' @rdname create_us_map
+#' @keywords internal
+transform_puerto_rico <- function(puerto_rico) {
+  sf::st_geometry(puerto_rico) <- sf::st_geometry(puerto_rico) * transform2D(15, 2)
+  sf::st_geometry(puerto_rico) <- sf::st_geometry(puerto_rico) + c(-4.5e6, 4e6)
+  sf::st_crs(puerto_rico) <- ea_crs()
+
+  puerto_rico
 }
 
 #' @rdname create_us_map
@@ -259,6 +276,22 @@ hawaii_bbox <- function() {
         xmax = -5450000,
         ymin = -1050000,
         ymax = -441000
+      ),
+      crs = ea_crs()
+    )
+  )
+}
+
+#' @rdname create_us_map
+#' @keywords internal
+puerto_rico_bbox <- function() {
+  sf::st_as_sfc(
+    sf::st_bbox(
+      c(
+        xmin = 3300000,
+        xmax = 3700000,
+        ymin = -2400000,
+        ymax = -2200000
       ),
       crs = ea_crs()
     )

@@ -2,7 +2,7 @@
 #'
 #' @inheritParams us_map
 #'
-#' @return An data frame of FIPS codes of the desired \code{regions}.
+#' @return An data frame of FIPS codes of the desired `regions`.
 #'
 #' @examples
 #' str(fips_data())
@@ -13,7 +13,6 @@
 #' @export
 fips_data <- function(
   regions = c("states", "state", "counties", "county"),
-  as_sf = TRUE,
   data_year = NULL
 ) {
   regions <- match.arg(regions)
