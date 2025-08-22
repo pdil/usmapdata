@@ -1,5 +1,8 @@
 # [unreleased]
 
+# usmapdata 1.0.0
+Released Friday, August 22, 2025.
+
 ### New Features
 * Puerto Rico has been added!
   * Finally, after years of procrastinating, Puerto Rico has finally been added to the map, see [Issue #48](https://github.com/pdil/usmapdata/issues/48).

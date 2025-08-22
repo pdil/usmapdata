@@ -7,13 +7,13 @@
 \title{usmapdata: Mapping Data for usmap Package}
 \description{
 It is usually difficult or inconvenient to create US maps that
-include both Alaska and Hawaii in a convenient spot. All map
+include Alaska, Hawaii, and even Puerto Rico in a convenient spot. All map
 data frames produced by this package use the US National Atlas Equal Area
 projection.
 }
 \section{Map data frames}{
 
-Alaska and Hawaii have been manually moved to a new location so that
+Alaska, Hawaii, and Puerto Rico have been manually moved to a new location so that
 their new coordinates place them to the bottom-left corner of
 the map. These maps can be accessed by using the \link{us_map} function.
 
