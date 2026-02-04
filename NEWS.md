@@ -7,7 +7,7 @@
   * `us_map()` and `fips_data()` both return Puerto Rico in their data sets and it can be included or excluded just like any state (using FIPS, full name, abbreviation, etc.).
   * Special thanks [@dcaud](https://github.com/dcaud) who started this work [years ago](https://github.com/pdil/usmap/pull/34).
 
-### Enhancements
+### Improvements
 * `include` now takes precedence over `exclude` in `us_map()`.
   * Any items that are in both the `include` and `exclude` vectors will be _included_.
 

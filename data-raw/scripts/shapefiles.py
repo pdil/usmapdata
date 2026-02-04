@@ -102,7 +102,7 @@ def download_shapefiles(selected_year=None):
         _failed(e.code)
     except Exception as e:
         print(e)
-        _failed(e.code)
+        _failed(-1)
 
 
 if __name__ == "__main__":
