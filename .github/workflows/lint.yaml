@@ -1,7 +1,4 @@
 # lintr provides static code analysis for R.
-# It checks for adherence to a given style,
-# identifying syntax errors and possible semantic issues,
-# then reports them to you so you can take action.
 # More details at https://lintr.r-lib.org/
 
 name: lint
@@ -34,7 +31,7 @@ jobs:
           extra-packages: lintr
 
       - name: Run lintr
-        run: lintr::sarif_output(lintr::lint_dir("."), "lintr-results.sarif")
+        run: lintr::sarif_output(lintr::lint_package(), "lintr-results.sarif")
         shell: Rscript {0}
         continue-on-error: true
 

@@ -1,8 +1,5 @@
 # [unreleased]
 
-# usmapdata 1.0.0
-Released Friday, August 22, 2025.
-
 ### New Features
 * Puerto Rico has been added!
   * Finally, after years of procrastinating, Puerto Rico has finally been added to the map, see [Issue #48](https://github.com/pdil/usmapdata/issues/48).
@@ -10,7 +7,7 @@ Released Friday, August 22, 2025.
   * `us_map()` and `fips_data()` both return Puerto Rico in their data sets and it can be included or excluded just like any state (using FIPS, full name, abbreviation, etc.).
   * Special thanks [@dcaud](https://github.com/dcaud) who started this work [years ago](https://github.com/pdil/usmap/pull/34).
 
-### Improvements
+### Enhancements
 * `include` now takes precedence over `exclude` in `us_map()`.
   * Any items that are in both the `include` and `exclude` vectors will be _included_.
 
