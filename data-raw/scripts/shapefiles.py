@@ -4,36 +4,48 @@ import os
 import requests
 import shutil
 import sys
+import tempfile
 from zipfile import ZipFile
 
 class DownloadError(Exception):
-    def __init__(self, message, code=None):
+    def __init__(self, message, code):
         super().__init__(message)
         self.code = code
 
-def _download_and_extract(file_url: str, extract_dir: str) -> bool:
-    response = requests.get(file_url)
-    LOCAL_FILE = "download.zip"
+def _download_and_extract(file_url: str, extract_dir: str):
+    response = requests.get(file_url, timeout=30)
 
-    if response.status_code == 200:
-        with open(LOCAL_FILE, "wb") as f:
-            f.write(response.content)
-            print(f"{LOCAL_FILE} downloaded from {file_url}.")
-
-        with ZipFile(LOCAL_FILE, "r") as z:
-            z.extractall(extract_dir)
-            print(f"{LOCAL_FILE} extracted to {extract_dir}.")
-
-        os.remove(LOCAL_FILE)
-    else:
+    if response.status_code != 200:
         raise DownloadError(f"Failed to download {file_url}.", code=response.status_code)
 
-def _failed(code: int):
+    with tempfile.NamedTemporaryFile(suffix='.zip', delete=False) as tmp_file:
+        tmp_filename = tmp_file.name
+        tmp_file.write(response.content)
+        print(f"Files downloaded from {file_url} to {tmp_filename}.")
+
+    try:
+        with ZipFile(tmp_filename, "r") as z:
+            z.extractall(extract_dir)
+            print(f"{tmp_filename} extracted to {extract_dir}.")
+    finally:
+        os.remove(tmp_filename)
+
+def _exit(sys_code: int, gh_code: int=None):
+    """
+    Exits with the given code(s).
+
+    Parameters:
+    sys_code: The exit code to call sys.exit() with.
+    gh_code (optional): The code to set in the GitHub output.
+      If None, uses sys_code.
+    """
+    gh_code = sys_code if gh_code is None else gh_code
+
     if (gh_env := os.getenv("GITHUB_OUTPUT")):
         with open(gh_env, "a") as f:
-            f.write(f"exit_code={code}\n")
+            f.write(f"exit_code={gh_code}\n")
 
-    sys.exit(code)
+    sys.exit(sys_code)
 
 def download_shapefiles(selected_year=None):
     """
@@ -72,7 +84,7 @@ def download_shapefiles(selected_year=None):
 
     if os.path.exists(extract_dir):
         shutil.rmtree(extract_dir)
-        shutil.os.makedirs(extract_dir)
+        os.makedirs(extract_dir)
 
     try:
         # attempt shapefile downloads
@@ -89,16 +101,20 @@ def download_shapefiles(selected_year=None):
             config.set(SECTION, "current_year", f"{year}")
             with open(config_file, "w") as f:
                 config.write(f)
+
+        _exit(0)
     except DownloadError as e:
         if e.code == 404:   # i.e. shapefiles not found
             print(f"The shapefiles for {year} were not found. Better luck next time!")
+            # "files not found" is not considered a system failure
+            _exit(sys_code=0, gh_code=404)
         else:               # other download errors
             print(e)
+            _exit(e.code)
 
-        _failed(e.code)
     except Exception as e:
         print(e)
-        _failed(-1)
+        _exit(-1)
 
 
 if __name__ == "__main__":
