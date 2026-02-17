@@ -18,9 +18,9 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       exit_code: ${{ steps.dl-shp.outputs.exit_code }}
-      shp_year: ${{ steps.dl-shp.outputs.shp_year }}
-      state_shp: ${{ steps.dl-shp.outputs.state_shp }}
-      county_shp: ${{ steps.dl-shp.outputs.county_shp }}
+      shp_year: ${{ steps.info.outputs.shp_year }}
+      state_shp: ${{ steps.info.outputs.state_shp }}
+      county_shp: ${{ steps.info.outputs.county_shp }}
 
     steps:
       - name: Checkout
@@ -39,6 +39,10 @@ jobs:
         id: dl-shp
         run: |
           python data-raw/scripts/shapefiles.py ${{ inputs.year }}
+
+      - name: Save shapefile info
+        id: info
+        run: |
           echo "shp_year=${{ env.shp_year }}" >> "$GITHUB_OUTPUT"
           echo "state_shp=${{ env.state_shp }}" >> "$GITHUB_OUTPUT"
           echo "county_shp=${{ env.county_shp }}" >> "$GITHUB_OUTPUT"
@@ -55,8 +59,8 @@ jobs:
     needs: download
     if: needs.download.outputs.exit_code == '0'
     outputs:
-      pr_url: ${{ steps.save-pr-info.outputs.pr_url }}
-      pr_number: ${{ steps.save-pr-info.outputs.pr_number }}
+      pr_url: ${{ steps.info.outputs.pr_url }}
+      pr_number: ${{ steps.info.outputs.pr_number }}
 
     steps:
       - name: Checkout
@@ -140,7 +144,7 @@ jobs:
           delete-branch: true
 
       - name: Save PR info
-        id: save-pr-info
+        id: info
         run: |
           echo "pr_url=${{ steps.open-pr.outputs.pull-request-url }}" >> "$GITHUB_OUTPUT"
           echo "pr_number=${{ steps.open-pr.outputs.pull-request-number }}" >> "$GITHUB_OUTPUT"
