@@ -13,7 +13,7 @@ class DownloadError(Exception):
         self.code = code
 
 def _download_and_extract(file_url: str, extract_dir: str):
-    response = requests.get(file_url, timeout=30)
+    response = requests.get(file_url, timeout=300)
 
     if response.status_code != 200:
         raise DownloadError(f"Failed to download {file_url}.", code=response.status_code)
