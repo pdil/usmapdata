@@ -14,11 +14,13 @@ on:
         default: ''
 
 jobs:
-  build:
+  download:
     runs-on: ubuntu-latest
-    env:
-      PUSHOVER_API_KEY: ${{ secrets.PUSHOVER_API_KEY }}
-      PUSHOVER_USER_KEY: ${{ secrets.PUSHOVER_USER_KEY }}
+    outputs:
+      exit_code: ${{ steps.dl-shp.outputs.exit_code }}
+      shp_year: ${{ steps.info.outputs.shp_year }}
+      state_shp: ${{ steps.info.outputs.state_shp }}
+      county_shp: ${{ steps.info.outputs.county_shp }}
 
     steps:
       - name: Checkout
@@ -38,6 +40,38 @@ jobs:
         run: |
           python data-raw/scripts/shapefiles.py ${{ inputs.year }}
 
+      - name: Save shapefile info
+        id: info
+        run: |
+          echo "shp_year=${{ env.shp_year }}" >> "$GITHUB_OUTPUT"
+          echo "state_shp=${{ env.state_shp }}" >> "$GITHUB_OUTPUT"
+          echo "county_shp=${{ env.county_shp }}" >> "$GITHUB_OUTPUT"
+
+      - name: Upload shapefiles
+        if: steps.dl-shp.outputs.exit_code == '0'
+        uses: actions/upload-artifact@v4
+        with:
+          name: shapefiles
+          path: data-raw/shapefiles/${{ env.shp_year }}
+
+  process:
+    runs-on: ubuntu-latest
+    needs: download
+    if: needs.download.outputs.exit_code == '0'
+    outputs:
+      pr_url: ${{ steps.info.outputs.pr_url }}
+      pr_number: ${{ steps.info.outputs.pr_number }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download shapefiles
+        uses: actions/download-artifact@v4
+        with:
+          name: shapefiles
+          path: data-raw/shapefiles/${{ needs.download.outputs.shp_year }}
+
       - name: Setup R
         uses: r-lib/actions/setup-r@v2
 
@@ -48,9 +82,9 @@ jobs:
 
       - name: Modify shapefiles
         env:
-          STATE_SHP: ${{ env.state_shp }}
-          COUNTY_SHP: ${{ env.county_shp }}
-          YEAR: ${{ env.shp_year }}
+          STATE_SHP: ${{ needs.download.outputs.state_shp }}
+          COUNTY_SHP: ${{ needs.download.outputs.county_shp }}
+          YEAR: ${{ needs.download.outputs.shp_year }}
         run: |
           input_dir <- file.path("data-raw", "shapefiles", Sys.getenv("YEAR"))
           output_dir <- file.path("inst", "extdata", Sys.getenv("YEAR"))
@@ -80,7 +114,7 @@ jobs:
       - name: Determine pull request parameters
         id: pr-params
         env:
-          YEAR: ${{ env.shp_year }}
+          YEAR: ${{ needs.download.outputs.shp_year }}
         run: |
           echo "branch_name=data-update/$YEAR" >> "$GITHUB_OUTPUT"
           echo "pr_title=Add $YEAR map data" >> "$GITHUB_OUTPUT"
@@ -100,7 +134,7 @@ jobs:
           token: ${{ secrets.BOT_PAT }}
           author: ${{ secrets.BOT_USER }}
           committer: ${{ secrets.BOT_USER }}
-          commit-message: "[automated] Add ${{ env.shp_year }} map data based on available shapefiles"
+          commit-message: "[automated] Add ${{ needs.download.outputs.shp_year }} map data based on available shapefiles"
           branch: ${{ steps.pr-params.outputs.branch_name }}
           title: ${{ steps.pr-params.outputs.pr_title }}
           body: ${{ steps.pr-body.outputs.result }}
@@ -109,17 +143,45 @@ jobs:
           labels: data update
           delete-branch: true
 
-      - name: Send success notification
+      - name: Save PR info
+        id: info
         run: |
-          python data-raw/scripts/pushover.py "✅ usmapdata has updated its data files, a PR review is needed: <a href=\"${{ steps.open-pr.outputs.pull-request-url }}\">PR #${{ steps.open-pr.outputs.pull-request-number }}</a>"
+          echo "pr_url=${{ steps.open-pr.outputs.pull-request-url }}" >> "$GITHUB_OUTPUT"
+          echo "pr_number=${{ steps.open-pr.outputs.pull-request-number }}" >> "$GITHUB_OUTPUT"
+
+  notify:
+    runs-on: ubuntu-latest
+    needs: [download, process]
+    if: always()
+    env:
+      PUSHOVER_API_KEY: ${{ secrets.PUSHOVER_API_KEY }}
+      PUSHOVER_USER_KEY: ${{ secrets.PUSHOVER_USER_KEY }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+          cache: 'pip'
+
+      - name: Install Python dependencies
+        run: pip install -r data-raw/scripts/requirements.txt
+
+      - name: Send success notification
+        if: needs.download.outputs.exit_code == '0' && needs.process.result == 'success'
+        run: |
+          python data-raw/scripts/pushover.py "✅ usmapdata has updated its data files, a PR review is needed: <a href=\"${{ needs.process.outputs.pr_url }}\">PR #${{ needs.process.outputs.pr_number }}</a>"
 
       - name: Send data not found notification
-        if: ${{ failure() && steps.dl-shp.outputs.exit_code == '404' }}
+        if: needs.download.outputs.exit_code == '404'
         run: |
-          python data-raw/scripts/pushover.py "⚠️ usmapdata failed to find map data files for ${{ env.shp_year }}." "LOW"
+          python data-raw/scripts/pushover.py "⚠️ usmapdata failed to find map data files for ${{ needs.download.outputs.shp_year }}." "LOW"
 
       - name: Send failure notification
-        if: ${{ failure() && steps.dl-shp.outputs.exit_code != '404' }}
+        if: needs.download.outputs.exit_code != '0' && needs.download.outputs.exit_code != '404'
         run: |
-          python data-raw/scripts/pushover.py "❌ usmapdata failed to update map data files. (error: ${{ steps.dl-shp.outputs.exit_code }})" "LOW"
+          python data-raw/scripts/pushover.py "❌ usmapdata failed to update map data files. (error: ${{ needs.download.outputs.exit_code }})" "LOW"
 
