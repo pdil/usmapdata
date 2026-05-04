@@ -60,6 +60,10 @@ jobs:
           build_args: 'c("--no-manual","--compact-vignettes=gs+qpdf")'
           artifact-name: "check-result"
 
+      - name: Clean up R CMD check results
+        run: |
+          rm -r check/
+
       - name: Update DESCRIPTION version
         env:
           VERSION: ${{ inputs.version }}
