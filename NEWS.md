@@ -1,4 +1,4 @@
-# [unreleased]
+# usmapdata 1.1.0
 
 # usmapdata 1.0.0
 Released Friday, August 22, 2025.
