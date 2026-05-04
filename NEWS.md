@@ -1,5 +1,7 @@
 # usmapdata 1.1.0
 
+* Add [2025 shape files](https://www.census.gov/geographies/mapping-files/time-series/geo/cartographic-boundary.2025.html#list-tab-1883739534).
+
 # usmapdata 1.0.0
 Released Friday, August 22, 2025.
 
